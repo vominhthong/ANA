@@ -40,6 +40,15 @@
 		68C5E7121B86D89D00C2A58F /* logo_music.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6F81B86D89D00C2A58F /* logo_music.png */; };
 		68C5E7131B86D89D00C2A58F /* logo_seach_song.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6F91B86D89D00C2A58F /* logo_seach_song.png */; };
 		68C5E7141B86D89D00C2A58F /* logo_search_name.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6FA1B86D89D00C2A58F /* logo_search_name.png */; };
+		68C5E71F1B86DBBA00C2A58F /* ANACoreDataStoreage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E71D1B86DBBA00C2A58F /* ANACoreDataStoreage.m */; };
+		68C5E7221B86DFA600C2A58F /* ImportSQLToCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7211B86DFA600C2A58F /* ImportSQLToCoreData.m */; };
+		68C5E7271B86E0C900C2A58F /* Song_Sqlite.db in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E7261B86E0C900C2A58F /* Song_Sqlite.db */; };
+		68C5E72A1B86E36D00C2A58F /* Song_CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7281B86E36D00C2A58F /* Song_CoreData.xcdatamodeld */; };
+		68C5E72D1B86E47500C2A58F /* SQLiteExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E72C1B86E47500C2A58F /* SQLiteExport.m */; };
+		68C5E72F1B86E6DA00C2A58F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C5E72E1B86E6DA00C2A58F /* libsqlite3.dylib */; };
+		68C5E7341B8707A100C2A58F /* LocalDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7331B8707A100C2A58F /* LocalDataBase.m */; };
+		68C5E7381B870B4F00C2A58F /* Singer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7371B870B4F00C2A58F /* Singer.m */; };
+		68C5E73A1B871D0400C2A58F /* avatar_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E7391B871D0400C2A58F /* avatar_placeholder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +101,22 @@
 		68C5E6F81B86D89D00C2A58F /* logo_music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_music.png; sourceTree = "<group>"; };
 		68C5E6F91B86D89D00C2A58F /* logo_seach_song.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_seach_song.png; sourceTree = "<group>"; };
 		68C5E6FA1B86D89D00C2A58F /* logo_search_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_search_name.png; sourceTree = "<group>"; };
+		68C5E71B1B86DBBA00C2A58F /* ANACoreDataStorageProtected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANACoreDataStorageProtected.h; sourceTree = "<group>"; };
+		68C5E71C1B86DBBA00C2A58F /* ANACoreDataStoreage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANACoreDataStoreage.h; sourceTree = "<group>"; };
+		68C5E71D1B86DBBA00C2A58F /* ANACoreDataStoreage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANACoreDataStoreage.m; sourceTree = "<group>"; };
+		68C5E7201B86DFA600C2A58F /* ImportSQLToCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportSQLToCoreData.h; sourceTree = "<group>"; };
+		68C5E7211B86DFA600C2A58F /* ImportSQLToCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSQLToCoreData.m; sourceTree = "<group>"; };
+		68C5E7261B86E0C900C2A58F /* Song_Sqlite.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Song_Sqlite.db; sourceTree = "<group>"; };
+		68C5E7291B86E36D00C2A58F /* Song_CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Song_CoreData.xcdatamodel; sourceTree = "<group>"; };
+		68C5E72B1B86E47500C2A58F /* SQLiteExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteExport.h; sourceTree = "<group>"; };
+		68C5E72C1B86E47500C2A58F /* SQLiteExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteExport.m; sourceTree = "<group>"; };
+		68C5E72E1B86E6DA00C2A58F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		68C5E7311B86E73500C2A58F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		68C5E7321B8707A100C2A58F /* LocalDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDataBase.h; sourceTree = "<group>"; };
+		68C5E7331B8707A100C2A58F /* LocalDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDataBase.m; sourceTree = "<group>"; };
+		68C5E7361B870B4F00C2A58F /* Singer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singer.h; sourceTree = "<group>"; };
+		68C5E7371B870B4F00C2A58F /* Singer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singer.m; sourceTree = "<group>"; };
+		68C5E7391B871D0400C2A58F /* avatar_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_placeholder.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68C5E72F1B86E6DA00C2A58F /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +177,8 @@
 		68B136501B858DDC001F4C64 /* ANA */ = {
 			isa = PBXGroup;
 			children = (
+				68C5E7301B86E72000C2A58F /* Constant */,
+				68C5E7151B86D9DA00C2A58F /* Database */,
 				68C5E6E01B86D89D00C2A58F /* Resource */,
 				689D09581B86130200D5C97B /* StoryBoard */,
 				689D09521B86120F00D5C97B /* Controller */,
@@ -165,6 +193,7 @@
 		68B136511B858DDC001F4C64 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				68C5E72E1B86E6DA00C2A58F /* libsqlite3.dylib */,
 				68B136521B858DDC001F4C64 /* Info.plist */,
 				68B136531B858DDC001F4C64 /* main.m */,
 			);
@@ -191,6 +220,7 @@
 		68C5E6E01B86D89D00C2A58F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				68C5E7391B871D0400C2A58F /* avatar_placeholder.png */,
 				68C5E6E11B86D89D00C2A58F /* background.png */,
 				68C5E6E21B86D89D00C2A58F /* bg_big_button.png */,
 				68C5E6E31B86D89D00C2A58F /* bg_button.png */,
@@ -219,6 +249,66 @@
 				68C5E6FA1B86D89D00C2A58F /* logo_search_name.png */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		68C5E7151B86D9DA00C2A58F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E7351B870AE600C2A58F /* ModalDatabase */,
+				68C5E7231B86DFC200C2A58F /* Database */,
+				68C5E71A1B86DBBA00C2A58F /* CoreDatabase */,
+				68C5E71E1B86DBBA00C2A58F /* Help */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		68C5E71A1B86DBBA00C2A58F /* CoreDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E71B1B86DBBA00C2A58F /* ANACoreDataStorageProtected.h */,
+				68C5E71C1B86DBBA00C2A58F /* ANACoreDataStoreage.h */,
+				68C5E71D1B86DBBA00C2A58F /* ANACoreDataStoreage.m */,
+			);
+			path = CoreDatabase;
+			sourceTree = "<group>";
+		};
+		68C5E71E1B86DBBA00C2A58F /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E7321B8707A100C2A58F /* LocalDataBase.h */,
+				68C5E7331B8707A100C2A58F /* LocalDataBase.m */,
+				68C5E7201B86DFA600C2A58F /* ImportSQLToCoreData.h */,
+				68C5E7211B86DFA600C2A58F /* ImportSQLToCoreData.m */,
+				68C5E72B1B86E47500C2A58F /* SQLiteExport.h */,
+				68C5E72C1B86E47500C2A58F /* SQLiteExport.m */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		68C5E7231B86DFC200C2A58F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E7261B86E0C900C2A58F /* Song_Sqlite.db */,
+				68C5E7281B86E36D00C2A58F /* Song_CoreData.xcdatamodeld */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		68C5E7301B86E72000C2A58F /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E7311B86E73500C2A58F /* Constants.h */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		68C5E7351B870AE600C2A58F /* ModalDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E7361B870B4F00C2A58F /* Singer.h */,
+				68C5E7371B870B4F00C2A58F /* Singer.m */,
+			);
+			path = ModalDatabase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,7 +403,9 @@
 				68C5E7071B86D89D00C2A58F /* button_play.png in Resources */,
 				689D09631B8616AC00D5C97B /* Main_iPad.storyboard in Resources */,
 				68C5E7001B86D89D00C2A58F /* button_danceremix.png in Resources */,
+				68C5E7271B86E0C900C2A58F /* Song_Sqlite.db in Resources */,
 				68C5E6FB1B86D89D00C2A58F /* background.png in Resources */,
+				68C5E73A1B871D0400C2A58F /* avatar_placeholder.png in Resources */,
 				689D095A1B86130B00D5C97B /* Main_iPhone.storyboard in Resources */,
 				68C5E7081B86D89D00C2A58F /* button_refresh.png in Resources */,
 				68C5E70D1B86D89D00C2A58F /* button_volume.png in Resources */,
@@ -347,9 +439,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68C5E72A1B86E36D00C2A58F /* Song_CoreData.xcdatamodeld in Sources */,
 				68B136571B858DDC001F4C64 /* AppDelegate.m in Sources */,
+				68C5E7341B8707A100C2A58F /* LocalDataBase.m in Sources */,
+				68C5E71F1B86DBBA00C2A58F /* ANACoreDataStoreage.m in Sources */,
 				689D095F1B86133400D5C97B /* MainViewController.m in Sources */,
+				68C5E7221B86DFA600C2A58F /* ImportSQLToCoreData.m in Sources */,
 				68B136541B858DDC001F4C64 /* main.m in Sources */,
+				68C5E7381B870B4F00C2A58F /* Singer.m in Sources */,
+				68C5E72D1B86E47500C2A58F /* SQLiteExport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +641,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		68C5E7281B86E36D00C2A58F /* Song_CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				68C5E7291B86E36D00C2A58F /* Song_CoreData.xcdatamodel */,
+			);
+			currentVersion = 68C5E7291B86E36D00C2A58F /* Song_CoreData.xcdatamodel */;
+			path = Song_CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 68B136461B858DDC001F4C64 /* Project object */;
 }

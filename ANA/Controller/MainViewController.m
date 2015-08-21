@@ -7,7 +7,7 @@
 //
 
 #import "MainViewController.h"
-
+#import "SQLiteExport.h"
 @interface MainViewController ()
 
 @end
@@ -16,6 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    SQLiteExport *sqliteExport = [[SQLiteExport alloc]init];
+    [sqliteExport exportSQLiteToLog:^{
+        
+    }];
     // Do any additional setup after loading the view.
 }
 
