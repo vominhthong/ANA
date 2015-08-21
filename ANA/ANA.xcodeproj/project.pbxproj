@@ -25,6 +25,12 @@
 		68B136571B858DDC001F4C64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B136561B858DDC001F4C64 /* AppDelegate.m */; };
 		68B1365F1B858DDC001F4C64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B1365E1B858DDC001F4C64 /* Images.xcassets */; };
 		68B1366E1B858DDC001F4C64 /* ANATests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B1366D1B858DDC001F4C64 /* ANATests.m */; };
+		68C5E6C41B86C03C00C2A58F /* logo_hifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6C21B86C03C00C2A58F /* logo_hifi.png */; };
+		68C5E6C51B86C03C00C2A58F /* logo_ana.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6C31B86C03C00C2A58F /* logo_ana.png */; };
+		68C5E6C71B86C1CE00C2A58F /* logo_music.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6C61B86C1CE00C2A58F /* logo_music.png */; };
+		68C5E6C91B86C5CB00C2A58F /* logo_search_name.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6C81B86C5CB00C2A58F /* logo_search_name.png */; };
+		68C5E6CB1B86C71900C2A58F /* logo_magnifying.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6CA1B86C71900C2A58F /* logo_magnifying.png */; };
+		68C5E6CD1B86CABF00C2A58F /* logo_seach_song.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E6CC1B86CABF00C2A58F /* logo_seach_song.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +68,12 @@
 		68B136671B858DDC001F4C64 /* ANATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ANATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B1366C1B858DDC001F4C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68B1366D1B858DDC001F4C64 /* ANATests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ANATests.m; sourceTree = "<group>"; };
+		68C5E6C21B86C03C00C2A58F /* logo_hifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_hifi.png; sourceTree = "<group>"; };
+		68C5E6C31B86C03C00C2A58F /* logo_ana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_ana.png; sourceTree = "<group>"; };
+		68C5E6C61B86C1CE00C2A58F /* logo_music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_music.png; sourceTree = "<group>"; };
+		68C5E6C81B86C5CB00C2A58F /* logo_search_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_search_name.png; sourceTree = "<group>"; };
+		68C5E6CA1B86C71900C2A58F /* logo_magnifying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_magnifying.png; sourceTree = "<group>"; };
+		68C5E6CC1B86CABF00C2A58F /* logo_seach_song.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_seach_song.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +115,13 @@
 		689D09671B86213400D5C97B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				68C5E6CC1B86CABF00C2A58F /* logo_seach_song.png */,
+				68C5E6CA1B86C71900C2A58F /* logo_magnifying.png */,
+				68C5E6C81B86C5CB00C2A58F /* logo_search_name.png */,
+				68C5E6C61B86C1CE00C2A58F /* logo_music.png */,
 				689D097E1B86343300D5C97B /* button_lips.png */,
+				68C5E6C21B86C03C00C2A58F /* logo_hifi.png */,
+				68C5E6C31B86C03C00C2A58F /* logo_ana.png */,
 				689D097C1B8633DE00D5C97B /* button_rum.png */,
 				689D097A1B8633A000D5C97B /* button_bravo.png */,
 				689D09781B86337100D5C97B /* button_dislike.png */,
@@ -261,10 +279,16 @@
 				689D096F1B86271800D5C97B /* button_play.png in Resources */,
 				689D096B1B86261D00D5C97B /* bg_button.png in Resources */,
 				689D097F1B86343300D5C97B /* button_lips.png in Resources */,
+				68C5E6CD1B86CABF00C2A58F /* logo_seach_song.png in Resources */,
+				68C5E6C91B86C5CB00C2A58F /* logo_search_name.png in Resources */,
+				68C5E6CB1B86C71900C2A58F /* logo_magnifying.png in Resources */,
 				689D09711B86274100D5C97B /* bg_big_button.png in Resources */,
+				68C5E6C71B86C1CE00C2A58F /* logo_music.png in Resources */,
+				68C5E6C51B86C03C00C2A58F /* logo_ana.png in Resources */,
 				689D097B1B8633A000D5C97B /* button_bravo.png in Resources */,
 				689D09791B86337100D5C97B /* button_dislike.png in Resources */,
 				689D09691B86213F00D5C97B /* background.png in Resources */,
+				68C5E6C41B86C03C00C2A58F /* logo_hifi.png in Resources */,
 				689D095A1B86130B00D5C97B /* Main_iPhone.storyboard in Resources */,
 				689D09771B862FE300D5C97B /* button_like.png in Resources */,
 				68B1365F1B858DDC001F4C64 /* Images.xcassets in Resources */,
