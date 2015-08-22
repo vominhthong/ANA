@@ -10,4 +10,7 @@
 #define ANA_Constants_h
 
 #define kNameSQLite         @"Song_Sqlite.db"
+
+#define CELLSINGER_WIDTH          122
+#define CELLSINGER_HEIGHT         160
 #endif

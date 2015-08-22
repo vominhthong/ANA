@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController
-@property (nonatomic,weak) IBOutlet UIButton*collectionView_iPad;
+@property (nonatomic,weak) IBOutlet UICollectionView *collectionView_iPad;
+@property (nonatomic,weak) IBOutlet UITableView *tableView_iPad;
 @end

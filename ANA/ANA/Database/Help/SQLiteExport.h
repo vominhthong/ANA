@@ -14,10 +14,11 @@
 -(BOOL)configureWithParent:(SQLiteExport *)aParent queue:(dispatch_queue_t)queue;
 
 -(void)insertToCoreData:(void(^)(void))callback;
+-(void)insertSongsToCoreData:(void(^)(void))callback;
 
 @end
 
 @interface SQLiteExport : NSObject
 -(void)exportSQLiteToLog:(void (^)(void))callback;
-
+-(void)exportSongSQLiteToLog:(void (^)(void))callback;
 @end

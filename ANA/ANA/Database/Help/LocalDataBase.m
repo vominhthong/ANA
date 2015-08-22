@@ -10,7 +10,7 @@
 #import "ANACoreDataStorageProtected.h"
 #import "Constants.h"
 #import "Singer.h"
-
+#import "Song.h"
 @implementation LocalDataBase
 @synthesize dataBaseEntityName;
 #define return_from_block               return
@@ -49,12 +49,74 @@ static LocalDataBase *sharedInstance;
 -(void)clearAllResponseOnMainThread{
     
 }
+-(void)insertSongsToCoreData:(void (^)(void))callback{
+    [self scheduleBlock:^{
+        NSManagedObjectContext *manageContext = [self managedObjectContext];
+        NSEntityDescription *entity = [self dataBaseEntitySongs:manageContext];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+        fetchRequest.entity = entity;
+        NSError *error = nil;
+        NSUInteger count = [manageContext countForFetchRequest:fetchRequest error:&error];
+        if (count > 0) {
+            callback();
+            return ;
+        }else if (error){
+            callback();
+        }
+        NSString *bundleSQLite = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kNameSQLite];
+        sqlite3_stmt *statement;
+        sqlite3 *ppDB;
+        if (sqlite3_open([bundleSQLite UTF8String], &ppDB) == SQLITE_OK) {
+            NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM song"];
+            const char *query_stmt = [querySQL UTF8String];
+            
+            if (sqlite3_prepare_v2(ppDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
+                while (sqlite3_step(statement) == SQLITE_ROW) {
+                    int idSong = sqlite3_column_int(statement, 0);
+                    NSString *nameSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+                    NSString *nameJPSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
+                    NSString *nameSinger = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 3)];
+                    int hotRate = sqlite3_column_int(statement, 4);
+                    
+                    Song *song = (Song*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];
+                    song.songName = nameSong;
+                    song.songNameJP = nameJPSong;
+                    song.hotRate = hotRate;
+                    song.idSong = idSong;
+                    song.singerName = nameSinger;
+                    
+                    NSError*error = nil;
+                    [manageContext save:&error];
+                    if (error) {
+                        NSLog(@"Error : %@",error.localizedDescription);
+                    }
+                }
+            }
+            sqlite3_close(ppDB);
+            callback();
+        }else{
+            callback();
+            NSLog(@"Failed");
+        }
+
+        
+    }];
+}
 -(void)insertToCoreData:(void (^)(void))callback{
     [self scheduleBlock:^{
         NSManagedObjectContext *manageContext = [self managedObjectContext];
         NSEntityDescription *entity = [self dataBaseEntity:manageContext];
         
-        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+        fetchRequest.entity = entity;
+        NSError *error = nil;
+        NSUInteger count = [manageContext countForFetchRequest:fetchRequest error:&error];
+        if (count > 0) {
+            callback();
+            return ;
+        }else if (error){
+            callback();
+        }
         NSString *bundleSQLite = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kNameSQLite];
         sqlite3_stmt *statement;
         sqlite3 *ppDB;
@@ -85,9 +147,9 @@ static LocalDataBase *sharedInstance;
                 }
             }
             sqlite3_close(ppDB);
-            
             callback();
         }else{
+            callback();
             NSLog(@"Failed");
         }
 
@@ -98,6 +160,10 @@ static LocalDataBase *sharedInstance;
 #pragma mark - DataBase Enity
 - (NSEntityDescription *)dataBaseEntity:(NSManagedObjectContext *)moc{
     return [NSEntityDescription entityForName:[self dataBaseEntityName] inManagedObjectContext:moc];
+}
+
+- (NSEntityDescription *)dataBaseEntitySongs:(NSManagedObjectContext *)moc{
+    return [NSEntityDescription entityForName:@"Songs" inManagedObjectContext:moc];
 }
 
 #pragma mark - Share Instance

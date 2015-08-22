@@ -17,5 +17,5 @@
 + (instancetype)sharedInstance;
 @property (nonatomic,strong) NSString *dataBaseEntityName;
 - (NSEntityDescription *)dataBaseEntity:(NSManagedObjectContext *)moc;
-
+- (NSEntityDescription *)dataBaseEntitySongs:(NSManagedObjectContext *)moc;
 @end

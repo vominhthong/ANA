@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6875DCCD1B88349900EA0BD4 /* background_cicle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6875DCCC1B88349900EA0BD4 /* background_cicle.png */; };
+		6875DCCF1B88356A00EA0BD4 /* background_mtv.png in Resources */ = {isa = PBXBuildFile; fileRef = 6875DCCE1B88356A00EA0BD4 /* background_mtv.png */; };
 		689D095A1B86130B00D5C97B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 689D09591B86130B00D5C97B /* Main_iPhone.storyboard */; };
 		689D095F1B86133400D5C97B /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D095E1B86133400D5C97B /* MainViewController.m */; };
 		689D09631B8616AC00D5C97B /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 689D09621B8616AC00D5C97B /* Main_iPad.storyboard */; };
+		689F0E0F1B880A7600B5BF88 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 689F0E0E1B880A7600B5BF88 /* Song.m */; };
+		689F0E1D1B8810B400B5BF88 /* TableViewCellSong_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 689F0E1B1B8810B400B5BF88 /* TableViewCellSong_iPad.m */; };
+		689F0E1E1B8810B400B5BF88 /* TableViewCellSong_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689F0E1C1B8810B400B5BF88 /* TableViewCellSong_iPad.xib */; };
+		689F0E201B88124D00B5BF88 /* background_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = 689F0E1F1B88124D00B5BF88 /* background_cell.png */; };
 		68B136541B858DDC001F4C64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B136531B858DDC001F4C64 /* main.m */; };
 		68B136571B858DDC001F4C64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B136561B858DDC001F4C64 /* AppDelegate.m */; };
 		68B1365F1B858DDC001F4C64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68B1365E1B858DDC001F4C64 /* Images.xcassets */; };
@@ -49,6 +55,11 @@
 		68C5E7341B8707A100C2A58F /* LocalDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7331B8707A100C2A58F /* LocalDataBase.m */; };
 		68C5E7381B870B4F00C2A58F /* Singer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7371B870B4F00C2A58F /* Singer.m */; };
 		68C5E73A1B871D0400C2A58F /* avatar_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E7391B871D0400C2A58F /* avatar_placeholder.png */; };
+		68C5E73F1B87664600C2A58F /* CollectionViewName_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E73E1B87664600C2A58F /* CollectionViewName_iPad.m */; };
+		68C5E7431B876A1900C2A58F /* CollectionViewCellSinger_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7411B876A1900C2A58F /* CollectionViewCellSinger_iPad.m */; };
+		68C5E7441B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E7421B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib */; };
+		68C5E7481B876BBC00C2A58F /* SingerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7471B876BBC00C2A58F /* SingerCell.m */; };
+		68C5E74B1B8787B500C2A58F /* MTTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E74A1B8787B500C2A58F /* MTTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,10 +73,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6875DCCC1B88349900EA0BD4 /* background_cicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_cicle.png; sourceTree = "<group>"; };
+		6875DCCE1B88356A00EA0BD4 /* background_mtv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_mtv.png; sourceTree = "<group>"; };
 		689D09591B86130B00D5C97B /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		689D095D1B86133400D5C97B /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controller/MainViewController.h; sourceTree = SOURCE_ROOT; };
 		689D095E1B86133400D5C97B /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Controller/MainViewController.m; sourceTree = SOURCE_ROOT; };
 		689D09621B8616AC00D5C97B /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
+		689F0E0D1B880A7600B5BF88 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		689F0E0E1B880A7600B5BF88 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		689F0E1A1B8810B400B5BF88 /* TableViewCellSong_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSong_iPad.h; sourceTree = "<group>"; };
+		689F0E1B1B8810B400B5BF88 /* TableViewCellSong_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSong_iPad.m; sourceTree = "<group>"; };
+		689F0E1C1B8810B400B5BF88 /* TableViewCellSong_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSong_iPad.xib; sourceTree = "<group>"; };
+		689F0E1F1B88124D00B5BF88 /* background_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_cell.png; sourceTree = "<group>"; };
 		68B1364E1B858DDC001F4C64 /* ANA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ANA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68B136521B858DDC001F4C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68B136531B858DDC001F4C64 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -117,6 +136,15 @@
 		68C5E7361B870B4F00C2A58F /* Singer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singer.h; sourceTree = "<group>"; };
 		68C5E7371B870B4F00C2A58F /* Singer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singer.m; sourceTree = "<group>"; };
 		68C5E7391B871D0400C2A58F /* avatar_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_placeholder.png; sourceTree = "<group>"; };
+		68C5E73D1B87664600C2A58F /* CollectionViewName_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewName_iPad.h; sourceTree = "<group>"; };
+		68C5E73E1B87664600C2A58F /* CollectionViewName_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewName_iPad.m; sourceTree = "<group>"; };
+		68C5E7401B876A1900C2A58F /* CollectionViewCellSinger_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCellSinger_iPad.h; sourceTree = "<group>"; };
+		68C5E7411B876A1900C2A58F /* CollectionViewCellSinger_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCellSinger_iPad.m; sourceTree = "<group>"; };
+		68C5E7421B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellSinger_iPad.xib; sourceTree = "<group>"; };
+		68C5E7461B876BBC00C2A58F /* SingerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingerCell.h; sourceTree = "<group>"; };
+		68C5E7471B876BBC00C2A58F /* SingerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingerCell.m; sourceTree = "<group>"; };
+		68C5E7491B8787B500C2A58F /* MTTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTextField.h; sourceTree = "<group>"; };
+		68C5E74A1B8787B500C2A58F /* MTTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +205,8 @@
 		68B136501B858DDC001F4C64 /* ANA */ = {
 			isa = PBXGroup;
 			children = (
+				68C5E7451B876B8900C2A58F /* Modal */,
+				68C5E73C1B8765BE00C2A58F /* View */,
 				68C5E7301B86E72000C2A58F /* Constant */,
 				68C5E7151B86D9DA00C2A58F /* Database */,
 				68C5E6E01B86D89D00C2A58F /* Resource */,
@@ -220,6 +250,9 @@
 		68C5E6E01B86D89D00C2A58F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				6875DCCE1B88356A00EA0BD4 /* background_mtv.png */,
+				6875DCCC1B88349900EA0BD4 /* background_cicle.png */,
+				689F0E1F1B88124D00B5BF88 /* background_cell.png */,
 				68C5E7391B871D0400C2A58F /* avatar_placeholder.png */,
 				68C5E6E11B86D89D00C2A58F /* background.png */,
 				68C5E6E21B86D89D00C2A58F /* bg_big_button.png */,
@@ -305,10 +338,38 @@
 		68C5E7351B870AE600C2A58F /* ModalDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				689F0E0D1B880A7600B5BF88 /* Song.h */,
+				689F0E0E1B880A7600B5BF88 /* Song.m */,
 				68C5E7361B870B4F00C2A58F /* Singer.h */,
 				68C5E7371B870B4F00C2A58F /* Singer.m */,
 			);
 			path = ModalDatabase;
+			sourceTree = "<group>";
+		};
+		68C5E73C1B8765BE00C2A58F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E73D1B87664600C2A58F /* CollectionViewName_iPad.h */,
+				68C5E73E1B87664600C2A58F /* CollectionViewName_iPad.m */,
+				68C5E7401B876A1900C2A58F /* CollectionViewCellSinger_iPad.h */,
+				68C5E7411B876A1900C2A58F /* CollectionViewCellSinger_iPad.m */,
+				68C5E7421B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib */,
+				68C5E7491B8787B500C2A58F /* MTTextField.h */,
+				68C5E74A1B8787B500C2A58F /* MTTextField.m */,
+				689F0E1A1B8810B400B5BF88 /* TableViewCellSong_iPad.h */,
+				689F0E1B1B8810B400B5BF88 /* TableViewCellSong_iPad.m */,
+				689F0E1C1B8810B400B5BF88 /* TableViewCellSong_iPad.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		68C5E7451B876B8900C2A58F /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				68C5E7461B876BBC00C2A58F /* SingerCell.h */,
+				68C5E7471B876BBC00C2A58F /* SingerCell.m */,
+			);
+			path = Modal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,10 +452,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6875DCCD1B88349900EA0BD4 /* background_cicle.png in Resources */,
 				68C5E70A1B86D89D00C2A58F /* button_settings.png in Resources */,
 				68C5E7061B86D89D00C2A58F /* button_nhacrap.png in Resources */,
 				68C5E70E1B86D89D00C2A58F /* button_wifi.png in Resources */,
 				68C5E7121B86D89D00C2A58F /* logo_music.png in Resources */,
+				689F0E1E1B8810B400B5BF88 /* TableViewCellSong_iPad.xib in Resources */,
 				68C5E7101B86D89D00C2A58F /* logo_hifi.png in Resources */,
 				68C5E70B1B86D89D00C2A58F /* button_songca.png in Resources */,
 				68C5E6FC1B86D89D00C2A58F /* bg_big_button.png in Resources */,
@@ -404,6 +467,8 @@
 				689D09631B8616AC00D5C97B /* Main_iPad.storyboard in Resources */,
 				68C5E7001B86D89D00C2A58F /* button_danceremix.png in Resources */,
 				68C5E7271B86E0C900C2A58F /* Song_Sqlite.db in Resources */,
+				6875DCCF1B88356A00EA0BD4 /* background_mtv.png in Resources */,
+				689F0E201B88124D00B5BF88 /* background_cell.png in Resources */,
 				68C5E6FB1B86D89D00C2A58F /* background.png in Resources */,
 				68C5E73A1B871D0400C2A58F /* avatar_placeholder.png in Resources */,
 				689D095A1B86130B00D5C97B /* Main_iPhone.storyboard in Resources */,
@@ -417,6 +482,7 @@
 				68C5E7041B86D89D00C2A58F /* button_menu.png in Resources */,
 				68C5E7051B86D89D00C2A58F /* button_next.png in Resources */,
 				68C5E70C1B86D89D00C2A58F /* button_tienganh.png in Resources */,
+				68C5E7441B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib in Resources */,
 				68C5E7091B86D89D00C2A58F /* button_rum.png in Resources */,
 				68C5E7031B86D89D00C2A58F /* button_lips.png in Resources */,
 				68C5E6FE1B86D89D00C2A58F /* button_bravo.png in Resources */,
@@ -439,15 +505,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				689F0E0F1B880A7600B5BF88 /* Song.m in Sources */,
+				68C5E74B1B8787B500C2A58F /* MTTextField.m in Sources */,
 				68C5E72A1B86E36D00C2A58F /* Song_CoreData.xcdatamodeld in Sources */,
+				689F0E1D1B8810B400B5BF88 /* TableViewCellSong_iPad.m in Sources */,
+				68C5E73F1B87664600C2A58F /* CollectionViewName_iPad.m in Sources */,
 				68B136571B858DDC001F4C64 /* AppDelegate.m in Sources */,
 				68C5E7341B8707A100C2A58F /* LocalDataBase.m in Sources */,
 				68C5E71F1B86DBBA00C2A58F /* ANACoreDataStoreage.m in Sources */,
 				689D095F1B86133400D5C97B /* MainViewController.m in Sources */,
 				68C5E7221B86DFA600C2A58F /* ImportSQLToCoreData.m in Sources */,
+				68C5E7481B876BBC00C2A58F /* SingerCell.m in Sources */,
 				68B136541B858DDC001F4C64 /* main.m in Sources */,
 				68C5E7381B870B4F00C2A58F /* Singer.m in Sources */,
 				68C5E72D1B86E47500C2A58F /* SQLiteExport.m in Sources */,
+				68C5E7431B876A1900C2A58F /* CollectionViewCellSinger_iPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

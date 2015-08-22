@@ -7,7 +7,16 @@
         <attribute name="namejp" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="Songs" representedClassName="Song" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Singer" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Songs" positionX="-63" positionY="18" width="128" height="135"/>
     </elements>
 </model>

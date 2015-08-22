@@ -32,6 +32,16 @@
     }
     return self;
 }
+-(void)exportSongSQLiteToLog:(void (^)(void))callback{
+    dispatch_block_t block = ^{
+        [sqliteExportStoreage insertSongsToCoreData:callback];
+    };
+    if (dispatch_get_specific(exportQueueTag)) {
+        block();
+    }else{
+        dispatch_async(exportQueue, block);
+    }
+}
 -(void)exportSQLiteToLog:(void (^)(void))callback{
     
     dispatch_block_t block = ^{
