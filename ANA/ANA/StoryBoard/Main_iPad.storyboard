@@ -323,6 +323,10 @@
                                     <outlet property="delegate" destination="gW4-5t-qmR" id="vkd-WR-asd"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="gHP-1B-r07">
+                                <rect key="frame" x="669" y="450" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -330,6 +334,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="collectionView_iPad" destination="02q-a0-Gl1" id="xcQ-pn-VCo"/>
+                        <outlet property="indicatorViewTableView_iPad" destination="gHP-1B-r07" id="XbQ-pc-Fgw"/>
                         <outlet property="tableView_iPad" destination="ihZ-QR-SN1" id="gvJ-HZ-CMq"/>
                     </connections>
                 </viewController>

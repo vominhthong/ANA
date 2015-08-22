@@ -44,6 +44,10 @@
     self.tableView_iPad.rowHeight = 92;
     self.tableView_iPad.backgroundColor = [UIColor clearColor];
 }
+-(void)configIndicatorView{
+    self.indicatorViewTableView_iPad.hidesWhenStopped = YES;
+    [self.indicatorViewTableView_iPad startAnimating];
+}
 #pragma mark - Fetch Result
 -(void)fetchResultsSinger{
     self.fetchResultSingers = [[NSFetchedResultsController alloc]initWithFetchRequest:[self fetchRequestSinger] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"Single"];
@@ -77,6 +81,7 @@
     __weak typeof(self) wSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [wSelf.tableView_iPad reloadData];
+        [wSelf.indicatorViewTableView_iPad stopAnimating];
     });
 }
 -(NSFetchRequest*)fetchRequestSongs{
@@ -99,15 +104,16 @@
         semaphore = dispatch_semaphore_create(0);
     }
     __weak typeof(self) wSelf = self;
+    [self configTableView];
+    [self configCollectionView];
+    [self configIndicatorView];
+
     [sqliteExport exportSQLiteToLog:^{
-        [wSelf configCollectionView];
         [wSelf fetchResultsSinger];
         dispatch_semaphore_signal(semaphore);
-
     }];
     
     [sqliteExport exportSongSQLiteToLog:^{
-        [wSelf configTableView];
         [wSelf fetchResultsSongs];
     }];
     
@@ -115,7 +121,9 @@
 
     // Do any additional setup after loading the view.
 }
-
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

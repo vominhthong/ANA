@@ -11,4 +11,6 @@
 @interface MainViewController : UIViewController
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView_iPad;
 @property (nonatomic,weak) IBOutlet UITableView *tableView_iPad;
+@property (nonatomic,weak) IBOutlet UIActivityIndicatorView *indicatorViewTableView_iPad;
 @end
+
