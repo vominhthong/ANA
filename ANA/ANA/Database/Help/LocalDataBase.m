@@ -62,6 +62,7 @@ static LocalDataBase *sharedInstance;
             return ;
         }else if (error){
             callback();
+            return;
         }
         NSString *bundleSQLite = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kNameSQLite];
         sqlite3_stmt *statement;
@@ -75,7 +76,7 @@ static LocalDataBase *sharedInstance;
                     int idSong = sqlite3_column_int(statement, 0);
                     NSString *nameSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
                     NSString *nameJPSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
-                    NSString *nameSinger = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 3)];
+                    NSString *nameSinger = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 7)];
                     int hotRate = sqlite3_column_int(statement, 4);
                     
                     Song *song = (Song*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];

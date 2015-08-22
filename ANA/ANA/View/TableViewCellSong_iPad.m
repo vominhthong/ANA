@@ -14,7 +14,6 @@
     [super awakeFromNib];
     self.contentView.backgroundColor = [UIColor clearColor];
     self.backgroundColor = [UIColor clearColor];
-//    self.backgroundCell.backgroundColor = [self.backgroundCell.backgroundColor colorWithAlphaComponent:0.4];
     // Initialization code
 }
 

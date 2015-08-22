@@ -42,6 +42,7 @@
     [self.tableView_iPad registerClass:[TableViewCellSong_iPad class] forCellReuseIdentifier:@"TableViewCellSong_iPad"];
     [self.tableView_iPad registerNib:[UINib nibWithNibName:@"TableViewCellSong_iPad" bundle:nil] forCellReuseIdentifier:@"TableViewCellSong_iPad"];
     self.tableView_iPad.rowHeight = 92;
+    self.tableView_iPad.backgroundColor = [UIColor clearColor];
 }
 #pragma mark - Fetch Result
 -(void)fetchResultsSinger{
@@ -129,11 +130,12 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TableViewCellSong_iPad *cell = [self.tableView_iPad dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPad" forIndexPath:indexPath];
     Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
-    cell.lbName.text = song.songName;
+    cell.lbName.text = [song.songName uppercaseString];
+    cell.lbSingerName.text = song.singerName;
     if (indexPath.row % 2== 1) {
-        cell.backgroundCell.hidden = YES;
+        cell.backgroundCell.alpha = 0.6;
     }else{
-        cell.backgroundCell.hidden = NO;
+        cell.backgroundCell.alpha = 0.9;
     }
     return cell;
 }

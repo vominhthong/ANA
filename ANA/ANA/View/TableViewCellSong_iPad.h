@@ -11,4 +11,5 @@
 @interface TableViewCellSong_iPad : UITableViewCell
 @property (nonatomic,weak) IBOutlet UILabel *lbName;
 @property (nonatomic,weak) IBOutlet UIImageView *backgroundCell;
+@property (nonatomic,weak) IBOutlet UILabel *lbSingerName;
 @end

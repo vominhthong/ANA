@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="690" height="91.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_cell.png" id="2lr-iY-Uyt">
+                    <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_cell.png" id="2lr-iY-Uyt">
                         <rect key="frame" x="0.0" y="0.0" width="690" height="91.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -28,10 +28,17 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lFX-DI-g98">
-                        <rect key="frame" x="90" y="16" width="350" height="21"/>
+                        <rect key="frame" x="90" y="16" width="385" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.14509803921568629" green="0.67843137254901964" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
+                        <color key="textColor" red="0.18013433263569134" green="0.78630605086892569" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbSingerName" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tqR-2E-Gvw">
+                        <rect key="frame" x="466" y="43" width="175" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -40,7 +47,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="backgroundCell" destination="2lr-iY-Uyt" id="YXg-SO-9di"/>
-                <outlet property="lbName" destination="lFX-DI-g98" id="WIv-af-BW5"/>
+                <outlet property="lbName" destination="lFX-DI-g98" id="n3Z-eS-WoY"/>
+                <outlet property="lbSingerName" destination="tqR-2E-Gvw" id="c4c-cg-4Vf"/>
             </connections>
             <point key="canvasLocation" x="296" y="226"/>
         </tableViewCell>
