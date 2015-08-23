@@ -137,6 +137,17 @@ typedef enum {
         [wSelf.indicatorViewTableView_iPad stopAnimating];
     });
 }
+-(NSFetchRequest*)fetchRequestSongWithKey:(NSString*)key{
+    LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
+    NSEntityDescription *entity = [localDatabase dataBaseEntitySongs:[localDatabase managedObjectContext]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    fetchRequest.fetchBatchSize = 100;
+    fetchRequest.entity = entity;
+    NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"songName" ascending:true];
+    [fetchRequest setSortDescriptors:@[sortDscr]];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"songName == %@",key];
+    return fetchRequest;
+}
 
 -(void)fetchResultsSongs{
     self.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:[self fetchRequestSongs] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"Song"];
@@ -239,13 +250,14 @@ typedef enum {
 }
 #pragma mark - UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    self.fetchResultSingers = nil;
-    [self.collectionView_iPad reloadData];
+
 
     [textField resignFirstResponder];
     __weak typeof(self)wSelf = self;
     if (textField == self.txtSearchSingerName) {
         [sqliteExport excuteBlockInBackground:^{
+            wSelf.fetchResultSingers = nil;
+            [wSelf.collectionView_iPad reloadData];
             NSString *searchKey = textField.text;
             if (searchKey.length == 0) {
                 [wSelf fetchResultsSinger];
@@ -254,7 +266,16 @@ typedef enum {
             }
         }];
     }else{
-    
+        [sqliteExport excuteBlockInBackground:^{
+            wSelf.fetchResultSongs = nil;
+            [wSelf.tableView_iPad reloadData];
+            NSString *searchKey = textField.text;
+            if (searchKey.length == 0) {
+                [wSelf fetchResultsSongs];
+            }else{
+                [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:searchKey]];
+            }
+        }];
     }
 
 
