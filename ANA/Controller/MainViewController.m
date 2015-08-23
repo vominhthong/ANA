@@ -22,7 +22,7 @@ typedef enum {
     CollectionViewCellSinger_iPadTypeSongType
 }CollectionViewCellSinger_iPadType;
 
-@interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate>{
+@interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
     dispatch_semaphore_t semaphore;
     SQLiteExport *sqliteExport;
 }
@@ -78,6 +78,19 @@ typedef enum {
     [self.indicatorViewTableView_iPad startAnimating];
 }
 #pragma mark - Fetch Result
+
+-(void)fecthResultsSingerWithPredicate:(NSFetchRequest*)fetchRequest{
+    self.fetchResultSingers = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:nil];
+    self.fetchResultSingers.delegate = self;
+    NSError *error = nil;
+    if (![self.fetchResultSingers performFetch:&error]) {
+        NSLog(@"Error :%@",error.localizedDescription);
+    }
+    __weak typeof(self) wSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [wSelf.collectionView_iPad reloadData];
+    });
+}
 -(void)fetchResultsSinger{
     self.fetchResultSingers = [[NSFetchedResultsController alloc]initWithFetchRequest:[self fetchRequestSinger] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"Single"];
     self.fetchResultSingers.delegate = self;
@@ -90,6 +103,17 @@ typedef enum {
         [wSelf.collectionView_iPad reloadData];
     });
 }
+-(NSFetchRequest*)fetchRequestSingerWithKey:(NSString*)key{
+    LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
+    NSEntityDescription *entity = [localDatabase dataBaseEntity:[localDatabase managedObjectContext]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    fetchRequest.fetchBatchSize = 100;
+    fetchRequest.entity = entity;
+    NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:true];
+    [fetchRequest setSortDescriptors:@[sortDscr]];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@",key];
+    return fetchRequest;
+}
 -(NSFetchRequest*)fetchRequestSinger{
     LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
     NSEntityDescription *entity = [localDatabase dataBaseEntity:[localDatabase managedObjectContext]];
@@ -100,6 +124,20 @@ typedef enum {
     [fetchRequest setSortDescriptors:@[sortDscr]];
     return fetchRequest;
 }
+-(void)fetchResultsSongsWithRequest:(NSFetchRequest*)request{
+    self.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    self.fetchResultSongs.delegate = self;
+    NSError *error = nil;
+    if (![self.fetchResultSongs performFetch:&error]) {
+        NSLog(@"Error :%@",error.localizedDescription);
+    }
+    __weak typeof(self) wSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [wSelf.tableView_iPad reloadData];
+        [wSelf.indicatorViewTableView_iPad stopAnimating];
+    });
+}
+
 -(void)fetchResultsSongs{
     self.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:[self fetchRequestSongs] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:@"Song"];
     self.fetchResultSongs.delegate = self;
@@ -199,14 +237,44 @@ typedef enum {
         });
     }];
 }
+#pragma mark - UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    self.fetchResultSingers = nil;
+    [self.collectionView_iPad reloadData];
+
+    [textField resignFirstResponder];
+    __weak typeof(self)wSelf = self;
+    if (textField == self.txtSearchSingerName) {
+        [sqliteExport excuteBlockInBackground:^{
+            NSString *searchKey = textField.text;
+            if (searchKey.length == 0) {
+                [wSelf fetchResultsSinger];
+            }else{
+                [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
+            }
+        }];
+    }else{
+    
+    }
 
 
+    return YES;
+}
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    return YES;
+}
 #pragma mark - Init life vehicle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
     sqliteExport = [[SQLiteExport alloc]init];
+    self.txtSearchSingerName.delegate = self;
+    self.txtSearchSongName.delegate = self;
+    
+    self.txtSearchSongName.returnKeyType = UIReturnKeyDone;
+    self.txtSearchSingerName.returnKeyType = UIReturnKeyDone;
     if (!semaphore) {
         semaphore = dispatch_semaphore_create(0);
     }
@@ -297,9 +365,10 @@ typedef enum {
         {
             SongType *songType = [self.fetchResultSingers objectAtIndexPath:indexPath];
             __weak typeof(self)wSelf = self;
+            self.fetchResultSongs = nil;
+            [self.tableView_iPad reloadData];
             if ([songType.typeName isEqualToString:@"ALL"]) {
-                self.fetchResultSongs = nil;
-                [self.tableView_iPad reloadData];
+                
                 [sqliteExport excuteBlockInBackground:^{
                     [wSelf fetchResultsSongs];
                 }];
@@ -308,13 +377,11 @@ typedef enum {
                     [wSelf fetchResultSongWithTypeName:songType.tableName];
                 }];
             }
-            NSLog(@"OK");
         }
             break;
         case CollectionViewCellSinger_iPadTypeSinger:{
             Singer *singer = [self.fetchResultSingers objectAtIndexPath:indexPath];
             [self fetchResultSongWithSingerName:singer.name];
-            NSLog(@"OK");
         }
             break;
         default:

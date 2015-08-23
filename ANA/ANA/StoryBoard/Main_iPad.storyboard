@@ -342,6 +342,8 @@
                         <outlet property="collectionView_iPad" destination="02q-a0-Gl1" id="xcQ-pn-VCo"/>
                         <outlet property="indicatorViewTableView_iPad" destination="gHP-1B-r07" id="XbQ-pc-Fgw"/>
                         <outlet property="tableView_iPad" destination="ihZ-QR-SN1" id="gvJ-HZ-CMq"/>
+                        <outlet property="txtSearchSingerName" destination="mnY-iL-aMx" id="3FA-an-5j6"/>
+                        <outlet property="txtSearchSongName" destination="ACR-zR-KSP" id="57V-Lh-R5D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mRF-3j-uQB" userLabel="First Responder" sceneMemberID="firstResponder"/>

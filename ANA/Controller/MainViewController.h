@@ -12,5 +12,7 @@
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView_iPad;
 @property (nonatomic,weak) IBOutlet UITableView *tableView_iPad;
 @property (nonatomic,weak) IBOutlet UIActivityIndicatorView *indicatorViewTableView_iPad;
+@property (nonatomic,weak) IBOutlet UITextField *txtSearchSingerName;
+@property (nonatomic,weak) IBOutlet UITextField *txtSearchSongName;
 @end
 
