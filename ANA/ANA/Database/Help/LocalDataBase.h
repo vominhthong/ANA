@@ -18,4 +18,8 @@
 @property (nonatomic,strong) NSString *dataBaseEntityName;
 - (NSEntityDescription *)dataBaseEntity:(NSManagedObjectContext *)moc;
 - (NSEntityDescription *)dataBaseEntitySongs:(NSManagedObjectContext *)moc;
+- (NSEntityDescription *)dataBaseEntitySongType:(NSManagedObjectContext *)moc;
+- (NSEntityDescription *)dataBaseEntitySongs:(NSManagedObjectContext *)moc
+                                     andName:(NSString*)name;
+
 @end

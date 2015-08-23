@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="GuoYu" representedClassName="GuoYu" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="LiuXing" representedClassName="LiuXing" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="QingGe" representedClassName="QingGe" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Singer" representedClassName="Singer" syncable="YES">
         <attribute name="hoterate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="idSinger" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -15,8 +39,55 @@
         <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="SongType" representedClassName="SongType" syncable="YES">
+        <attribute name="flag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="tableName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="YueNan" representedClassName="YueNan" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="YueYu" representedClassName="YueYu" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Zong" representedClassName="Zong" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ZuHe" representedClassName="ZuHe" syncable="YES">
+        <attribute name="hotRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idSong" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pftype" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
+        <element name="GuoYu" positionX="-54" positionY="63" width="128" height="135"/>
+        <element name="LiuXing" positionX="-36" positionY="90" width="128" height="135"/>
+        <element name="QingGe" positionX="-18" positionY="108" width="128" height="135"/>
         <element name="Singer" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Songs" positionX="-63" positionY="18" width="128" height="135"/>
+        <element name="SongType" positionX="-63" positionY="45" width="128" height="120"/>
+        <element name="ZuHe" positionX="-36" positionY="90" width="128" height="135"/>
+        <element name="YueYu" positionX="-27" positionY="99" width="128" height="135"/>
+        <element name="Zong" positionX="-18" positionY="108" width="128" height="135"/>
+        <element name="YueNan" positionX="-9" positionY="117" width="128" height="135"/>
     </elements>
 </model>

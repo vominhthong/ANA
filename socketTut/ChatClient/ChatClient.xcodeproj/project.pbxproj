@@ -15,6 +15,17 @@
 		2899E5220DE3E06400AC0155 /* ChatClientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* ChatClientViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* ChatClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* ChatClientViewController.m */; };
+		68FAA0361B886B64007C517A /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA02C1B886B64007C517A /* NSString+DDXML.m */; };
+		68FAA0371B886B64007C517A /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA02F1B886B64007C517A /* DDXMLDocument.m */; };
+		68FAA0381B886B64007C517A /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0311B886B64007C517A /* DDXMLElement.m */; };
+		68FAA0391B886B64007C517A /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0331B886B64007C517A /* DDXMLNode.m */; };
+		68FAA03B1B886B79007C517A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FAA03A1B886B79007C517A /* libxml2.dylib */; };
+		68FAA0401B886CB7007C517A /* NSXMLElement+XMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA03D1B886CB7007C517A /* NSXMLElement+XMPP.m */; };
+		68FAA0461B886D29007C517A /* NSData+XMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0431B886D29007C517A /* NSData+XMPP.m */; };
+		68FAA0471B886D29007C517A /* NSNumber+XMPP.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0451B886D29007C517A /* NSNumber+XMPP.m */; };
+		68FAA04A1B887220007C517A /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0491B887220007C517A /* GCDAsyncSocket.m */; };
+		68FAA04C1B88722A007C517A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FAA04B1B88722A007C517A /* Security.framework */; };
+		68FAA04E1B887258007C517A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FAA04D1B887258007C517A /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +41,27 @@
 		28D7ACF70DDB3853001CB0EB /* ChatClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatClientViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ChatClient_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatClient_Prefix.pch; sourceTree = "<group>"; };
+		68FAA02B1B886B64007C517A /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		68FAA02C1B886B64007C517A /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		68FAA02D1B886B64007C517A /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		68FAA02E1B886B64007C517A /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		68FAA02F1B886B64007C517A /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		68FAA0301B886B64007C517A /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		68FAA0311B886B64007C517A /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		68FAA0321B886B64007C517A /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		68FAA0331B886B64007C517A /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		68FAA0351B886B64007C517A /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		68FAA03A1B886B79007C517A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		68FAA03C1B886CB7007C517A /* NSXMLElement+XMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSXMLElement+XMPP.h"; sourceTree = "<group>"; };
+		68FAA03D1B886CB7007C517A /* NSXMLElement+XMPP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLElement+XMPP.m"; sourceTree = "<group>"; };
+		68FAA0421B886D29007C517A /* NSData+XMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+XMPP.h"; sourceTree = "<group>"; };
+		68FAA0431B886D29007C517A /* NSData+XMPP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+XMPP.m"; sourceTree = "<group>"; };
+		68FAA0441B886D29007C517A /* NSNumber+XMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+XMPP.h"; sourceTree = "<group>"; };
+		68FAA0451B886D29007C517A /* NSNumber+XMPP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+XMPP.m"; sourceTree = "<group>"; };
+		68FAA0481B887220007C517A /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		68FAA0491B887220007C517A /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		68FAA04B1B88722A007C517A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		68FAA04D1B887258007C517A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* ChatClient-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ChatClient-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -38,6 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68FAA04E1B887258007C517A /* CFNetwork.framework in Frameworks */,
+				68FAA04C1B88722A007C517A /* Security.framework in Frameworks */,
+				68FAA03B1B886B79007C517A /* libxml2.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -70,6 +105,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				68FAA0481B887220007C517A /* GCDAsyncSocket.h */,
+				68FAA0491B887220007C517A /* GCDAsyncSocket.m */,
+				68FAA0291B886B64007C517A /* KissXML */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -100,11 +138,53 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68FAA04D1B887258007C517A /* CFNetwork.framework */,
+				68FAA04B1B88722A007C517A /* Security.framework */,
+				68FAA03A1B886B79007C517A /* libxml2.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		68FAA0291B886B64007C517A /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				68FAA0421B886D29007C517A /* NSData+XMPP.h */,
+				68FAA0431B886D29007C517A /* NSData+XMPP.m */,
+				68FAA0441B886D29007C517A /* NSNumber+XMPP.h */,
+				68FAA0451B886D29007C517A /* NSNumber+XMPP.m */,
+				68FAA03C1B886CB7007C517A /* NSXMLElement+XMPP.h */,
+				68FAA03D1B886CB7007C517A /* NSXMLElement+XMPP.m */,
+				68FAA02A1B886B64007C517A /* Categories */,
+				68FAA02D1B886B64007C517A /* DDXML.h */,
+				68FAA02E1B886B64007C517A /* DDXMLDocument.h */,
+				68FAA02F1B886B64007C517A /* DDXMLDocument.m */,
+				68FAA0301B886B64007C517A /* DDXMLElement.h */,
+				68FAA0311B886B64007C517A /* DDXMLElement.m */,
+				68FAA0321B886B64007C517A /* DDXMLNode.h */,
+				68FAA0331B886B64007C517A /* DDXMLNode.m */,
+				68FAA0341B886B64007C517A /* Private */,
+			);
+			path = KissXML;
+			sourceTree = "<group>";
+		};
+		68FAA02A1B886B64007C517A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				68FAA02B1B886B64007C517A /* NSString+DDXML.h */,
+				68FAA02C1B886B64007C517A /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		68FAA0341B886B64007C517A /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				68FAA0351B886B64007C517A /* DDXMLPrivate.h */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +212,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ChatClient" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -168,9 +250,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68FAA0471B886D29007C517A /* NSNumber+XMPP.m in Sources */,
+				68FAA0391B886B64007C517A /* DDXMLNode.m in Sources */,
+				68FAA0461B886D29007C517A /* NSData+XMPP.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				68FAA0401B886CB7007C517A /* NSXMLElement+XMPP.m in Sources */,
+				68FAA0371B886B64007C517A /* DDXMLDocument.m in Sources */,
+				68FAA0381B886B64007C517A /* DDXMLElement.m in Sources */,
 				1D3623260D0F684500981E51 /* ChatClientAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* ChatClientViewController.m in Sources */,
+				68FAA04A1B887220007C517A /* GCDAsyncSocket.m in Sources */,
+				68FAA0361B886B64007C517A /* NSString+DDXML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,13 +271,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ChatClient_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "ChatClient-Info.plist";
 				PRODUCT_NAME = ChatClient;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
 		};
@@ -195,11 +293,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ChatClient_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "ChatClient-Info.plist";
 				PRODUCT_NAME = ChatClient;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

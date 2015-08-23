@@ -42,10 +42,39 @@
         dispatch_async(exportQueue, block);
     }
 }
+-(void)exportSongTypeSQLiteToLog:(void (^)(void))callback{
+    dispatch_block_t block = ^{
+        [sqliteExportStoreage insertSongTypeToCoreData:callback];
+    };
+    if (dispatch_get_specific(exportQueueTag)) {
+        block();
+    }else{
+        dispatch_async(exportQueue, block);
+    }
+}
 -(void)exportSQLiteToLog:(void (^)(void))callback{
-    
     dispatch_block_t block = ^{
         [sqliteExportStoreage insertToCoreData:callback];
+    };
+    if (dispatch_get_specific(exportQueueTag)) {
+        block();
+    }else{
+        dispatch_async(exportQueue, block);
+    }
+}
+-(void)exportSongGouYuSQLToLog:(void (^)(void))callback{
+    dispatch_block_t block = ^{
+        [sqliteExportStoreage insertSongGouYuToCoreData:callback];
+    };
+    if (dispatch_get_specific(exportQueueTag)) {
+        block();
+    }else{
+        dispatch_async(exportQueue, block);
+    }
+}
+-(void)excuteBlockInBackground:(void (^)(void))callback{
+    dispatch_block_t block = ^{
+        [sqliteExportStoreage excuteThreadInBackground:callback];
     };
     if (dispatch_get_specific(exportQueueTag)) {
         block();

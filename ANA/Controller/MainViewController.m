@@ -15,13 +15,21 @@
 #import "Singer.h"
 #import "Song.h"
 #import "TableViewCellSong_iPad.h"
+#import "SongType.h"
+typedef enum {
+    CollectionViewCellSinger_iPadTypeUnknow = 0,
+    CollectionViewCellSinger_iPadTypeSinger = 1,
+    CollectionViewCellSinger_iPadTypeSongType
+}CollectionViewCellSinger_iPadType;
 
 @interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate>{
     dispatch_semaphore_t semaphore;
+    SQLiteExport *sqliteExport;
 }
 @property (nonatomic,strong) NSMutableArray *arrSingers;
 @property (nonatomic,strong) NSFetchedResultsController *fetchResultSingers;
 @property (nonatomic,strong) NSFetchedResultsController *fetchResultSongs;
+@property (nonatomic) CollectionViewCellSinger_iPadType collectionViewCellType;
 @end
 
 @implementation MainViewController
@@ -32,6 +40,27 @@
         _arrSingers = [[NSMutableArray alloc]init];
     }
     return _arrSingers;
+}
+#pragma mark - IBAction
+-(IBAction)didTouchedSongType:(id)sender{
+    __weak typeof(self)wSelf = self;
+    self.fetchResultSingers = nil;
+    self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSongType;
+
+    [self.collectionView_iPad reloadData];
+    
+    [sqliteExport exportSongTypeSQLiteToLog:^{
+        [wSelf fetchResultsSongType];
+    }];
+}
+-(IBAction)didTouchedSinger:(id)sender{
+    __weak typeof(self)wSelf = self;
+    self.fetchResultSingers = nil;
+    self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
+    [self.collectionView_iPad reloadData];
+    [sqliteExport exportSQLiteToLog:^{
+        [wSelf fetchResultsSinger];
+    }];
 }
 #pragma mark - Config View
 -(void)configCollectionView{
@@ -84,6 +113,16 @@
         [wSelf.indicatorViewTableView_iPad stopAnimating];
     });
 }
+-(NSFetchRequest*)fetchRequestSongsWithEntityName:(NSString*)entityName{
+    LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
+    NSEntityDescription *entity = [localDatabase dataBaseEntitySongs:[localDatabase managedObjectContext] andName:entityName];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    fetchRequest.fetchBatchSize = 100;
+    fetchRequest.entity = entity;
+    NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"songName" ascending:true];
+    [fetchRequest setSortDescriptors:@[sortDscr]];
+    return fetchRequest;
+}
 -(NSFetchRequest*)fetchRequestSongs{
     LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
     NSEntityDescription *entity = [localDatabase dataBaseEntitySongs:[localDatabase managedObjectContext]];
@@ -95,11 +134,79 @@
     return fetchRequest;
 }
 
+-(void)fetchResultsSongType{
+    self.fetchResultSingers = [[NSFetchedResultsController alloc]initWithFetchRequest:[self fetchRequestSongType] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"SongType"];
+    self.fetchResultSingers.delegate = self;
+    NSError *error = nil;
+    if (![self.fetchResultSingers performFetch:&error]) {
+        NSLog(@"Error :%@",error.localizedDescription);
+    }
+    __weak typeof(self) wSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [wSelf.collectionView_iPad reloadData];
+    });
+}
+-(NSFetchRequest*)fetchRequestSongType{
+    LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
+    NSEntityDescription *entity = [localDatabase dataBaseEntitySongType:[localDatabase managedObjectContext]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    fetchRequest.fetchBatchSize = 100;
+    fetchRequest.entity = entity;
+    NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"typeName" ascending:true];
+    [fetchRequest setSortDescriptors:@[sortDscr]];
+    return fetchRequest;
+}
+
+-(void)fetchResultSongWithSingerName:(NSString*)singerName{
+    self.fetchResultSongs = nil;
+    [self.tableView_iPad reloadData];
+    
+    __weak typeof(self)wSelf = self;
+    [sqliteExport excuteBlockInBackground:^{
+        NSFetchRequest *fetchRequest = [wSelf fetchRequestSongs];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"singerName == %@",singerName];
+        wSelf.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+        wSelf.fetchResultSongs.delegate = wSelf;
+        NSError *error = nil;
+        if (![wSelf.fetchResultSongs performFetch:&error]) {
+            NSLog(@"Error :%@",error.localizedDescription);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [wSelf.tableView_iPad reloadData];
+            [wSelf.indicatorViewTableView_iPad stopAnimating];
+        });
+    }];
+}
+
+
+
+-(void)fetchResultSongWithTypeName:(NSString*)typeName{
+    self.fetchResultSongs = nil;
+    [self.tableView_iPad reloadData];
+    
+    __weak typeof(self)wSelf = self;
+    [sqliteExport excuteBlockInBackground:^{
+        NSFetchRequest *fetchRequest = [wSelf fetchRequestSongsWithEntityName:typeName];
+        wSelf.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+        wSelf.fetchResultSongs.delegate = wSelf;
+        NSError *error = nil;
+        if (![wSelf.fetchResultSongs performFetch:&error]) {
+            NSLog(@"Error :%@",error.localizedDescription);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [wSelf.tableView_iPad reloadData];
+            [wSelf.indicatorViewTableView_iPad stopAnimating];
+        });
+    }];
+}
+
+
 #pragma mark - Init life vehicle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SQLiteExport *sqliteExport = [[SQLiteExport alloc]init];
+    self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
+    sqliteExport = [[SQLiteExport alloc]init];
     if (!semaphore) {
         semaphore = dispatch_semaphore_create(0);
     }
@@ -111,6 +218,14 @@
     [sqliteExport exportSQLiteToLog:^{
         [wSelf fetchResultsSinger];
         dispatch_semaphore_signal(semaphore);
+    }];
+    
+    [sqliteExport exportSongTypeSQLiteToLog:^{
+        
+    }];
+    
+    [sqliteExport exportSongGouYuSQLToLog:^{
+        
     }];
     
     [sqliteExport exportSongSQLiteToLog:^{
@@ -156,9 +271,55 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CollectionViewCellSinger_iPad *singerCell = [self.collectionView_iPad dequeueReusableCellWithReuseIdentifier:@"CollectionViewCellSinger_iPad" forIndexPath:indexPath];
-    Singer *singer = [self.fetchResultSingers objectAtIndexPath:indexPath];
-    singerCell.lbSingerName.text = singer.name;
+    
+    switch (self.collectionViewCellType) {
+        case CollectionViewCellSinger_iPadTypeSinger:{
+            Singer *singer = [self.fetchResultSingers objectAtIndexPath:indexPath];
+            singerCell.lbSingerName.text = singer.name;
+        }
+            
+            break;
+        case CollectionViewCellSinger_iPadTypeSongType:{
+            SongType *songType = [self.fetchResultSingers objectAtIndexPath:indexPath];
+            singerCell.lbSingerName.text = songType.typeName;
+        }
+            
+        default:
+            break;
+    }
+
     return singerCell;
+    
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    switch (self.collectionViewCellType) {
+        case CollectionViewCellSinger_iPadTypeSongType:
+        {
+            SongType *songType = [self.fetchResultSingers objectAtIndexPath:indexPath];
+            __weak typeof(self)wSelf = self;
+            if ([songType.typeName isEqualToString:@"ALL"]) {
+                self.fetchResultSongs = nil;
+                [self.tableView_iPad reloadData];
+                [sqliteExport excuteBlockInBackground:^{
+                    [wSelf fetchResultsSongs];
+                }];
+            }else{
+                [sqliteExport excuteBlockInBackground:^{
+                    [wSelf fetchResultSongWithTypeName:songType.tableName];
+                }];
+            }
+            NSLog(@"OK");
+        }
+            break;
+        case CollectionViewCellSinger_iPadTypeSinger:{
+            Singer *singer = [self.fetchResultSingers objectAtIndexPath:indexPath];
+            [self fetchResultSongWithSingerName:singer.name];
+            NSLog(@"OK");
+        }
+            break;
+        default:
+            break;
+    }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout

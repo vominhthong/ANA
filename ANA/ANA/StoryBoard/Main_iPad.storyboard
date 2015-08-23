@@ -140,6 +140,9 @@
                                         <state key="normal" image="logo_music.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedSinger:" destination="gW4-5t-qmR" eventType="touchUpInside" id="utX-zE-NoA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ekf-nq-DWh">
                                         <rect key="frame" x="95" y="8" width="48" height="46"/>
@@ -147,6 +150,9 @@
                                         <state key="normal" image="logo_music.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedSongType:" destination="gW4-5t-qmR" eventType="touchUpInside" id="QP8-vX-qyn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HVQ-Nr-Ido">
                                         <rect key="frame" x="185" y="8" width="48" height="46"/>

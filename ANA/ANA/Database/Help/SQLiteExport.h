@@ -15,10 +15,17 @@
 
 -(void)insertToCoreData:(void(^)(void))callback;
 -(void)insertSongsToCoreData:(void(^)(void))callback;
+-(void)insertSongTypeToCoreData:(void (^)(void))callback;
+-(void)insertSongGouYuToCoreData:(void(^)(void))callback;
+-(void)excuteThreadInBackground:(void(^)(void))callback;
 
 @end
 
 @interface SQLiteExport : NSObject
 -(void)exportSQLiteToLog:(void (^)(void))callback;
 -(void)exportSongSQLiteToLog:(void (^)(void))callback;
+-(void)exportSongTypeSQLiteToLog:(void (^)(void))callback;
+-(void)exportSongGouYuSQLToLog:(void(^)(void))callback;
+
+-(void)excuteBlockInBackground:(void(^)(void))callback;
 @end
