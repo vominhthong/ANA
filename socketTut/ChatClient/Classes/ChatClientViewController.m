@@ -12,6 +12,7 @@
 #import "GCDAsyncSocket.h"
 @interface ChatClientViewController () <GCDAsyncSocketDelegate>{
     GCDAsyncSocket *_socket;
+    BOOL isCompleted;
 }
 @end
 @implementation ChatClientViewController
@@ -26,12 +27,49 @@
     
 }
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+    [sock readDataWithTimeout:10 tag:100];
+
     NSString *getBindingCode = [[self sendMessageToGetBindingCode] compactXMLString];
-    NSData *data = [[NSData alloc] initWithData:[getBindingCode dataUsingEncoding:NSUTF8StringEncoding]];
-    [_socket writeData:data withTimeout:5 tag:1];
+    NSMutableData *data = [[[NSData alloc] initWithData:[getBindingCode dataUsingEncoding:NSUTF8StringEncoding]]mutableCopy ];
+    
+    NSMutableData *newData = [NSMutableData data];
+    
+    const char *charKM = [@"KM" UTF8String];
+    
+    [newData appendBytes:charKM length:2];
+    
+    NSData *data1 = [NSData dataWithBytes:(unsigned char[]){0x82} length:1];
+    [newData appendData:data1];
+    
+    NSData *data2 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+    [newData appendData:data2];
+    
+    NSData *data3 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+    [newData appendData:data3];
+    
+    NSData *data4 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+    [newData appendData:data4];
+    
+    const char *constChar5 = [@" " UTF8String];
+    
+    NSData *data5 = [NSData dataWithBytes:constChar5 length:1];
+    [newData appendData:data5];
+    
+    const char *constChar6 = [@" " UTF8String];
+
+    NSData *data6 = [NSData dataWithBytes:constChar6 length:1];
+    [newData appendData:data6];
+
+//
+//    const char *charDoubleSpace = [@"  " UTF8String];
+//    [newData appendBytes:charDoubleSpace length:2];
+    
+    [newData appendData:data];
+    NSMutableData *dataFinal = [[[NSData alloc]initWithData:newData] mutableCopy];
+    [_socket writeData:dataFinal withTimeout:1 tag:101];
 }
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
-    
+    NSLog(@"Data : %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
 }
 -(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag{
     
@@ -39,9 +77,7 @@
 -(void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust completionHandler:(void (^)(BOOL))completionHandler{
     
 }
--(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
-    
-}
+
 -(void)socket:(GCDAsyncSocket *)sock didWritePartialDataOfLength:(NSUInteger)partialLength tag:(long)tag{
     
 }
@@ -60,13 +96,14 @@
 -(void)socketDidSecure:(GCDAsyncSocket *)sock{
     
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 		
     _socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *error = nil;
-    [_socket connectToHost:@"192.168.1.36" onPort:9166 error:&error];
-    
+    [_socket connectToHost:@"192.168.1.14" onPort:9392 error:&error];
+//
 //	[self initNetworkCommunication];
 	
 	inputNameField.text = @"cesare";
@@ -81,7 +118,9 @@
 	
 	CFReadStreamRef readStream;
 	CFWriteStreamRef writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.1.36", 9166, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.1.14", 9392, &readStream, &writeStream);
+
+//    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.1.14", 9166, &readStream, &writeStream);
 
 	inputStream = (NSInputStream *)readStream;
 	outputStream = (NSOutputStream *)writeStream;
@@ -113,17 +152,17 @@
 -(NSXMLElement*)sendMessageToGetBindingCode{
     NSXMLElement *messageTag = [NSXMLElement elementWithName:@"message"];
     NSXMLElement *headTag = [NSXMLElement elementWithName:@"head"];
-    [headTag addAttributeWithName:@"fromip" stringValue:@"192.168.1.24"];
+    [headTag addAttributeWithName:@"fromip" stringValue:@"192.168.0.1"];
     [headTag addAttributeWithName:@"packtype" stringValue:@"32"];
-    [headTag addAttributeWithName:@"toip" stringValue:@"192.168.1.36"];
-    [headTag addAttributeWithName:@"sessionid" stringValue:@"2387"];
+    [headTag addAttributeWithName:@"toip" stringValue:@"192.168.1.14"];
+    [headTag addAttributeWithName:@"sessionid" stringValue:@"9472"];
     [headTag addAttributeWithName:@"version" stringValue:@"1"];
     
     NSXMLElement *bodyTag = [NSXMLElement elementWithName:@"body"];
     [bodyTag addAttributeWithName:@"cmdid" stringValue:@"E420"];
     
-    [messageTag addChild:bodyTag];
     [messageTag addChild:headTag];
+    [messageTag addChild:bodyTag];
     return messageTag;
     
 }
@@ -155,7 +194,49 @@
 	switch (streamEvent) {
 			
 		case NSStreamEventOpenCompleted:
-            
+            if (!isCompleted) {
+                isCompleted = YES;
+                NSString *getBindingCode = [[self sendMessageToGetBindingCode] compactXMLString];
+                NSMutableData *data = [[[NSData alloc] initWithData:[getBindingCode dataUsingEncoding:NSUTF8StringEncoding]]mutableCopy ];
+                
+                NSMutableData *newData = [NSMutableData data];
+                
+                const char *charKM = [@"KM" UTF8String];
+                
+                [newData appendBytes:charKM length:2];
+                
+                const char *constData1 = [[NSString stringWithFormat:@"0x%lX",
+                                           (unsigned long)[getBindingCode length]] UTF8String];
+                
+                NSData *data1 = [NSData dataWithBytes:constData1 length:1];
+                [newData appendData:data1];
+                
+                NSData *data2 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+                [newData appendData:data2];
+                
+                NSData *data3 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+                [newData appendData:data3];
+                
+                NSData *data4 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+                [newData appendData:data4];
+                
+                const char *constChar5 = [@" " UTF8String];
+                
+                NSData *data5 = [NSData dataWithBytes:constChar5 length:1];
+                [newData appendData:data5];
+                
+                NSData *data6 = [NSData dataWithBytes:(unsigned char[]){0x20} length:1];
+                [newData appendData:data6];
+                
+                //
+                //    const char *charDoubleSpace = [@"  " UTF8String];
+                //    [newData appendBytes:charDoubleSpace length:2];
+                
+                [newData appendData:data];
+                NSMutableData *dataFinal = [[[NSData alloc]initWithData:newData] mutableCopy];
+                [outputStream write:[newData bytes] maxLength:newData.length];
+
+            }
 			NSLog(@"NSStreamEventOpenCompleted");
 			break;
 		case NSStreamEventHasBytesAvailable:
@@ -197,24 +278,6 @@
 			
 			break;
         case NSStreamEventHasSpaceAvailable:{
-            uint8_t buffer[1024];
-            int len;
-            
-            while ([inputStream hasBytesAvailable]) {
-                len = [inputStream read:buffer maxLength:sizeof(buffer)];
-                if (len > 0) {
-                    
-                    NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                    
-                    if (nil != output) {
-                        
-                        NSLog(@"server said: %@", output);
-                        [self messageReceived:output];
-                        
-                    }
-                }
-            }
-            NSLog(@"NSStreamEventHasSpaceAvailable");
         }
             break;
         case NSStreamEventNone:{
