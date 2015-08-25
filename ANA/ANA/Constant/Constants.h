@@ -13,4 +13,5 @@
 
 #define CELLSINGER_WIDTH          122
 #define CELLSINGER_HEIGHT         160
+#define HOST_TCP_ANA                9392
 #endif
