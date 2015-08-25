@@ -14,5 +14,8 @@
 @property (nonatomic,weak) IBOutlet UIActivityIndicatorView *indicatorViewTableView_iPad;
 @property (nonatomic,weak) IBOutlet UITextField *txtSearchSingerName;
 @property (nonatomic,weak) IBOutlet UITextField *txtSearchSongName;
+
+@property (nonatomic,weak) IBOutlet UITableView *tableView_iPhone;
+
 @end
 

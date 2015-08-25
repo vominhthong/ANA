@@ -50,7 +50,7 @@
                 <outlet property="lbName" destination="lFX-DI-g98" id="n3Z-eS-WoY"/>
                 <outlet property="lbSingerName" destination="tqR-2E-Gvw" id="c4c-cg-4Vf"/>
             </connections>
-            <point key="canvasLocation" x="296" y="226"/>
+            <point key="canvasLocation" x="453" y="201"/>
         </tableViewCell>
     </objects>
     <resources>

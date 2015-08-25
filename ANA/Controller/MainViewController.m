@@ -16,20 +16,24 @@
 #import "Song.h"
 #import "TableViewCellSong_iPad.h"
 #import "SongType.h"
+#import "ScanLANIP.h"
+#import "TableViewCellSong_iPhone.h"
 typedef enum {
     CollectionViewCellSinger_iPadTypeUnknow = 0,
     CollectionViewCellSinger_iPadTypeSinger = 1,
     CollectionViewCellSinger_iPadTypeSongType
 }CollectionViewCellSinger_iPadType;
 
-@interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
+@interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,ScanLANIPDelegate>{
     dispatch_semaphore_t semaphore;
     SQLiteExport *sqliteExport;
+
 }
 @property (nonatomic,strong) NSMutableArray *arrSingers;
 @property (nonatomic,strong) NSFetchedResultsController *fetchResultSingers;
 @property (nonatomic,strong) NSFetchedResultsController *fetchResultSongs;
 @property (nonatomic) CollectionViewCellSinger_iPadType collectionViewCellType;
+@property (nonatomic,strong) ScanLANIP *_scanLanIPTool;
 @end
 
 @implementation MainViewController
@@ -54,13 +58,18 @@ typedef enum {
     }];
 }
 -(IBAction)didTouchedSinger:(id)sender{
-    __weak typeof(self)wSelf = self;
-    self.fetchResultSingers = nil;
-    self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
-    [self.collectionView_iPad reloadData];
-    [sqliteExport exportSQLiteToLog:^{
-        [wSelf fetchResultsSinger];
-    }];
+     __weak typeof(self)wSelf = self;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.fetchResultSingers = nil;
+        self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
+        [self.collectionView_iPad reloadData];
+        [sqliteExport exportSQLiteToLog:^{
+            [wSelf fetchResultsSinger];
+        }];
+    }else{
+        
+    }
+    
 }
 #pragma mark - Config View
 -(void)configCollectionView{
@@ -72,6 +81,12 @@ typedef enum {
     [self.tableView_iPad registerNib:[UINib nibWithNibName:@"TableViewCellSong_iPad" bundle:nil] forCellReuseIdentifier:@"TableViewCellSong_iPad"];
     self.tableView_iPad.rowHeight = 92;
     self.tableView_iPad.backgroundColor = [UIColor clearColor];
+    
+    [self.tableView_iPhone registerClass:[TableViewCellSong_iPhone class] forCellReuseIdentifier:@"TableViewCellSong_iPhone"];
+    [self.tableView_iPhone registerNib:[UINib nibWithNibName:@"TableViewCellSong_iPhone" bundle:nil] forCellReuseIdentifier:@"TableViewCellSong_iPhone"];
+    self.tableView_iPhone.rowHeight = 60;
+    self.tableView_iPhone.backgroundColor = [UIColor clearColor];
+    
 }
 -(void)configIndicatorView{
     self.indicatorViewTableView_iPad.hidesWhenStopped = YES;
@@ -134,6 +149,7 @@ typedef enum {
     __weak typeof(self) wSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [wSelf.tableView_iPad reloadData];
+        [wSelf.tableView_iPhone reloadData];
         [wSelf.indicatorViewTableView_iPad stopAnimating];
     });
 }
@@ -159,6 +175,7 @@ typedef enum {
     __weak typeof(self) wSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [wSelf.tableView_iPad reloadData];
+        [wSelf.tableView_iPhone reloadData];
         [wSelf.indicatorViewTableView_iPad stopAnimating];
     });
 }
@@ -209,6 +226,7 @@ typedef enum {
 -(void)fetchResultSongWithSingerName:(NSString*)singerName{
     self.fetchResultSongs = nil;
     [self.tableView_iPad reloadData];
+    [self.tableView_iPhone reloadData];
     
     __weak typeof(self)wSelf = self;
     [sqliteExport excuteBlockInBackground:^{
@@ -222,6 +240,7 @@ typedef enum {
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [wSelf.tableView_iPad reloadData];
+            [wSelf.tableView_iPhone reloadData];
             [wSelf.indicatorViewTableView_iPad stopAnimating];
         });
     }];
@@ -232,7 +251,7 @@ typedef enum {
 -(void)fetchResultSongWithTypeName:(NSString*)typeName{
     self.fetchResultSongs = nil;
     [self.tableView_iPad reloadData];
-    
+    [self.tableView_iPhone reloadData];
     __weak typeof(self)wSelf = self;
     [sqliteExport excuteBlockInBackground:^{
         NSFetchRequest *fetchRequest = [wSelf fetchRequestSongsWithEntityName:typeName];
@@ -244,6 +263,7 @@ typedef enum {
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [wSelf.tableView_iPad reloadData];
+            [wSelf.tableView_iPhone reloadData];
             [wSelf.indicatorViewTableView_iPad stopAnimating];
         });
     }];
@@ -269,6 +289,7 @@ typedef enum {
         [sqliteExport excuteBlockInBackground:^{
             wSelf.fetchResultSongs = nil;
             [wSelf.tableView_iPad reloadData];
+            [wSelf.tableView_iPhone reloadData];
             NSString *searchKey = textField.text;
             if (searchKey.length == 0) {
                 [wSelf fetchResultsSongs];
@@ -285,9 +306,17 @@ typedef enum {
     
     return YES;
 }
+#pragma mark - ScanLANIP Delegate
+-(void)scanLANIPDidConnectToANA:(ConnectTCP *)socket{
+    
+}
 #pragma mark - Init life vehicle
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    self._scanLanIPTool = [ScanLANIP shareInstance];
+    self._scanLanIPTool.delegate = self;
+    [self._scanLanIPTool startScanIPInLan];
     
     self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
     sqliteExport = [[SQLiteExport alloc]init];
@@ -304,6 +333,7 @@ typedef enum {
     [self configCollectionView];
     [self configIndicatorView];
 
+    
     [sqliteExport exportSQLiteToLog:^{
         [wSelf fetchResultsSinger];
         dispatch_semaphore_signal(semaphore);
@@ -340,16 +370,30 @@ typedef enum {
     return [[self.fetchResultSongs.sections objectAtIndex:section] numberOfObjects];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TableViewCellSong_iPad *cell = [self.tableView_iPad dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPad" forIndexPath:indexPath];
-    Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
-    cell.lbName.text = [song.songName uppercaseString];
-    cell.lbSingerName.text = song.singerName;
-    if (indexPath.row % 2== 1) {
-        cell.backgroundCell.alpha = 0.6;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        TableViewCellSong_iPad *cell = [self.tableView_iPad dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPad" forIndexPath:indexPath];
+        Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
+        cell.lbName.text = [song.songName uppercaseString];
+        cell.lbSingerName.text = song.singerName;
+        if (indexPath.row % 2== 1) {
+            cell.backgroundCell.alpha = 0.6;
+        }else{
+            cell.backgroundCell.alpha = 0.9;
+        }
+        return cell;
     }else{
-        cell.backgroundCell.alpha = 0.9;
+        TableViewCellSong_iPhone *cell = [self.tableView_iPhone dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPhone" forIndexPath:indexPath];
+        Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
+        cell.lbName.text = [song.songName uppercaseString];
+        cell.lbSingerName.text = song.singerName;
+        if (indexPath.row % 2== 1) {
+            cell.backgroundCell.alpha = 0.6;
+        }else{
+            cell.backgroundCell.alpha = 0.9;
+        }
+        return cell;
     }
-    return cell;
+    return nil;
 }
 #pragma mark - UICollectionViewDelegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -388,6 +432,7 @@ typedef enum {
             __weak typeof(self)wSelf = self;
             self.fetchResultSongs = nil;
             [self.tableView_iPad reloadData];
+            [self.tableView_iPhone reloadData];
             if ([songType.typeName isEqualToString:@"ALL"]) {
                 
                 [sqliteExport excuteBlockInBackground:^{

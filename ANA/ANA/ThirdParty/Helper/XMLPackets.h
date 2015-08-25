@@ -10,9 +10,38 @@
 #import "DDXML.h"
 
 @interface XMLPackets : NSObject
-+(XMLPackets*)shareInstance;
 
--(NSXMLElement*)getBindingCode;
+-(NSXMLElement *)getBindingCodeToIPAna:(NSString*)ip;
+
+-(NSXMLElement *)pauseWithIP:(NSString *)ip roomBindingCode:(NSString *)bindingCode;
+
+-(NSXMLElement *)replayWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)nextWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)lipsWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)muteWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)drumWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)clapWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)thumbUPWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)thumbDownWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)volumeUpWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)volumeDownWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)volumeDefaultWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode;
+
+-(NSXMLElement *)selectSongWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode withId:(NSString*)idSong;
+
+-(NSXMLElement *)pushSongTopWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode withId:(NSString*)idSong;
+
+-(NSXMLElement *)chooseSongWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode withId:(NSString*)idSong;
 
 
 @end

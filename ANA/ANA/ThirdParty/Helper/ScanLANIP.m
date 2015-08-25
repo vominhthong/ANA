@@ -37,10 +37,14 @@
     [_scanLan startScan];
 }
 -(void)connectToHost:(NSString*)host andPort:(uint16_t)port{
-    [_connectTCP connectSocketWithHost:host port:port];
+    
+   GCDAsyncSocket* socket = [_connectTCP connectSocketWithHost:host port:port];
+    if (!socket) {
+        NSLog(@"Connect failed");
+    }
 }
 -(void)connectTCPDidDisconnectHostWithError:(NSError *)error{
-    
+    NSLog(@"Connect failed");
 }
 -(void)connectTCPDidConnectHost:(NSString *)host{
     if (_scanLan) {

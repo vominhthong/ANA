@@ -22,5 +22,5 @@
 
 -(GCDAsyncSocket*)connectSocketWithHost:(NSString*)host port:(uint16_t)port;
 
-@property (nonatomic) id <ConnectTCPDelegate> delegate
+@property (nonatomic) id <ConnectTCPDelegate> delegate;
 @end

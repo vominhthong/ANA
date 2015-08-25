@@ -42,10 +42,17 @@
     if ([self.delegate respondsToSelector:@selector(connectTCPDidConnectHost:)]) {
         [self.delegate connectTCPDidConnectHost:host];
     }
+    
+    /* handle read data from server tcp */
+    [_socket readDataWithTimeout:10 tag:100];
+    
+    /* sent message to get binding code */
+    
 }
 -(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
     
 }
+
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
     if ([self.delegate respondsToSelector:@selector(connectTCPDidDisconnectHostWithError:)]) {
         [self.delegate connectTCPDidDisconnectHostWithError:err];
