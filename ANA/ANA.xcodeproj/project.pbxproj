@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */; };
+		68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */; };
 		68982EB81B89EBB70003C57F /* QingGe.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EB71B89EBB70003C57F /* QingGe.m */; };
 		68982EBB1B89EC900003C57F /* ZuHe.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EBA1B89EC900003C57F /* ZuHe.m */; };
 		68982EBE1B89EFC90003C57F /* YueYu.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EBD1B89EFC90003C57F /* YueYu.m */; };
@@ -127,6 +128,8 @@
 /* Begin PBXFileReference section */
 		68870F031B8D7DA00027DCE4 /* MorinitoringMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorinitoringMemory.h; sourceTree = "<group>"; };
 		68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorinitoringMemory.m; sourceTree = "<group>"; };
+		68870F091B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+HashPacketANA.h"; sourceTree = "<group>"; };
+		68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+HashPacketANA.m"; sourceTree = "<group>"; };
 		68982EB61B89EBB70003C57F /* QingGe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QingGe.h; sourceTree = "<group>"; };
 		68982EB71B89EBB70003C57F /* QingGe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QingGe.m; sourceTree = "<group>"; };
 		68982EB91B89EC900003C57F /* ZuHe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZuHe.h; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				68AC02EA1B8C519B003F2316 /* ScanLANIP.m */,
 				68870F031B8D7DA00027DCE4 /* MorinitoringMemory.h */,
 				68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */,
+				68870F091B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.h */,
+				68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -826,6 +831,7 @@
 				68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */,
 				68AC02CD1B8C4ABF003F2316 /* DDXMLElement.m in Sources */,
 				689F0E1D1B8810B400B5BF88 /* TableViewCellSong_iPad.m in Sources */,
+				68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */,
 				68C5E73F1B87664600C2A58F /* CollectionViewName_iPad.m in Sources */,
 				68982EBB1B89EC900003C57F /* ZuHe.m in Sources */,
 				68982EBE1B89EFC90003C57F /* YueYu.m in Sources */,

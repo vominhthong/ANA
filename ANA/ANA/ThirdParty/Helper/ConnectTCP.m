@@ -7,6 +7,9 @@
 //
 
 #import "ConnectTCP.h"
+#import "XMLPackets.h"
+#import "NSXMLElement+XMPP.h"
+#import "NSMutableData+HashPacketANA.h"
 @interface ConnectTCP ()<GCDAsyncSocketDelegate>{
     GCDAsyncSocket *_socket;
 
@@ -33,20 +36,32 @@
     NSError *error = nil;
     [_socket connectToHost:host onPort:port error:&error];
     if (error) {
+        [_socket disconnect];
         return nil;
     }else{
         return _socket;
     }
 }
+-(void)writeData:(NSString *)xmlString{
+    NSMutableData *data = [[[NSData alloc]initWithData:[xmlString dataUsingEncoding:NSUTF8StringEncoding]] mutableCopy];
+    [_socket writeData:[data hasPacketAna] withTimeout:1 tag:101];
+}
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+    
+    
     if ([self.delegate respondsToSelector:@selector(connectTCPDidConnectHost:)]) {
         [self.delegate connectTCPDidConnectHost:host];
     }
+    self.hostIP = host;
     
     /* handle read data from server tcp */
     [_socket readDataWithTimeout:10 tag:100];
     
     /* sent message to get binding code */
+    XMLPackets *xmlPackets = [[XMLPackets alloc]init];
+    NSString *getBindingCode = [[xmlPackets getBindingCodeToIPAna:host] compactXMLString];
+    NSMutableData *data = [[[NSData alloc]initWithData:[getBindingCode dataUsingEncoding:NSUTF8StringEncoding]] mutableCopy];
+    [sock writeData:[data hasPacketAna] withTimeout:1 tag:101];
     
 }
 -(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
@@ -54,11 +69,21 @@
 }
 
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+    [sock disconnect];
+
     if ([self.delegate respondsToSelector:@selector(connectTCPDidDisconnectHostWithError:)]) {
         [self.delegate connectTCPDidDisconnectHostWithError:err];
     }
 }
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
-    
+    CFDataDeleteBytes((CFMutableDataRef)data, CFRangeMake(0, 8));
+    NSError *errorWhenReadXML = nil;
+    DDXMLDocument *dataFromServer = [[DDXMLDocument alloc]initWithData:data options:0 error:&errorWhenReadXML];
+    NSXMLElement *element = [dataFromServer.children lastObject];
+    if (!element) {
+        return;
+    }
+    /* actual */
+    self.roomBindingCode = [[[element elementForName:@"body"] attributeForName:@"roombindingcode"] stringValue];
 }
 @end

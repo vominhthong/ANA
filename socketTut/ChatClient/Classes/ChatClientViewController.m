@@ -29,40 +29,56 @@
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
     [sock readDataWithTimeout:10 tag:100];
 
+    
     NSString *getBindingCode = [[self sendMessageToGetBindingCode] compactXMLString];
     NSMutableData *data = [[[NSData alloc] initWithData:[getBindingCode dataUsingEncoding:NSUTF8StringEncoding]]mutableCopy ];
-    
     NSMutableData *newData = [NSMutableData data];
-    
+
     const char *charKM = [@"KM" UTF8String];
-    
     [newData appendBytes:charKM length:2];
     
-    NSData *data1 = [NSData dataWithBytes:(unsigned char[]){0x82} length:1];
-    [newData appendData:data1];
+    NSUInteger i = newData.length - 2;
+    NSData *lenghtData = [NSData dataWithBytes:&i length:1];
+    [newData appendData:lenghtData];
     
-    NSData *data2 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
-    [newData appendData:data2];
+    NSData *byteDefault = [NSData dataWithBytes:(unsigned char[]){0x00,0x00,0x00} length:3];
+    [newData appendData:byteDefault];
     
-    NSData *data3 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
-    [newData appendData:data3];
+    NSData *doubleSpace = [NSData dataWithBytes:(const char*)[@"  " UTF8String] length:2];
+    [newData appendData:doubleSpace];
     
-    NSData *data4 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
-    [newData appendData:data4];
     
-    const char *constChar5 = [@" " UTF8String];
-    
-    NSData *data5 = [NSData dataWithBytes:constChar5 length:1];
-    [newData appendData:data5];
-    
-    const char *constChar6 = [@" " UTF8String];
-
-    NSData *data6 = [NSData dataWithBytes:constChar6 length:1];
-    [newData appendData:data6];
-
+//    const char *charKM = [@"KM" UTF8String];
+//    
+//    [newData appendBytes:charKM length:2];
+//    int i = data.length;
+//    NSData *data1 = [NSData dataWithBytes:&i length:1];
+//    [newData appendData:data1];
+//    
+//    
+//    
+//    NSData *data2 = [NSData dataWithBytes:(unsigned char[]){0x00,0x00,0x00} length:3];
+//    [newData appendData:data2];
+//    
+////    NSData *data3 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+////    [newData appendData:data3];
+////    
+////    NSData *data4 = [NSData dataWithBytes:(unsigned char[]){0x00} length:1];
+////    [newData appendData:data4];
+//    
+//    const char *constChar5 = [@"  " UTF8String];
+//    
+//    NSData *data5 = [NSData dataWithBytes:constChar5 length:2];
+//    [newData appendData:data5];
+////    
+////    const char *constChar6 = [@" " UTF8String];
+////
+////    NSData *data6 = [NSData dataWithBytes:constChar6 length:1];
+////    [newData appendData:data6];
 //
-//    const char *charDoubleSpace = [@"  " UTF8String];
-//    [newData appendBytes:charDoubleSpace length:2];
+////
+////    const char *charDoubleSpace = [@"  " UTF8String];
+////    [newData appendBytes:charDoubleSpace length:2];
     
     [newData appendData:data];
     NSMutableData *dataFinal = [[[NSData alloc]initWithData:newData] mutableCopy];
@@ -102,7 +118,7 @@
 		
     _socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *error = nil;
-    [_socket connectToHost:@"192.168.1.14" onPort:9392 error:&error];
+    [_socket connectToHost:@"192.168.1.31" onPort:9392 error:&error];
 //
 //	[self initNetworkCommunication];
 	

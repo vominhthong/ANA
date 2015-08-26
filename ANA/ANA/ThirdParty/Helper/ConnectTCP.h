@@ -19,8 +19,12 @@
 
 @interface ConnectTCP : NSObject
 +(ConnectTCP*)shareInstance;
+@property (nonatomic,strong) NSString *roomBindingCode;
+@property (nonatomic,strong) NSString *hostIP;
 
 -(GCDAsyncSocket*)connectSocketWithHost:(NSString*)host port:(uint16_t)port;
+
+-(void)writeData:(NSString*)data;
 
 @property (nonatomic) id <ConnectTCPDelegate> delegate;
 @end

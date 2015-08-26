@@ -20,6 +20,9 @@
 #import "ScanLANIP.h"
 #import "TableViewCellSong_iPhone.h"
 #import "MorinitoringMemory.h"
+#import "ConnectTCP.h"
+#import "XMLPackets.h"
+#import "NSXMLElement+XMPP.h"
 
 typedef enum {
     CollectionViewCellSinger_iPadTypeUnknow = 0,
@@ -57,6 +60,12 @@ typedef enum {
     return _arrSingers;
 }
 #pragma mark - IBAction
+-(IBAction)didTouchedPlayButton:(id)sender{
+    XMLPackets *xmlPacketPlay = [[XMLPackets alloc]init];
+    ConnectTCP *connectTCP = [ConnectTCP shareInstance];
+    NSString *xmlString = [[xmlPacketPlay pauseWithIP:connectTCP.hostIP roomBindingCode:connectTCP.roomBindingCode]compactXMLString];
+    [connectTCP writeData:xmlString];
+}
 -(IBAction)didTouchedSong:(id)sender{
     __weak typeof(self)wSelf = self;
     self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
@@ -476,7 +485,7 @@ typedef enum {
     return nil;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && !self.tableViewSong_iPhone == TableViewSong_iPhoneSong) {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         __weak typeof(self)wSelf = self;
         switch (self.tableViewSong_iPhone) {
             case TableViewSong_iPhoneSinger:
@@ -492,7 +501,15 @@ typedef enum {
                 SongType *songType = [self.fetchResultSongs objectAtIndexPath:indexPath];
                 [wSelf fetchResultSongWithTypeName:songType.tableName];
             }
-                
+                break;
+            case TableViewSong_iPhoneSong:{
+                Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                XMLPackets *packet = [[XMLPackets alloc]init];
+                ConnectTCP *connectTCP = [ConnectTCP shareInstance];
+                NSString *xmlString =  [[packet selectSongWithIP:connectTCP.hostIP roomBindingCode:connectTCP.roomBindingCode withId:[NSString stringWithFormat:@"84596"]] compactXMLString];
+                [connectTCP writeData:xmlString];
+            }
+                break;
             default:
                 break;
         }
@@ -563,6 +580,7 @@ typedef enum {
 {
     return CGSizeMake(CELLSINGER_WIDTH, CELLSINGER_HEIGHT);
 }
+
 /*
 #pragma mark - Navigation
 

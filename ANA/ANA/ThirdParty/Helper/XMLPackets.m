@@ -35,7 +35,7 @@
 
 
 -(NSXMLElement *)pauseWithIP:(NSString *)ip roomBindingCode:(NSString *)bindingCode{
-    return [self packetXMLDataWithControlType:@"20"
+    return [self packetXMLDataWithControlType:@"10"
                              andControllValue:@"1"
                                      andCMDID:@"E400"
                                          toIp:ip
