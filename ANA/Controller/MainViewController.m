@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Minh Thong. All rights reserved.
 //
 
+
 #import "MainViewController.h"
 #import "SQLiteExport.h"
 #import "CollectionViewCellSinger_iPad.h"
@@ -18,11 +19,19 @@
 #import "SongType.h"
 #import "ScanLANIP.h"
 #import "TableViewCellSong_iPhone.h"
+#import "MorinitoringMemory.h"
+
 typedef enum {
     CollectionViewCellSinger_iPadTypeUnknow = 0,
     CollectionViewCellSinger_iPadTypeSinger = 1,
     CollectionViewCellSinger_iPadTypeSongType
 }CollectionViewCellSinger_iPadType;
+
+typedef enum {
+    TableViewSong_iPhoneSong = 0,
+    TableViewSong_iPhoneSinger,
+    TableViewSong_iPhoneType
+}TableViewSong_iPhone;
 
 @interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,ScanLANIPDelegate>{
     dispatch_semaphore_t semaphore;
@@ -33,6 +42,8 @@ typedef enum {
 @property (nonatomic,strong) NSFetchedResultsController *fetchResultSingers;
 @property (nonatomic,strong) NSFetchedResultsController *fetchResultSongs;
 @property (nonatomic) CollectionViewCellSinger_iPadType collectionViewCellType;
+@property (nonatomic) TableViewSong_iPhone tableViewSong_iPhone;
+
 @property (nonatomic,strong) ScanLANIP *_scanLanIPTool;
 @end
 
@@ -46,16 +57,47 @@ typedef enum {
     return _arrSingers;
 }
 #pragma mark - IBAction
+-(IBAction)didTouchedSong:(id)sender{
+    __weak typeof(self)wSelf = self;
+    self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
+    
+    [sqliteExport excuteBlockInBackground:^{
+        wSelf.fetchResultSongs = nil;
+        [wSelf.tableView_iPhone reloadData];
+        [wSelf fetchResultsSongs];
+    }];
+}
+
 -(IBAction)didTouchedSongType:(id)sender{
     __weak typeof(self)wSelf = self;
-    self.fetchResultSingers = nil;
-    self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSongType;
 
-    [self.collectionView_iPad reloadData];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.fetchResultSingers = nil;
+        self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSongType;
+        
+        [self.collectionView_iPad reloadData];
+        
+        [sqliteExport exportSongTypeSQLiteToLog:^{
+            [wSelf fetchResultsSongType];
+        }];
+    }else{
+        self.tableViewSong_iPhone = TableViewSong_iPhoneType;
+        
+        [sqliteExport excuteBlockInBackground:^{
+            wSelf.fetchResultSongs = nil;
+            [wSelf.tableView_iPhone reloadData];
+            wSelf.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:[wSelf fetchRequestSongType] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"SongType"];
+            wSelf.fetchResultSongs.delegate = wSelf;
+            NSError *error = nil;
+            if (![wSelf.fetchResultSongs performFetch:&error]) {
+                NSLog(@"Error :%@",error.localizedDescription);
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [wSelf.tableView_iPhone reloadData];
+            });
+        }];
+    }
     
-    [sqliteExport exportSongTypeSQLiteToLog:^{
-        [wSelf fetchResultsSongType];
-    }];
 }
 -(IBAction)didTouchedSinger:(id)sender{
      __weak typeof(self)wSelf = self;
@@ -67,9 +109,22 @@ typedef enum {
             [wSelf fetchResultsSinger];
         }];
     }else{
+        self.tableViewSong_iPhone = TableViewSong_iPhoneSinger;
         
+        [sqliteExport excuteBlockInBackground:^{
+            wSelf.fetchResultSongs = nil;
+            [wSelf.tableView_iPhone reloadData];
+            wSelf.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:[wSelf fetchRequestSinger] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"Single"];
+            wSelf.fetchResultSongs.delegate = wSelf;
+            NSError *error = nil;
+            if (![wSelf.fetchResultSongs performFetch:&error]) {
+                NSLog(@"Error :%@",error.localizedDescription);
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [wSelf.tableView_iPhone reloadData];
+            });
+        }];
     }
-    
 }
 #pragma mark - Config View
 -(void)configCollectionView{
@@ -178,6 +233,10 @@ typedef enum {
         [wSelf.tableView_iPhone reloadData];
         [wSelf.indicatorViewTableView_iPad stopAnimating];
     });
+}
+-(unsigned long long)getPhysicalMemoryValue{
+    NSProcessInfo *pinfo = [NSProcessInfo processInfo];
+    return [pinfo physicalMemory];
 }
 -(NSFetchRequest*)fetchRequestSongsWithEntityName:(NSString*)entityName{
     LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
@@ -333,12 +392,11 @@ typedef enum {
     [self configCollectionView];
     [self configIndicatorView];
 
-    
     [sqliteExport exportSQLiteToLog:^{
         [wSelf fetchResultsSinger];
         dispatch_semaphore_signal(semaphore);
     }];
-    
+
     [sqliteExport exportSongTypeSQLiteToLog:^{
         
     }];
@@ -350,9 +408,12 @@ typedef enum {
     [sqliteExport exportSongSQLiteToLog:^{
         [wSelf fetchResultsSongs];
     }];
-    
+    [self getPhysicalMemoryValue];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
+    
+    MorinitoringMemory *morinitor = [[MorinitoringMemory alloc]init];
+    [morinitor startMornitoringRAMWithTimer:5];
+    
     // Do any additional setup after loading the view.
 }
 - (BOOL)prefersStatusBarHidden {
@@ -383,9 +444,28 @@ typedef enum {
         return cell;
     }else{
         TableViewCellSong_iPhone *cell = [self.tableView_iPhone dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPhone" forIndexPath:indexPath];
-        Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
-        cell.lbName.text = [song.songName uppercaseString];
-        cell.lbSingerName.text = song.singerName;
+        switch (self.tableViewSong_iPhone) {
+            case TableViewSong_iPhoneSinger:
+            {
+                Singer *singer = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                cell.lbName.text = singer.name;
+            }
+                break;
+            case TableViewSong_iPhoneSong:{
+                Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                cell.lbName.text = [song.songName uppercaseString];
+                cell.lbSingerName.text = song.singerName;
+            }
+                break;
+            case TableViewSong_iPhoneType:{
+                SongType *songType = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                cell.lbName.text = songType.typeName;
+            }
+                break;
+            default:
+                break;
+        }
+        
         if (indexPath.row % 2== 1) {
             cell.backgroundCell.alpha = 0.6;
         }else{
@@ -394,6 +474,29 @@ typedef enum {
         return cell;
     }
     return nil;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && !self.tableViewSong_iPhone == TableViewSong_iPhoneSong) {
+        __weak typeof(self)wSelf = self;
+        switch (self.tableViewSong_iPhone) {
+            case TableViewSong_iPhoneSinger:
+            {
+                self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
+                Singer *singer = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                [wSelf fetchResultSongWithSingerName:singer.name];
+                
+            }
+                break;
+            case TableViewSong_iPhoneType:{
+                self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
+                SongType *songType = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                [wSelf fetchResultSongWithTypeName:songType.tableName];
+            }
+                
+            default:
+                break;
+        }
+    }
 }
 #pragma mark - UICollectionViewDelegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{

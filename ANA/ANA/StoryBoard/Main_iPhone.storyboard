@@ -31,6 +31,9 @@
                                         <state key="normal" image="button_baihat.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedSong:" destination="gXP-ak-9nj" eventType="touchUpInside" id="eIa-aW-IGY"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YRu-GM-2Xe">
                                         <rect key="frame" x="97" y="14" width="48" height="18"/>
@@ -55,6 +58,9 @@
                                         <state key="normal" image="button_theloai.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedSongType:" destination="gXP-ak-9nj" eventType="touchUpInside" id="erJ-9c-0A6"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_child.png" id="fo2-dj-Ng5">
                                         <rect key="frame" x="79" y="12" width="163" height="25"/>
