@@ -48,7 +48,6 @@
 }
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
     
-    
     if ([self.delegate respondsToSelector:@selector(connectTCPDidConnectHost:)]) {
         [self.delegate connectTCPDidConnectHost:host];
     }

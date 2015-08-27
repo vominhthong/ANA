@@ -445,6 +445,7 @@ typedef enum {
         Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
         cell.lbName.text = [song.songName uppercaseString];
         cell.lbSingerName.text = song.singerName;
+        cell.lbCode.text = [NSString stringWithFormat:@"%@",song.idSong];
         if (indexPath.row % 2== 1) {
             cell.backgroundCell.alpha = 0.6;
         }else{

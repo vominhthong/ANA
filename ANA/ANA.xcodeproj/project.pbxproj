@@ -9,11 +9,6 @@
 /* Begin PBXBuildFile section */
 		68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */; };
 		68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */; };
-		68982EB81B89EBB70003C57F /* QingGe.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EB71B89EBB70003C57F /* QingGe.m */; };
-		68982EBB1B89EC900003C57F /* ZuHe.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EBA1B89EC900003C57F /* ZuHe.m */; };
-		68982EBE1B89EFC90003C57F /* YueYu.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EBD1B89EFC90003C57F /* YueYu.m */; };
-		68982EC11B89F2E60003C57F /* Zong.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EC01B89F2E60003C57F /* Zong.m */; };
-		68982EC41B89F3AE0003C57F /* YueNan.m in Sources */ = {isa = PBXBuildFile; fileRef = 68982EC31B89F3AE0003C57F /* YueNan.m */; };
 		68982EE41B8A22E30003C57F /* avatar_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68982EC61B8A22E30003C57F /* avatar_placeholder.png */; };
 		68982EE51B8A22E30003C57F /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 68982EC71B8A22E30003C57F /* background.png */; };
 		68982EE61B8A22E30003C57F /* background_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = 68982EC81B8A22E30003C57F /* background_cell.png */; };
@@ -104,15 +99,20 @@
 		68C5E72D1B86E47500C2A58F /* SQLiteExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E72C1B86E47500C2A58F /* SQLiteExport.m */; };
 		68C5E72F1B86E6DA00C2A58F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C5E72E1B86E6DA00C2A58F /* libsqlite3.dylib */; };
 		68C5E7341B8707A100C2A58F /* LocalDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7331B8707A100C2A58F /* LocalDataBase.m */; };
-		68C5E7381B870B4F00C2A58F /* Singer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7371B870B4F00C2A58F /* Singer.m */; };
 		68C5E73F1B87664600C2A58F /* CollectionViewName_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E73E1B87664600C2A58F /* CollectionViewName_iPad.m */; };
 		68C5E7431B876A1900C2A58F /* CollectionViewCellSinger_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7411B876A1900C2A58F /* CollectionViewCellSinger_iPad.m */; };
 		68C5E7441B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E7421B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib */; };
 		68C5E7481B876BBC00C2A58F /* SingerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7471B876BBC00C2A58F /* SingerCell.m */; };
-		68FAA0541B88B5A8007C517A /* SongType.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0531B88B5A8007C517A /* SongType.m */; };
-		68FAA0571B88E6E4007C517A /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0561B88E6E4007C517A /* Song.m */; };
-		68FAA05D1B88E72C007C517A /* GuoYu.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA05C1B88E72C007C517A /* GuoYu.m */; };
-		68FAA0631B88E8F2007C517A /* LiuXing.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA0621B88E8F2007C517A /* LiuXing.m */; };
+		68CF2E881B8EAE1100A230AE /* GuoYu.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E751B8EAE1100A230AE /* GuoYu.m */; };
+		68CF2E891B8EAE1100A230AE /* LiuXing.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E771B8EAE1100A230AE /* LiuXing.m */; };
+		68CF2E8A1B8EAE1100A230AE /* QingGe.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E791B8EAE1100A230AE /* QingGe.m */; };
+		68CF2E8B1B8EAE1100A230AE /* Singer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E7B1B8EAE1100A230AE /* Singer.m */; };
+		68CF2E8C1B8EAE1100A230AE /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E7D1B8EAE1100A230AE /* Song.m */; };
+		68CF2E8D1B8EAE1100A230AE /* SongType.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E7F1B8EAE1100A230AE /* SongType.m */; };
+		68CF2E8E1B8EAE1100A230AE /* YueNan.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E811B8EAE1100A230AE /* YueNan.m */; };
+		68CF2E8F1B8EAE1100A230AE /* YueYu.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E831B8EAE1100A230AE /* YueYu.m */; };
+		68CF2E901B8EAE1100A230AE /* Zong.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E851B8EAE1100A230AE /* Zong.m */; };
+		68CF2E911B8EAE1100A230AE /* ZuHe.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF2E871B8EAE1100A230AE /* ZuHe.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,16 +130,6 @@
 		68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorinitoringMemory.m; sourceTree = "<group>"; };
 		68870F091B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+HashPacketANA.h"; sourceTree = "<group>"; };
 		68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+HashPacketANA.m"; sourceTree = "<group>"; };
-		68982EB61B89EBB70003C57F /* QingGe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QingGe.h; sourceTree = "<group>"; };
-		68982EB71B89EBB70003C57F /* QingGe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QingGe.m; sourceTree = "<group>"; };
-		68982EB91B89EC900003C57F /* ZuHe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZuHe.h; sourceTree = "<group>"; };
-		68982EBA1B89EC900003C57F /* ZuHe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZuHe.m; sourceTree = "<group>"; };
-		68982EBC1B89EFC90003C57F /* YueYu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YueYu.h; sourceTree = "<group>"; };
-		68982EBD1B89EFC90003C57F /* YueYu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YueYu.m; sourceTree = "<group>"; };
-		68982EBF1B89F2E60003C57F /* Zong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zong.h; sourceTree = "<group>"; };
-		68982EC01B89F2E60003C57F /* Zong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zong.m; sourceTree = "<group>"; };
-		68982EC21B89F3AE0003C57F /* YueNan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YueNan.h; sourceTree = "<group>"; };
-		68982EC31B89F3AE0003C57F /* YueNan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YueNan.m; sourceTree = "<group>"; };
 		68982EC61B8A22E30003C57F /* avatar_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_placeholder.png; sourceTree = "<group>"; };
 		68982EC71B8A22E30003C57F /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		68982EC81B8A22E30003C57F /* background_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_cell.png; sourceTree = "<group>"; };
@@ -261,8 +251,6 @@
 		68C5E7311B86E73500C2A58F /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		68C5E7321B8707A100C2A58F /* LocalDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDataBase.h; sourceTree = "<group>"; };
 		68C5E7331B8707A100C2A58F /* LocalDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDataBase.m; sourceTree = "<group>"; };
-		68C5E7361B870B4F00C2A58F /* Singer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singer.h; sourceTree = "<group>"; };
-		68C5E7371B870B4F00C2A58F /* Singer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singer.m; sourceTree = "<group>"; };
 		68C5E73D1B87664600C2A58F /* CollectionViewName_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewName_iPad.h; sourceTree = "<group>"; };
 		68C5E73E1B87664600C2A58F /* CollectionViewName_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewName_iPad.m; sourceTree = "<group>"; };
 		68C5E7401B876A1900C2A58F /* CollectionViewCellSinger_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCellSinger_iPad.h; sourceTree = "<group>"; };
@@ -270,14 +258,26 @@
 		68C5E7421B876A1900C2A58F /* CollectionViewCellSinger_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellSinger_iPad.xib; sourceTree = "<group>"; };
 		68C5E7461B876BBC00C2A58F /* SingerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingerCell.h; sourceTree = "<group>"; };
 		68C5E7471B876BBC00C2A58F /* SingerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingerCell.m; sourceTree = "<group>"; };
-		68FAA0521B88B5A8007C517A /* SongType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongType.h; sourceTree = "<group>"; };
-		68FAA0531B88B5A8007C517A /* SongType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongType.m; sourceTree = "<group>"; };
-		68FAA0551B88E6E4007C517A /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
-		68FAA0561B88E6E4007C517A /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
-		68FAA05B1B88E72C007C517A /* GuoYu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuoYu.h; sourceTree = "<group>"; };
-		68FAA05C1B88E72C007C517A /* GuoYu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuoYu.m; sourceTree = "<group>"; };
-		68FAA0611B88E8F2007C517A /* LiuXing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiuXing.h; sourceTree = "<group>"; };
-		68FAA0621B88E8F2007C517A /* LiuXing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiuXing.m; sourceTree = "<group>"; };
+		68CF2E741B8EAE1100A230AE /* GuoYu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuoYu.h; sourceTree = "<group>"; };
+		68CF2E751B8EAE1100A230AE /* GuoYu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuoYu.m; sourceTree = "<group>"; };
+		68CF2E761B8EAE1100A230AE /* LiuXing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiuXing.h; sourceTree = "<group>"; };
+		68CF2E771B8EAE1100A230AE /* LiuXing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiuXing.m; sourceTree = "<group>"; };
+		68CF2E781B8EAE1100A230AE /* QingGe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QingGe.h; sourceTree = "<group>"; };
+		68CF2E791B8EAE1100A230AE /* QingGe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QingGe.m; sourceTree = "<group>"; };
+		68CF2E7A1B8EAE1100A230AE /* Singer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singer.h; sourceTree = "<group>"; };
+		68CF2E7B1B8EAE1100A230AE /* Singer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singer.m; sourceTree = "<group>"; };
+		68CF2E7C1B8EAE1100A230AE /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		68CF2E7D1B8EAE1100A230AE /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		68CF2E7E1B8EAE1100A230AE /* SongType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongType.h; sourceTree = "<group>"; };
+		68CF2E7F1B8EAE1100A230AE /* SongType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongType.m; sourceTree = "<group>"; };
+		68CF2E801B8EAE1100A230AE /* YueNan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YueNan.h; sourceTree = "<group>"; };
+		68CF2E811B8EAE1100A230AE /* YueNan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YueNan.m; sourceTree = "<group>"; };
+		68CF2E821B8EAE1100A230AE /* YueYu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YueYu.h; sourceTree = "<group>"; };
+		68CF2E831B8EAE1100A230AE /* YueYu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YueYu.m; sourceTree = "<group>"; };
+		68CF2E841B8EAE1100A230AE /* Zong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zong.h; sourceTree = "<group>"; };
+		68CF2E851B8EAE1100A230AE /* Zong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zong.m; sourceTree = "<group>"; };
+		68CF2E861B8EAE1100A230AE /* ZuHe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZuHe.h; sourceTree = "<group>"; };
+		68CF2E871B8EAE1100A230AE /* ZuHe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZuHe.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -558,7 +558,7 @@
 		68C5E7151B86D9DA00C2A58F /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				68C5E7351B870AE600C2A58F /* ModalDatabase */,
+				68CF2E731B8EAE1100A230AE /* ModalDataBase */,
 				68C5E7231B86DFC200C2A58F /* Database */,
 				68C5E71A1B86DBBA00C2A58F /* CoreDatabase */,
 				68C5E71E1B86DBBA00C2A58F /* Help */,
@@ -606,33 +606,6 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
-		68C5E7351B870AE600C2A58F /* ModalDatabase */ = {
-			isa = PBXGroup;
-			children = (
-				68982EC21B89F3AE0003C57F /* YueNan.h */,
-				68982EC31B89F3AE0003C57F /* YueNan.m */,
-				68982EBF1B89F2E60003C57F /* Zong.h */,
-				68982EC01B89F2E60003C57F /* Zong.m */,
-				68982EBC1B89EFC90003C57F /* YueYu.h */,
-				68982EBD1B89EFC90003C57F /* YueYu.m */,
-				68982EB91B89EC900003C57F /* ZuHe.h */,
-				68982EBA1B89EC900003C57F /* ZuHe.m */,
-				68982EB61B89EBB70003C57F /* QingGe.h */,
-				68982EB71B89EBB70003C57F /* QingGe.m */,
-				68FAA0611B88E8F2007C517A /* LiuXing.h */,
-				68FAA0621B88E8F2007C517A /* LiuXing.m */,
-				68FAA05B1B88E72C007C517A /* GuoYu.h */,
-				68FAA05C1B88E72C007C517A /* GuoYu.m */,
-				68FAA0551B88E6E4007C517A /* Song.h */,
-				68FAA0561B88E6E4007C517A /* Song.m */,
-				68FAA0521B88B5A8007C517A /* SongType.h */,
-				68FAA0531B88B5A8007C517A /* SongType.m */,
-				68C5E7361B870B4F00C2A58F /* Singer.h */,
-				68C5E7371B870B4F00C2A58F /* Singer.m */,
-			);
-			path = ModalDatabase;
-			sourceTree = "<group>";
-		};
 		68C5E73C1B8765BE00C2A58F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,6 +631,33 @@
 				68C5E7471B876BBC00C2A58F /* SingerCell.m */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		68CF2E731B8EAE1100A230AE /* ModalDataBase */ = {
+			isa = PBXGroup;
+			children = (
+				68CF2E741B8EAE1100A230AE /* GuoYu.h */,
+				68CF2E751B8EAE1100A230AE /* GuoYu.m */,
+				68CF2E761B8EAE1100A230AE /* LiuXing.h */,
+				68CF2E771B8EAE1100A230AE /* LiuXing.m */,
+				68CF2E781B8EAE1100A230AE /* QingGe.h */,
+				68CF2E791B8EAE1100A230AE /* QingGe.m */,
+				68CF2E7A1B8EAE1100A230AE /* Singer.h */,
+				68CF2E7B1B8EAE1100A230AE /* Singer.m */,
+				68CF2E7C1B8EAE1100A230AE /* Song.h */,
+				68CF2E7D1B8EAE1100A230AE /* Song.m */,
+				68CF2E7E1B8EAE1100A230AE /* SongType.h */,
+				68CF2E7F1B8EAE1100A230AE /* SongType.m */,
+				68CF2E801B8EAE1100A230AE /* YueNan.h */,
+				68CF2E811B8EAE1100A230AE /* YueNan.m */,
+				68CF2E821B8EAE1100A230AE /* YueYu.h */,
+				68CF2E831B8EAE1100A230AE /* YueYu.m */,
+				68CF2E841B8EAE1100A230AE /* Zong.h */,
+				68CF2E851B8EAE1100A230AE /* Zong.m */,
+				68CF2E861B8EAE1100A230AE /* ZuHe.h */,
+				68CF2E871B8EAE1100A230AE /* ZuHe.m */,
+			);
+			path = ModalDataBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -819,26 +819,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68CF2E8C1B8EAE1100A230AE /* Song.m in Sources */,
 				68AC02D01B8C4ABF003F2316 /* NSNumber+XMPP.m in Sources */,
 				68AC02EB1B8C519B003F2316 /* ScanLANIP.m in Sources */,
+				68CF2E881B8EAE1100A230AE /* GuoYu.m in Sources */,
 				68AC02B81B8C4AA4003F2316 /* GCDAsyncSocket.m in Sources */,
-				68FAA0631B88E8F2007C517A /* LiuXing.m in Sources */,
+				68CF2E911B8EAE1100A230AE /* ZuHe.m in Sources */,
+				68CF2E891B8EAE1100A230AE /* LiuXing.m in Sources */,
 				68AC02E71B8C5076003F2316 /* SimplePing.m in Sources */,
 				68AC02D81B8C4BC2003F2316 /* XMLPackets.m in Sources */,
 				68C5E72A1B86E36D00C2A58F /* Song_CoreData.xcdatamodeld in Sources */,
 				68AC02DB1B8C4D2C003F2316 /* ConnectTCP.m in Sources */,
-				68982EC41B89F3AE0003C57F /* YueNan.m in Sources */,
+				68CF2E8D1B8EAE1100A230AE /* SongType.m in Sources */,
 				68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */,
 				68AC02CD1B8C4ABF003F2316 /* DDXMLElement.m in Sources */,
+				68CF2E901B8EAE1100A230AE /* Zong.m in Sources */,
 				689F0E1D1B8810B400B5BF88 /* TableViewCellSong_iPad.m in Sources */,
 				68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */,
 				68C5E73F1B87664600C2A58F /* CollectionViewName_iPad.m in Sources */,
-				68982EBB1B89EC900003C57F /* ZuHe.m in Sources */,
-				68982EBE1B89EFC90003C57F /* YueYu.m in Sources */,
 				68AC02E51B8C5076003F2316 /* Device.m in Sources */,
 				68B136571B858DDC001F4C64 /* AppDelegate.m in Sources */,
 				68C5E7341B8707A100C2A58F /* LocalDataBase.m in Sources */,
-				68982EC11B89F2E60003C57F /* Zong.m in Sources */,
+				68CF2E8B1B8EAE1100A230AE /* Singer.m in Sources */,
+				68CF2E8A1B8EAE1100A230AE /* QingGe.m in Sources */,
 				68AC02E81B8C5076003F2316 /* SimplePingHelper.m in Sources */,
 				68AC02F21B8C6C17003F2316 /* TableViewCellSong_iPhone.m in Sources */,
 				68AC02E61B8C5076003F2316 /* ScanLAN.m in Sources */,
@@ -847,16 +850,13 @@
 				68AC02CC1B8C4ABF003F2316 /* DDXMLDocument.m in Sources */,
 				68AC02CB1B8C4ABF003F2316 /* NSString+DDXML.m in Sources */,
 				68AC02CF1B8C4ABF003F2316 /* NSData+XMPP.m in Sources */,
-				68FAA05D1B88E72C007C517A /* GuoYu.m in Sources */,
-				68FAA0571B88E6E4007C517A /* Song.m in Sources */,
 				68C5E7221B86DFA600C2A58F /* ImportSQLToCoreData.m in Sources */,
 				68C5E7481B876BBC00C2A58F /* SingerCell.m in Sources */,
+				68CF2E8F1B8EAE1100A230AE /* YueYu.m in Sources */,
 				68AC02CE1B8C4ABF003F2316 /* DDXMLNode.m in Sources */,
 				68B136541B858DDC001F4C64 /* main.m in Sources */,
-				68C5E7381B870B4F00C2A58F /* Singer.m in Sources */,
-				68982EB81B89EBB70003C57F /* QingGe.m in Sources */,
 				68C5E72D1B86E47500C2A58F /* SQLiteExport.m in Sources */,
-				68FAA0541B88B5A8007C517A /* SongType.m in Sources */,
+				68CF2E8E1B8EAE1100A230AE /* YueNan.m in Sources */,
 				68C5E7431B876A1900C2A58F /* CollectionViewCellSinger_iPad.m in Sources */,
 				68AC02D11B8C4ABF003F2316 /* NSXMLElement+XMPP.m in Sources */,
 			);

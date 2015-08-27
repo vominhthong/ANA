@@ -84,11 +84,11 @@ static LocalDataBase *sharedInstance;
                     int pftype = sqlite3_column_int(statement, 4);
                     
                     SongType *songType = (SongType*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];
-                    songType.type = type;
+                    songType.type = [NSNumber numberWithInt:type];
                     songType.typeName = typeName;
                     songType.tableName = tableName;
-                    songType.flag = flag;
-                    songType.pftype = pftype;
+                    songType.flag = [NSNumber numberWithBool:flag];
+                    songType.pftype = [NSNumber numberWithInt:pftype];
                     
                     NSError*error = nil;
                     [manageContext save:&error];
@@ -142,17 +142,17 @@ static LocalDataBase *sharedInstance;
             
             if (sqlite3_prepare_v2(ppDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
                 while (sqlite3_step(statement) == SQLITE_ROW) {
-                    int16_t idSong = sqlite3_column_int(statement, 0);
+                    int idSong = sqlite3_column_int(statement, 0);
                     NSString *nameSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
                     NSString *nameJPSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
                     NSString *nameSinger = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 7)];
-                    int16_t hotRate = sqlite3_column_int(statement, 8);
+                    int hotRate = sqlite3_column_int(statement, 8);
                     
                     Song *song = (Song*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];
                     song.songName = nameSong;
                     song.songNameJP = nameJPSong;
-                    song.hotRate = hotRate;
-                    song.idSong = idSong;
+                    song.hotRate = [NSNumber numberWithInt:hotRate];
+                    song.idSong = [NSString stringWithFormat:@"%i",idSong];
                     song.singerName = nameSinger;
                     
                     NSError*error = nil;
@@ -205,12 +205,10 @@ static LocalDataBase *sharedInstance;
                     Song *song = (Song*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];
                     song.songName = nameSong;
                     song.songNameJP = nameJPSong;
-                    song.hotRate = hotRate;
-                    song.idSong = idSong;
+                    song.hotRate = [NSNumber numberWithInt:hotRate];
+                    song.idSong = [NSString stringWithFormat:@"%i",idSong];
                     song.singerName = nameSinger;
-                    
-                    NSError*error = nil;
-                    [manageContext save:&error];
+                    [manageContext insertObject:song];
                     if (error) {
                         NSLog(@"Error : %@",error.localizedDescription);
                     }
@@ -258,9 +256,9 @@ static LocalDataBase *sharedInstance;
                     Singer *singer = (Singer*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];
                     singer.name = nameSinger;
                     singer.namejp = nameJP;
-                    singer.type = type;
-                    singer.idSinger = idSinger;
-                    singer.hoterate = hotRate;
+                    singer.type = [NSNumber numberWithInt:type];
+                    singer.idSinger = [NSString stringWithFormat:@"%i",idSinger];
+                    singer.hoterate = [NSNumber numberWithInt:hotRate];
                     
                     NSError*error = nil;
                     [manageContext save:&error];

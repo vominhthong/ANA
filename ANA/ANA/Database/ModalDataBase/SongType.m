@@ -2,7 +2,7 @@
 //  SongType.m
 //  ANA
 //
-//  Created by Minh Thong on 8/22/15.
+//  Created by Minh Thong on 8/27/15.
 //  Copyright (c) 2015 Minh Thong. All rights reserved.
 //
 
@@ -11,10 +11,10 @@
 
 @implementation SongType
 
-@dynamic type;
-@dynamic typeName;
-@dynamic tableName;
 @dynamic flag;
 @dynamic pftype;
+@dynamic tableName;
+@dynamic type;
+@dynamic typeName;
 
 @end

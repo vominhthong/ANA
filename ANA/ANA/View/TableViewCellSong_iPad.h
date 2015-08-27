@@ -12,4 +12,5 @@
 @property (nonatomic,weak) IBOutlet UILabel *lbName;
 @property (nonatomic,weak) IBOutlet UIImageView *backgroundCell;
 @property (nonatomic,weak) IBOutlet UILabel *lbSingerName;
+@property (nonatomic,weak) IBOutlet UILabel *lbCode;
 @end

@@ -1,15 +1,15 @@
 //
-//  YueNan.m
+//  GuoYu.m
 //  ANA
 //
-//  Created by Minh Thong on 8/23/15.
+//  Created by Minh Thong on 8/27/15.
 //  Copyright (c) 2015 Minh Thong. All rights reserved.
 //
 
-#import "YueNan.h"
+#import "GuoYu.h"
 
 
-@implementation YueNan
+@implementation GuoYu
 
 @dynamic hotRate;
 @dynamic idSong;

@@ -1,15 +1,16 @@
 //
-//  QingGe.m
+//  Zong.m
 //  ANA
 //
-//  Created by Minh Thong on 8/23/15.
+//  Created by Minh Thong on 8/27/15.
 //  Copyright (c) 2015 Minh Thong. All rights reserved.
 //
 
-#import "QingGe.h"
+#import "Zong.h"
 
 
-@implementation QingGe
+@implementation Zong
+
 @dynamic hotRate;
 @dynamic idSong;
 @dynamic pftype;
