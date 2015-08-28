@@ -67,6 +67,12 @@
 		68A703421B8AD0E60091E84A /* backgroundrfresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A703401B8AD0E60091E84A /* backgroundrfresh.png */; };
 		68A703451B8AD3170091E84A /* button_choi.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A703431B8AD3170091E84A /* button_choi.png */; };
 		68A703461B8AD3170091E84A /* background_choi.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A703441B8AD3170091E84A /* background_choi.png */; };
+		68AB72061B908621003BE428 /* btnChoonse.png in Resources */ = {isa = PBXBuildFile; fileRef = 68AB72031B908621003BE428 /* btnChoonse.png */; };
+		68AB72071B908621003BE428 /* btnDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = 68AB72041B908621003BE428 /* btnDelete.png */; };
+		68AB72081B908621003BE428 /* btnTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 68AB72051B908621003BE428 /* btnTop.png */; };
+		68AB720C1B90BBFD003BE428 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB720B1B90BBFD003BE428 /* AFNetworkReachabilityManager.m */; };
+		68AB720F1B90BC42003BE428 /* ConnectionNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB720E1B90BC42003BE428 /* ConnectionNetwork.m */; };
+		68AB72121B90BD85003BE428 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB72111B90BD85003BE428 /* Reachability.m */; };
 		68AC02B11B8C4A74003F2316 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68AC02AF1B8C4A6B003F2316 /* SystemConfiguration.framework */; };
 		68AC02B21B8C4A74003F2316 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68AC02AD1B8C4A60003F2316 /* CFNetwork.framework */; };
 		68AC02B81B8C4AA4003F2316 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AC02B61B8C4AA4003F2316 /* GCDAsyncSocket.m */; };
@@ -190,6 +196,15 @@
 		68A703401B8AD0E60091E84A /* backgroundrfresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundrfresh.png; sourceTree = "<group>"; };
 		68A703431B8AD3170091E84A /* button_choi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_choi.png; sourceTree = "<group>"; };
 		68A703441B8AD3170091E84A /* background_choi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_choi.png; sourceTree = "<group>"; };
+		68AB72031B908621003BE428 /* btnChoonse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnChoonse.png; sourceTree = "<group>"; };
+		68AB72041B908621003BE428 /* btnDelete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnDelete.png; sourceTree = "<group>"; };
+		68AB72051B908621003BE428 /* btnTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnTop.png; sourceTree = "<group>"; };
+		68AB720A1B90BBFD003BE428 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		68AB720B1B90BBFD003BE428 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		68AB720D1B90BC42003BE428 /* ConnectionNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionNetwork.h; sourceTree = "<group>"; };
+		68AB720E1B90BC42003BE428 /* ConnectionNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionNetwork.m; sourceTree = "<group>"; };
+		68AB72101B90BD85003BE428 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		68AB72111B90BD85003BE428 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		68AC02AD1B8C4A60003F2316 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		68AC02AF1B8C4A6B003F2316 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		68AC02B51B8C4AA4003F2316 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -388,9 +403,23 @@
 			path = StoryBoard;
 			sourceTree = "<group>";
 		};
+		68AB72091B90BBF8003BE428 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				68AB72101B90BD85003BE428 /* Reachability.h */,
+				68AB72111B90BD85003BE428 /* Reachability.m */,
+				68AB720A1B90BBFD003BE428 /* AFNetworkReachabilityManager.h */,
+				68AB720B1B90BBFD003BE428 /* AFNetworkReachabilityManager.m */,
+				68AB720D1B90BC42003BE428 /* ConnectionNetwork.h */,
+				68AB720E1B90BC42003BE428 /* ConnectionNetwork.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		68AC02B31B8C4AA4003F2316 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				68AB72091B90BBF8003BE428 /* Reachability */,
 				68AC02DC1B8C5076003F2316 /* ScanLAN */,
 				68AC02D51B8C4B5E003F2316 /* Helper */,
 				68AC02B41B8C4AA4003F2316 /* GCDAsynSocket */,
@@ -549,6 +578,9 @@
 		68C5E6E01B86D89D00C2A58F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				68AB72031B908621003BE428 /* btnChoonse.png */,
+				68AB72041B908621003BE428 /* btnDelete.png */,
+				68AB72051B908621003BE428 /* btnTop.png */,
 				68982F021B8A22FA0003C57F /* Resource_iPhone */,
 				68982EC51B8A22E30003C57F /* Resource_iPad */,
 			);
@@ -770,6 +802,7 @@
 				68982EF71B8A22E30003C57F /* button_settings.png in Resources */,
 				68982F0D1B8A28490003C57F /* button_dachon.png in Resources */,
 				68982EFD1B8A22E30003C57F /* logo_hifi.png in Resources */,
+				68AB72071B908621003BE428 /* btnDelete.png in Resources */,
 				68982F081B8A27780003C57F /* background_child.png in Resources */,
 				68982EE81B8A22E30003C57F /* background_mtv.png in Resources */,
 				68982EFE1B8A22E30003C57F /* logo_magnifying.png in Resources */,
@@ -792,7 +825,9 @@
 				68982EEA1B8A22E30003C57F /* bg_button.png in Resources */,
 				68A703361B8AC6580091E84A /* lips.png in Resources */,
 				68A7033B1B8ACC810091E84A /* hifisystem.png in Resources */,
+				68AB72081B908621003BE428 /* btnTop.png in Resources */,
 				68982EF91B8A22E30003C57F /* button_tienganh.png in Resources */,
+				68AB72061B908621003BE428 /* btnChoonse.png in Resources */,
 				68982F061B8A23F30003C57F /* header@2x.png in Resources */,
 				68982EFA1B8A22E30003C57F /* button_volume.png in Resources */,
 				68982EEB1B8A22E30003C57F /* button_bravo.png in Resources */,
@@ -831,6 +866,7 @@
 				68C5E72A1B86E36D00C2A58F /* Song_CoreData.xcdatamodeld in Sources */,
 				68AC02DB1B8C4D2C003F2316 /* ConnectTCP.m in Sources */,
 				68CF2E8D1B8EAE1100A230AE /* SongType.m in Sources */,
+				68AB720F1B90BC42003BE428 /* ConnectionNetwork.m in Sources */,
 				68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */,
 				68AC02CD1B8C4ABF003F2316 /* DDXMLElement.m in Sources */,
 				68CF2E901B8EAE1100A230AE /* Zong.m in Sources */,
@@ -847,11 +883,13 @@
 				68AC02E61B8C5076003F2316 /* ScanLAN.m in Sources */,
 				68C5E71F1B86DBBA00C2A58F /* ANACoreDataStoreage.m in Sources */,
 				689D095F1B86133400D5C97B /* MainViewController.m in Sources */,
+				68AB72121B90BD85003BE428 /* Reachability.m in Sources */,
 				68AC02CC1B8C4ABF003F2316 /* DDXMLDocument.m in Sources */,
 				68AC02CB1B8C4ABF003F2316 /* NSString+DDXML.m in Sources */,
 				68AC02CF1B8C4ABF003F2316 /* NSData+XMPP.m in Sources */,
 				68C5E7221B86DFA600C2A58F /* ImportSQLToCoreData.m in Sources */,
 				68C5E7481B876BBC00C2A58F /* SingerCell.m in Sources */,
+				68AB720C1B90BBFD003BE428 /* AFNetworkReachabilityManager.m in Sources */,
 				68CF2E8F1B8EAE1100A230AE /* YueYu.m in Sources */,
 				68AC02CE1B8C4ABF003F2316 /* DDXMLNode.m in Sources */,
 				68B136541B858DDC001F4C64 /* main.m in Sources */,

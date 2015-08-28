@@ -10,6 +10,7 @@
 #import "XMLPackets.h"
 #import "NSXMLElement+XMPP.h"
 #import "NSMutableData+HashPacketANA.h"
+#import <UIKit/UIKit.h>
 @interface ConnectTCP ()<GCDAsyncSocketDelegate>{
     GCDAsyncSocket *_socket;
 
@@ -43,6 +44,10 @@
     }
 }
 -(void)writeData:(NSString *)xmlString{
+    if (!self.roomBindingCode) {
+        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to BOX" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
+        return;
+    }
     [_socket readDataWithTimeout:10 tag:100];
     NSMutableData *data = [[[NSData alloc]initWithData:[xmlString dataUsingEncoding:NSUTF8StringEncoding]] mutableCopy];
     [_socket writeData:[data hasPacketAna] withTimeout:200 tag:101];

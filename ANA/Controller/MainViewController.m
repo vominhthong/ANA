@@ -23,6 +23,8 @@
 #import "ConnectTCP.h"
 #import "XMLPackets.h"
 #import "NSXMLElement+XMPP.h"
+#import "AFNetworkReachabilityManager.h"
+#import "ConnectionNetwork.h"
 
 typedef enum {
     CollectionViewCellSinger_iPadTypeUnknow = 0,
@@ -46,7 +48,7 @@ typedef enum {
 @property (nonatomic,strong) NSFetchedResultsController *fetchResultSongs;
 @property (nonatomic) CollectionViewCellSinger_iPadType collectionViewCellType;
 @property (nonatomic) TableViewSong_iPhone tableViewSong_iPhone;
-
+@property (nonatomic) BOOL  isHasNetwork;
 @property (nonatomic,strong) ScanLANIP *_scanLanIPTool;
 @property (nonatomic,strong) ConnectTCP *_connectTCP;
 @end
@@ -230,7 +232,7 @@ typedef enum {
     fetchRequest.entity = entity;
     NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:true];
     [fetchRequest setSortDescriptors:@[sortDscr]];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@",key];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ OR namejp CONTAINS[cd] %@",key,key];
     return fetchRequest;
 }
 -(NSFetchRequest*)fetchRequestSinger{
@@ -265,7 +267,7 @@ typedef enum {
     fetchRequest.entity = entity;
     NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"songName" ascending:true];
     [fetchRequest setSortDescriptors:@[sortDscr]];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"songName == %@",key];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"songName CONTAINS[cd] %@ OR songNameJP CONTAINS[cd] %@",key,key];
     return fetchRequest;
 }
 
@@ -406,10 +408,38 @@ typedef enum {
             }
         }];
     }
-
-
     return YES;
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    __weak typeof(self)wSelf = self;
+    if (textField == self.txtSearchSingerName) {
+        [sqliteExport excuteBlockInBackground:^{
+            wSelf.fetchResultSingers = nil;
+            [wSelf.collectionView_iPad reloadData];
+            NSString *searchKey = textField.text;
+            if (searchKey.length == 0) {
+                [wSelf fetchResultsSinger];
+            }else{
+                [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
+            }
+        }];
+    }else{
+        [sqliteExport excuteBlockInBackground:^{
+            wSelf.fetchResultSongs = nil;
+            [wSelf.tableView_iPad reloadData];
+            [wSelf.tableView_iPhone reloadData];
+            NSString *searchKey = textField.text;
+            if (searchKey.length == 0) {
+                [wSelf fetchResultsSongs];
+            }else{
+                [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:searchKey]];
+            }
+        }];
+    }
+    return YES;
+}
+
+
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
     return YES;
@@ -422,12 +452,8 @@ typedef enum {
 
 -(void)scanLANIPDidFinishedScan:(ConnectTCP *)socket{
     if (!socket.roomBindingCode) {
-        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't find ANA" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Retry", nil] show];
+        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't find BOX" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
     }
-}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self clearScanToolIP];
-    [self startScanToolIP];
 }
 -(void)clearScanToolIP{
     self._scanLanIPTool = nil;
@@ -435,16 +461,50 @@ typedef enum {
 -(void)startScanToolIP{
     self._scanLanIPTool = [[ScanLANIP alloc]init];
     self._scanLanIPTool.delegate = self;
+    self._connectTCP = self._scanLanIPTool._connectTCP;
     [self._scanLanIPTool startScanIPInLan];
+}
+#pragma mark - TapGesture
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    for (TableViewCellSong_iPad *cell in self.tableView_iPad.visibleCells) {
+        if (cell.viewContentButton.hidden == NO) {
+            cell.viewContentButton.hidden = YES;
+        }
+    }
+}
+
+-(void)handleTapGestureTableViewIpad:(UITapGestureRecognizer*)gestureRecognizer{
+    for (TableViewCellSong_iPad *cell in self.tableView_iPad.visibleCells) {
+        if (cell.viewContentButton.hidden == NO) {
+            cell.viewContentButton.hidden = YES;
+        }
+    }
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint swipeLocation = [gestureRecognizer locationInView:self.tableView_iPad];
+        NSIndexPath *swipedIndexPath = [self.tableView_iPad indexPathForRowAtPoint:swipeLocation];
+        TableViewCellSong_iPad* cell = (TableViewCellSong_iPad*)[self.tableView_iPad cellForRowAtIndexPath:swipedIndexPath];
+        cell.viewContentButton.hidden = NO;
+    }
 }
 #pragma mark - Init life vehicle
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    NotifReg(self, @selector(handleConnectionNetwork:), kHandleConnectionNetwork);
+    [self.tableView_iPad addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureTableViewIpad:)]];
     self.activityIp.hidesWhenStopped = YES;
     [self.activityIp startAnimating];
     [self startScanToolIP];
+    
+    if (!self.isHasNetwork) {
+        [self._scanLanIPTool stopScanIPInLan];
+        self.viewScanIP.hidden = YES;
+        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to wifi" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
+    }
 
     
     self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
@@ -482,7 +542,7 @@ typedef enum {
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     MorinitoringMemory *morinitor = [[MorinitoringMemory alloc]init];
-    [morinitor startMornitoringRAMWithTimer:5];
+    [morinitor startMornitoringRAMWithTimer:10];
     
     // Do any additional setup after loading the view.
 }
@@ -513,6 +573,7 @@ typedef enum {
         }else{
             cell.backgroundCell.alpha = 0.9;
         }
+        cell.viewContentButton.hidden = YES;
         return cell;
     }else{
         TableViewCellSong_iPhone *cell = [self.tableView_iPhone dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPhone" forIndexPath:indexPath];
@@ -646,6 +707,44 @@ typedef enum {
     return CGSizeMake(CELLSINGER_WIDTH, CELLSINGER_HEIGHT);
 }
 
+#pragma mark - NOtification
+-(void)handleConnectionNetwork:(NSNotification*)notifi{
+    ConnectionNetworkStatus status = [notifi.object intValue];
+    switch (status) {
+        case ConnectionNetworkStatusNotReachable:{
+            [self handleConnectionNetworkWasLost];
+        }
+            break;
+        case ConnectionNetworkStatusReachableViaWiFi:{
+            [self handleConnectionNetworkWasWoriking];
+            [self handleConnectionNetworkWasWorikingWithWifi];
+        }
+            break;
+        case ConnectionNetworkStatusReachableViaWWAN:{
+            [self handleConnectionNetworkWasWoriking];
+            [self handleConnectionNetworkWasWorikingWithWWan];
+        }
+            break;
+        default:
+            break;
+    }
+}
+-(void)handleConnectionNetworkWasWoriking{
+    
+}
+-(void)handleConnectionNetworkWasLost{
+    
+}
+-(void)handleConnectionNetworkWasWorikingWithWifi{
+    
+}
+-(void)handleConnectionNetworkWasWorikingWithWWan{
+    
+}
+
+-(BOOL)isHasNetwork{
+    return [[ConnectionNetwork shareInstance] networkStatus] != ConnectionNetworkStatusNotReachable;
+}
 /*
 #pragma mark - Navigation
 

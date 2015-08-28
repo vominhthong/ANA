@@ -48,6 +48,33 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" id="nim-t1-nDO">
+                        <rect key="frame" x="334" y="23" width="168" height="46"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PTs-2d-RQk">
+                                <rect key="frame" x="0.0" y="4" width="80" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="btnChoonse.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchedChooseSong:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hlQ-7n-jrC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pp0-rm-ize">
+                                <rect key="frame" x="88" y="4" width="80" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="btnTop.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchedPushSong:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ppt-5H-AX9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
@@ -57,6 +84,7 @@
                 <outlet property="lbCode" destination="YwV-kM-m4o" id="a6S-lN-Ubf"/>
                 <outlet property="lbName" destination="lFX-DI-g98" id="n3Z-eS-WoY"/>
                 <outlet property="lbSingerName" destination="tqR-2E-Gvw" id="c4c-cg-4Vf"/>
+                <outlet property="viewContentButton" destination="nim-t1-nDO" id="8dK-hB-EuP"/>
             </connections>
             <point key="canvasLocation" x="453" y="201"/>
         </tableViewCell>
@@ -65,6 +93,8 @@
         <image name="background_cell.png" width="656" height="92"/>
         <image name="background_cicle.png" width="60" height="62"/>
         <image name="background_mtv.png" width="60" height="19"/>
+        <image name="btnChoonse.png" width="99" height="45"/>
+        <image name="btnTop.png" width="99" height="45"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

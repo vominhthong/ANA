@@ -12,7 +12,7 @@
 #import "Constants.h"
 @interface ScanLANIP () <ScanLANDelegate,ConnectTCPDelegate>{
     ScanLAN *_scanLan;
-    ConnectTCP *_connectTCP;
+    
 }
 @end
 
@@ -28,8 +28,8 @@
 -(instancetype)init{
     if (self = [super init]) {
         _scanLan = [[ScanLAN alloc]initWithDelegate:self];
-        _connectTCP = [ConnectTCP shareInstance];
-        _connectTCP.delegate = self;
+        self._connectTCP = [ConnectTCP shareInstance];
+        self._connectTCP.delegate = self;
     }
     return self;
 }
@@ -41,7 +41,7 @@
 }
 -(void)connectToHost:(NSString*)host andPort:(uint16_t)port{
     
-   GCDAsyncSocket* socket = [_connectTCP connectSocketWithHost:host port:port];
+   GCDAsyncSocket* socket = [self._connectTCP connectSocketWithHost:host port:port];
     if (!socket) {
         NSLog(@"Connect failed");
     }
@@ -55,7 +55,7 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(scanLANIPDidConnectToANA:)]) {
-        [self.delegate scanLANIPDidConnectToANA:_connectTCP];
+        [self.delegate scanLANIPDidConnectToANA:self._connectTCP];
     }
 }
 - (void)scanLANDidFindNewAdrress:(NSString *)address havingHostName:(NSString *)hostName {
@@ -65,7 +65,7 @@
 
 - (void)scanLANDidFinishScanning {
     if ([self.delegate respondsToSelector:@selector(scanLANIPDidFinishedScan:)]) {
-        [self.delegate scanLANIPDidFinishedScan:_connectTCP];
+        [self.delegate scanLANIPDidFinishedScan:self._connectTCP];
     }
     NSLog(@"Scan LAN did finish");
 }

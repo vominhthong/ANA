@@ -20,6 +20,6 @@
 -(void)stopScanIPInLan;
 
 -(void)startScanIPInLan;
-
+@property (nonatomic,strong) ConnectTCP *_connectTCP;
 @property (nonatomic) id <ScanLANIPDelegate> delegate;
 @end
