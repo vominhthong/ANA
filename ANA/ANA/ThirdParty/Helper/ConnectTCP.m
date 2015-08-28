@@ -43,8 +43,9 @@
     }
 }
 -(void)writeData:(NSString *)xmlString{
+    [_socket readDataWithTimeout:10 tag:100];
     NSMutableData *data = [[[NSData alloc]initWithData:[xmlString dataUsingEncoding:NSUTF8StringEncoding]] mutableCopy];
-    [_socket writeData:[data hasPacketAna] withTimeout:1 tag:101];
+    [_socket writeData:[data hasPacketAna] withTimeout:200 tag:101];
 }
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
     
@@ -83,6 +84,8 @@
         return;
     }
     /* actual */
-    self.roomBindingCode = [[[element elementForName:@"body"] attributeForName:@"roombindingcode"] stringValue];
+    if (!self.roomBindingCode) {
+        self.roomBindingCode = [[[element elementForName:@"body"] attributeForName:@"roombindingcode"] stringValue];
+    }
 }
 @end
