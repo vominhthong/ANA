@@ -17,5 +17,7 @@
 
 @property (nonatomic,weak) IBOutlet UITableView *tableView_iPhone;
 
+@property (nonatomic,weak) IBOutlet UIActivityIndicatorView *activityIp;
+@property (nonatomic,weak) IBOutlet UIView *viewScanIP;
 @end
 

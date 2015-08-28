@@ -36,7 +36,7 @@ typedef enum {
     TableViewSong_iPhoneType
 }TableViewSong_iPhone;
 
-@interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,ScanLANIPDelegate>{
+@interface MainViewController () <UICollectionViewDataSource,UICollectionViewDelegate,NSFetchedResultsControllerDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,ScanLANIPDelegate,UIAlertViewDelegate>{
     dispatch_semaphore_t semaphore;
     SQLiteExport *sqliteExport;
 
@@ -48,6 +48,7 @@ typedef enum {
 @property (nonatomic) TableViewSong_iPhone tableViewSong_iPhone;
 
 @property (nonatomic,strong) ScanLANIP *_scanLanIPTool;
+@property (nonatomic,strong) ConnectTCP *_connectTCP;
 @end
 
 @implementation MainViewController
@@ -60,11 +61,50 @@ typedef enum {
     return _arrSingers;
 }
 #pragma mark - IBAction
+-(IBAction)didTouchedThumbDownButton:(id)sender{
+    XMLPackets *xmlPacketClap = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketClap thumbDownWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
+-(IBAction)didTouchedThumbUpButton:(id)sender{
+    XMLPackets *xmlPacketClap = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketClap thumbUPWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
+-(IBAction)didTouchedClapButton:(id)sender{
+    XMLPackets *xmlPacketClap = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketClap clapWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
+-(IBAction)didTouchedDrumButton:(id)sender{
+    XMLPackets *xmlPacketDrum = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketDrum drumWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
+-(IBAction)didTouchedMuteButton:(id)sender{
+    XMLPackets *xmlPacketMute = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketMute muteWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
+-(IBAction)didTouchedLipsButton:(id)sender{
+    XMLPackets *xmlPacketLip = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketLip lipsWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
+-(IBAction)didTouchedNextButton:(id)sender{
+    XMLPackets *xmlPacketNext = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketNext nextWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
+-(IBAction)didTouchedReplayButton:(id)sender{
+    XMLPackets *xmlPacketReplay = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketReplay replayWithIP:self._connectTCP.hostIP roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
 -(IBAction)didTouchedPlayButton:(id)sender{
     XMLPackets *xmlPacketPlay = [[XMLPackets alloc]init];
-    ConnectTCP *connectTCP = [ConnectTCP shareInstance];
-    NSString *xmlString = [[xmlPacketPlay pauseWithIP:connectTCP.hostIP roomBindingCode:connectTCP.roomBindingCode]compactXMLString];
-    [connectTCP writeData:xmlString];
+    NSString *xmlString = [[xmlPacketPlay pauseWithIP:self._connectTCP.hostIP roomBindingCode:self._connectTCP.roomBindingCode]compactXMLString];
+    [self._connectTCP writeData:xmlString];
 }
 -(IBAction)didTouchedSong:(id)sender{
     __weak typeof(self)wSelf = self;
@@ -376,15 +416,36 @@ typedef enum {
 }
 #pragma mark - ScanLANIP Delegate
 -(void)scanLANIPDidConnectToANA:(ConnectTCP *)socket{
-    
+    self.viewScanIP.hidden = YES;
+    self._connectTCP = socket;
+}
+
+-(void)scanLANIPDidFinishedScan:(ConnectTCP *)socket{
+    if (!socket.roomBindingCode) {
+        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't find ANA" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Retry", nil] show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self clearScanToolIP];
+    [self startScanToolIP];
+}
+-(void)clearScanToolIP{
+    self._scanLanIPTool = nil;
+}
+-(void)startScanToolIP{
+    self._scanLanIPTool = [[ScanLANIP alloc]init];
+    self._scanLanIPTool.delegate = self;
+    [self._scanLanIPTool startScanIPInLan];
 }
 #pragma mark - Init life vehicle
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self._scanLanIPTool = [ScanLANIP shareInstance];
-    self._scanLanIPTool.delegate = self;
-    [self._scanLanIPTool startScanIPInLan];
+    
+    self.activityIp.hidesWhenStopped = YES;
+    [self.activityIp startAnimating];
+    [self startScanToolIP];
+
     
     self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
     sqliteExport = [[SQLiteExport alloc]init];
@@ -443,6 +504,7 @@ typedef enum {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         TableViewCellSong_iPad *cell = [self.tableView_iPad dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPad" forIndexPath:indexPath];
         Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
+        cell.song = song;
         cell.lbName.text = [song.songName uppercaseString];
         cell.lbSingerName.text = song.singerName;
         cell.lbCode.text = [NSString stringWithFormat:@"%@",song.idSong];
@@ -507,13 +569,15 @@ typedef enum {
                 Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
                 XMLPackets *packet = [[XMLPackets alloc]init];
                 ConnectTCP *connectTCP = [ConnectTCP shareInstance];
-                NSString *xmlString =  [[packet selectSongWithIP:connectTCP.hostIP roomBindingCode:connectTCP.roomBindingCode withId:[NSString stringWithFormat:@"84596"]] compactXMLString];
+                NSString *xmlString =  [[packet selectSongWithIP:connectTCP.hostIP roomBindingCode:connectTCP.roomBindingCode withId:song.idSong] compactXMLString];
                 [connectTCP writeData:xmlString];
             }
                 break;
             default:
                 break;
         }
+    }else{
+       
     }
 }
 #pragma mark - UICollectionViewDelegate

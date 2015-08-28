@@ -62,6 +62,7 @@
 
 - (void)stopScan {
     NSLog(@"stop scan");
+    self.currentHostAddress = 0;
     [self.timer invalidate];
 }
 

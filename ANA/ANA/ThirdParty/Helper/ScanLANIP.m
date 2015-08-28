@@ -33,6 +33,9 @@
     }
     return self;
 }
+-(void)stopScanIPInLan{
+    [_scanLan stopScan];
+}
 -(void)startScanIPInLan{
     [_scanLan startScan];
 }
@@ -61,6 +64,9 @@
 }
 
 - (void)scanLANDidFinishScanning {
+    if ([self.delegate respondsToSelector:@selector(scanLANIPDidFinishedScan:)]) {
+        [self.delegate scanLANIPDidFinishedScan:_connectTCP];
+    }
     NSLog(@"Scan LAN did finish");
 }
 @end

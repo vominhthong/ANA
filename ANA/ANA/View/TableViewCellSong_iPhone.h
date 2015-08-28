@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Song.h"
 @interface TableViewCellSong_iPhone : UITableViewCell
 @property (nonatomic,weak) IBOutlet UILabel *lbName;
 @property (nonatomic,weak) IBOutlet UIImageView *backgroundCell;

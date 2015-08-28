@@ -7,13 +7,17 @@
 //
 
 #import "TableViewCellSong_iPad.h"
-
+#import "XMLPackets.h"
+#import "ConnectTCP.h"
+#import "NSXMLElement+XMPP.h"
 @implementation TableViewCellSong_iPad
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.contentView.backgroundColor = [UIColor clearColor];
     self.backgroundColor = [UIColor clearColor];
+    
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTouchedCellModal:)]];
     // Initialization code
 }
 
@@ -21,6 +25,13 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)didTouchedCellModal:(UITapGestureRecognizer*)tap{
+    XMLPackets *packet = [[XMLPackets alloc]init];
+    ConnectTCP *connectTCP = [ConnectTCP shareInstance];
+    NSString *xmlString =  [[packet selectSongWithIP:connectTCP.hostIP roomBindingCode:connectTCP.roomBindingCode withId:self.song.idSong] compactXMLString];
+    [connectTCP writeData:xmlString];
 }
 
 @end

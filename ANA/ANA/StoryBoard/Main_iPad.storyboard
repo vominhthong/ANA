@@ -34,6 +34,9 @@
                                         <state key="normal" image="button_next.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedNextButton:" destination="gW4-5t-qmR" eventType="touchUpInside" id="Edb-Vn-IZg"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6PU-8p-Dvp">
                                         <rect key="frame" x="69" y="49" width="72" height="74"/>
@@ -55,6 +58,9 @@
                                         <state key="normal" image="button_refresh.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedReplayButton:" destination="gW4-5t-qmR" eventType="touchUpInside" id="prx-sw-2rr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -69,6 +75,9 @@
                                         <state key="normal" image="button_like.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedThumbUpButton:" destination="gW4-5t-qmR" eventType="touchUpInside" id="2hC-QM-fVD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jCD-EK-cIj">
                                         <rect key="frame" x="59" y="14" width="36" height="32"/>
@@ -76,6 +85,9 @@
                                         <state key="normal" image="button_dislike.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedThumbDownButton:" destination="gW4-5t-qmR" eventType="touchUpInside" id="qJD-tK-nZx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aCK-B1-60H">
                                         <rect key="frame" x="116" y="8" width="36" height="32"/>
@@ -83,6 +95,9 @@
                                         <state key="normal" image="button_bravo.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedClapButton:" destination="gW4-5t-qmR" eventType="touchUpInside" id="Zkz-9x-jLr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RmK-ac-1ni">
                                         <rect key="frame" x="170" y="7" width="36" height="32"/>
@@ -90,6 +105,9 @@
                                         <state key="normal" image="button_rum.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedDrumButton:" destination="gW4-5t-qmR" eventType="touchUpInside" id="bf5-fM-wN7"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Opp-zs-KbG">
                                         <rect key="frame" x="224" y="8" width="62" height="31"/>
@@ -97,6 +115,9 @@
                                         <state key="normal" image="button_lips.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTouchedLipsButton:" destination="gW4-5t-qmR" eventType="touchUpInside" id="fpx-sh-OCc"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -333,17 +354,37 @@
                                 <rect key="frame" x="669" y="450" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" id="R1e-af-9r0">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="buE-q3-2Y9">
+                                        <rect key="frame" x="502" y="374" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scaning ANA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dSR-Q0-ckm">
+                                        <rect key="frame" x="454" y="413" width="117" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="activityIp" destination="buE-q3-2Y9" id="k6G-UQ-hlV"/>
                         <outlet property="collectionView_iPad" destination="02q-a0-Gl1" id="xcQ-pn-VCo"/>
                         <outlet property="indicatorViewTableView_iPad" destination="gHP-1B-r07" id="XbQ-pc-Fgw"/>
                         <outlet property="tableView_iPad" destination="ihZ-QR-SN1" id="gvJ-HZ-CMq"/>
                         <outlet property="txtSearchSingerName" destination="mnY-iL-aMx" id="3FA-an-5j6"/>
                         <outlet property="txtSearchSongName" destination="ACR-zR-KSP" id="57V-Lh-R5D"/>
+                        <outlet property="viewScanIP" destination="R1e-af-9r0" id="jJO-y8-Nke"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mRF-3j-uQB" userLabel="First Responder" sceneMemberID="firstResponder"/>

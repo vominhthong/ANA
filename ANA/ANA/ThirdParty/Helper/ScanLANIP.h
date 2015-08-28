@@ -11,11 +11,13 @@
 @protocol ScanLANIPDelegate <NSObject>
 
 -(void)scanLANIPDidConnectToANA:(ConnectTCP*)socket;
-
+-(void)scanLANIPDidFinishedScan:(ConnectTCP*)socket;
 @end
 
 @interface ScanLANIP : NSObject
 +(ScanLANIP*)shareInstance;
+
+-(void)stopScanIPInLan;
 
 -(void)startScanIPInLan;
 

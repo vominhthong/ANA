@@ -43,7 +43,7 @@
 }
 
 -(NSXMLElement *)replayWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode{
-    return [self packetXMLDataWithControlType:@"20"
+    return [self packetXMLDataWithControlType:@"10"
                              andControllValue:@"3"
                                      andCMDID:@"E400"
                                          toIp:ip
@@ -51,7 +51,7 @@
 }
 
 -(NSXMLElement *)nextWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode{
-    return [self packetXMLDataWithControlType:@"20"
+    return [self packetXMLDataWithControlType:@"10"
                              andControllValue:@"2"
                                      andCMDID:@"E400"
                                          toIp:ip
@@ -59,7 +59,7 @@
 }
 
 -(NSXMLElement *)lipsWithIP:(NSString*)ip roomBindingCode:(NSString*)bindingCode{
-    return [self packetXMLDataWithControlType:@"20"
+    return [self packetXMLDataWithControlType:@"10"
                              andControllValue:@"4"
                                      andCMDID:@"E400"
                                          toIp:ip
