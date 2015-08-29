@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6885FC381B91541800730E06 /* Song_Sqlite.db in Resources */ = {isa = PBXBuildFile; fileRef = 6885FC371B91541800730E06 /* Song_Sqlite.db */; };
+		6885FC3B1B916C7A00730E06 /* NSString+ASII.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885FC3A1B916C7A00730E06 /* NSString+ASII.m */; };
 		68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */; };
 		68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */; };
 		68982EE41B8A22E30003C57F /* avatar_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68982EC61B8A22E30003C57F /* avatar_placeholder.png */; };
@@ -133,6 +134,8 @@
 
 /* Begin PBXFileReference section */
 		6885FC371B91541800730E06 /* Song_Sqlite.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Song_Sqlite.db; sourceTree = "<group>"; };
+		6885FC391B916C7A00730E06 /* NSString+ASII.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ASII.h"; sourceTree = "<group>"; };
+		6885FC3A1B916C7A00730E06 /* NSString+ASII.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ASII.m"; sourceTree = "<group>"; };
 		68870F031B8D7DA00027DCE4 /* MorinitoringMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorinitoringMemory.h; sourceTree = "<group>"; };
 		68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorinitoringMemory.m; sourceTree = "<group>"; };
 		68870F091B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+HashPacketANA.h"; sourceTree = "<group>"; };
@@ -489,6 +492,8 @@
 				68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */,
 				68870F091B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.h */,
 				68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */,
+				6885FC391B916C7A00730E06 /* NSString+ASII.h */,
+				6885FC3A1B916C7A00730E06 /* NSString+ASII.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -857,6 +862,7 @@
 				68CF2E8C1B8EAE1100A230AE /* Song.m in Sources */,
 				68AC02D01B8C4ABF003F2316 /* NSNumber+XMPP.m in Sources */,
 				68AC02EB1B8C519B003F2316 /* ScanLANIP.m in Sources */,
+				6885FC3B1B916C7A00730E06 /* NSString+ASII.m in Sources */,
 				68CF2E881B8EAE1100A230AE /* GuoYu.m in Sources */,
 				68AC02B81B8C4AA4003F2316 /* GCDAsyncSocket.m in Sources */,
 				68CF2E911B8EAE1100A230AE /* ZuHe.m in Sources */,

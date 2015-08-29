@@ -118,7 +118,7 @@
 		
     _socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *error = nil;
-    [_socket connectToHost:@"192.168.1.31" onPort:9392 error:&error];
+    [_socket connectToHost:@"192.168.1.49" onPort:9392 error:&error];
 //
 //	[self initNetworkCommunication];
 	

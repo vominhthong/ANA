@@ -21,6 +21,7 @@
 +(ConnectTCP*)shareInstance;
 @property (nonatomic,strong) NSString *roomBindingCode;
 @property (nonatomic,strong) NSString *hostIP;
+@property (nonatomic) BOOL isConnected;
 
 -(GCDAsyncSocket*)connectSocketWithHost:(NSString*)host port:(uint16_t)port;
 

@@ -12,7 +12,8 @@
 #import "Constants.h"
 @interface ScanLANIP () <ScanLANDelegate,ConnectTCPDelegate>{
     ScanLAN *_scanLan;
-    
+    dispatch_queue_t connectQueue;
+    void* connectQueueTag;
 }
 @end
 
@@ -30,18 +31,24 @@
         _scanLan = [[ScanLAN alloc]initWithDelegate:self];
         self._connectTCP = [ConnectTCP shareInstance];
         self._connectTCP.delegate = self;
+        
+        connectQueue = dispatch_queue_create("Connect QUEUE", DISPATCH_QUEUE_SERIAL);
+        connectQueueTag = &connectQueueTag;
+        dispatch_queue_set_specific(connectQueue, connectQueueTag, connectQueueTag, NULL);
     }
     return self;
 }
 -(void)stopScanIPInLan{
     [_scanLan stopScan];
 }
-
 -(void)startScanIPInLan{
     [_scanLan startScan];
 }
 -(void)connectToHost:(NSString*)host andPort:(uint16_t)port{
     
+    if ([host isEqualToString:@"192.168.1.49"]) {
+        NSLog(@"OK");
+    }
    GCDAsyncSocket* socket = [self._connectTCP connectSocketWithHost:host port:port];
     if (!socket) {
         NSLog(@"Connect failed");
@@ -59,15 +66,17 @@
         [self.delegate scanLANIPDidConnectToANA:self._connectTCP];
     }
 }
-
--(void)scanFailed{
-    if ([self.delegate respondsToSelector:@selector(scanLANIPFailed)]) {
-        [self.delegate scanLANIPFailed];
-    }
-}
 - (void)scanLANDidFindNewAdrress:(NSString *)address havingHostName:(NSString *)hostName {
     NSLog(@"found  %@", address);
-    [self connectToHost:address andPort:HOST_TCP_ANA];
+    __weak typeof(self)wSelf = self;
+    dispatch_block_t block = ^{
+        [wSelf connectToHost:address andPort:HOST_TCP_ANA];
+    };
+    if (dispatch_get_specific(connectQueueTag)) {
+        block();
+    }else{
+        dispatch_async(connectQueue, block);
+    }
 }
 
 - (void)scanLANDidFinishScanning {

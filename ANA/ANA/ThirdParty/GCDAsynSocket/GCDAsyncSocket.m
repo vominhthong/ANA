@@ -1875,7 +1875,7 @@ enum GCDAsyncSocketConfig
 
 - (BOOL)connectToHost:(NSString*)host onPort:(uint16_t)port error:(NSError **)errPtr
 {
-	return [self connectToHost:host onPort:port withTimeout:-1 error:errPtr];
+	return [self connectToHost:host onPort:port withTimeout:1 error:errPtr];
 }
 
 - (BOOL)connectToHost:(NSString *)host

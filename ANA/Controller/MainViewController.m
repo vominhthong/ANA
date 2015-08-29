@@ -213,7 +213,7 @@ typedef enum {
     });
 }
 -(void)fetchResultsSinger{
-    self.fetchResultSingers = [[NSFetchedResultsController alloc]initWithFetchRequest:[self fetchRequestSinger] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"Single"];
+    self.fetchResultSingers = [[NSFetchedResultsController alloc]initWithFetchRequest:[self fetchRequestSinger] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:nil];
     self.fetchResultSingers.delegate = self;
     NSError *error = nil;
     if (![self.fetchResultSingers performFetch:&error]) {
@@ -232,7 +232,7 @@ typedef enum {
     fetchRequest.entity = entity;
     NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:true];
     [fetchRequest setSortDescriptors:@[sortDscr]];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ OR namejp CONTAINS[cd] %@",key,key];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"((name contains[cd] %@ OR namejp contains[cd] %@) AND name BEGINSWITH[cd] %@) OR (name like[c] %@ OR namejp like[c] %@)",[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII]];
     return fetchRequest;
 }
 -(NSFetchRequest*)fetchRequestSinger{
@@ -267,7 +267,8 @@ typedef enum {
     fetchRequest.entity = entity;
     NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"songName" ascending:true];
     [fetchRequest setSortDescriptors:@[sortDscr]];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"songName CONTAINS[cd] %@ OR songNameJP CONTAINS[cd] %@",key,key];
+    //SELF like[c] %@*
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"((songNameUnicode contains[cd] %@ OR songNameJP contains[cd] %@) AND songNameUnicode BEGINSWITH[cd] %@) OR (songNameUnicode like[c] %@ OR songNameJP like[c] %@)",[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII],[[key uppercaseString] stringToASCII]];
     return fetchRequest;
 }
 
@@ -396,10 +397,11 @@ typedef enum {
             }
         }];
     }else{
+        self.fetchResultSongs = nil;
+        [self.tableView_iPad reloadData];
+        [self.tableView_iPhone reloadData];
         [sqliteExport excuteBlockInBackground:^{
-            wSelf.fetchResultSongs = nil;
-            [wSelf.tableView_iPad reloadData];
-            [wSelf.tableView_iPhone reloadData];
+
             NSString *searchKey = textField.text;
             if (searchKey.length == 0) {
                 [wSelf fetchResultsSongs];
@@ -410,31 +412,42 @@ typedef enum {
     }
     return YES;
 }
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     __weak typeof(self)wSelf = self;
+
     if (textField == self.txtSearchSingerName) {
-        [sqliteExport excuteBlockInBackground:^{
-            wSelf.fetchResultSingers = nil;
-            [wSelf.collectionView_iPad reloadData];
-            NSString *searchKey = textField.text;
-            if (searchKey.length == 0) {
-                [wSelf fetchResultsSinger];
-            }else{
-                [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
-            }
-        }];
+        self.fetchResultSingers = nil;
+        [self.collectionView_iPad reloadData];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [sqliteExport excuteBlockInBackground:^{
+                
+                NSString *searchKey = textField.text;
+                if (searchKey.length == 0) {
+                    [wSelf fetchResultsSinger];
+                }else{
+                    [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
+                }
+            }];
+        });
+        
     }else{
-        [sqliteExport excuteBlockInBackground:^{
-            wSelf.fetchResultSongs = nil;
-            [wSelf.tableView_iPad reloadData];
-            [wSelf.tableView_iPhone reloadData];
-            NSString *searchKey = textField.text;
-            if (searchKey.length == 0) {
-                [wSelf fetchResultsSongs];
-            }else{
-                [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:searchKey]];
-            }
-        }];
+        self.fetchResultSongs = nil;
+        [self.tableView_iPad reloadData];
+        [self.tableView_iPhone reloadData];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [sqliteExport excuteBlockInBackground:^{
+                NSString *searchKey = textField.text;
+                if (searchKey.length == 0) {
+                    [wSelf fetchResultsSongs];
+                }else{
+                    [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:wSelf.txtSearchSongName.text]];
+                }
+                
+                
+            }];
+        });
+        
     }
     return YES;
 }
@@ -453,10 +466,11 @@ typedef enum {
 -(void)scanLANIPDidFinishedScan:(ConnectTCP *)socket{
     if (!socket.roomBindingCode) {
         [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't find BOX" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
+        self.viewScanIP.hidden = YES;
     }
 }
 -(void)scanLANIPFailed{
-    [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to network" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
+//    [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to network" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
 }
 -(void)clearScanToolIP{
     self._scanLanIPTool = nil;
@@ -498,21 +512,12 @@ typedef enum {
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    ConnectionNetwork *connect = [ConnectionNetwork shareInstance];
-    
-    NotifReg(self, @selector(handleConnectionNetwork:), kHandleConnectionNetwork);
+
     
     [self.tableView_iPad addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureTableViewIpad:)]];
     self.activityIp.hidesWhenStopped = YES;
     [self.activityIp startAnimating];
     [self startScanToolIP];
-    
-//    if (!self.isHasNetwork) {
-//        [self._scanLanIPTool stopScanIPInLan];
-//        self.viewScanIP.hidden = YES;
-//        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to wifi" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
-//    }
-
     
     self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
     sqliteExport = [[SQLiteExport alloc]init];
@@ -548,8 +553,11 @@ typedef enum {
     [self getPhysicalMemoryValue];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
-    MorinitoringMemory *morinitor = [[MorinitoringMemory alloc]init];
-    [morinitor startMornitoringRAMWithTimer:10];
+  //  MorinitoringMemory *morinitor = [[MorinitoringMemory alloc]init];
+  //  [morinitor startMornitoringRAMWithTimer:10];
+    
+    [ConnectionNetwork shareInstance];
+    NotifReg(self, @selector(handleConnectionNetwork:), kHandleConnectionNetwork);
     
     // Do any additional setup after loading the view.
 }
@@ -570,6 +578,10 @@ typedef enum {
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         TableViewCellSong_iPad *cell = [self.tableView_iPad dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPad" forIndexPath:indexPath];
+        if (self.fetchResultSongs.sections.count == 0) {
+            cell.hidden = YES;
+            return cell;
+        }
         Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
         cell.song = song;
         cell.lbName.text = [song.songName uppercaseString];
@@ -660,6 +672,10 @@ typedef enum {
     
     switch (self.collectionViewCellType) {
         case CollectionViewCellSinger_iPadTypeSinger:{
+            if (self.fetchResultSingers.sections.count == 0) {
+                singerCell.hidden = YES;
+                return singerCell;
+            }
             Singer *singer = [self.fetchResultSingers objectAtIndexPath:indexPath];
             singerCell.lbSingerName.text = singer.name;
         }
@@ -737,10 +753,13 @@ typedef enum {
     }
 }
 -(void)handleConnectionNetworkWasWoriking{
-    
+    self._scanLanIPTool._connectTCP.isConnected = YES;
 }
 -(void)handleConnectionNetworkWasLost{
-    
+    self._scanLanIPTool._connectTCP.isConnected = NO;
+    [self._scanLanIPTool stopScanIPInLan];
+    [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to network" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
+    self.viewScanIP.hidden = YES;
 }
 -(void)handleConnectionNetworkWasWorikingWithWifi{
     

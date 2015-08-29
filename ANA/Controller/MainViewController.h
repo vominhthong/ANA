@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "NSString+ASII.h"
 @interface MainViewController : UIViewController
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView_iPad;
 @property (nonatomic,weak) IBOutlet UITableView *tableView_iPad;

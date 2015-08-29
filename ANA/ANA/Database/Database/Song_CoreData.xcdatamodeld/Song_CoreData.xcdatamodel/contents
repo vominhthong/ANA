@@ -38,6 +38,7 @@
         <attribute name="singerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="songNameJP" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songNameUnicode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="SongType" representedClassName="SongType" syncable="YES">
         <attribute name="flag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -83,7 +84,7 @@
         <element name="LiuXing" positionX="-36" positionY="90" width="128" height="135"/>
         <element name="QingGe" positionX="-18" positionY="108" width="128" height="135"/>
         <element name="Singer" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Songs" positionX="-63" positionY="18" width="128" height="135"/>
+        <element name="Songs" positionX="-63" positionY="18" width="128" height="150"/>
         <element name="SongType" positionX="-63" positionY="45" width="128" height="120"/>
         <element name="YueNan" positionX="-9" positionY="117" width="128" height="135"/>
         <element name="YueYu" positionX="-27" positionY="99" width="128" height="135"/>

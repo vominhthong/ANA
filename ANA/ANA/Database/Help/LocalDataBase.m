@@ -146,7 +146,7 @@ static LocalDataBase *sharedInstance;
                     NSString *nameSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
                     NSString *nameJPSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
                     NSString *nameSinger = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 7)];
-                    int hotRate = sqlite3_column_int(statement, 8);
+                    int hotRate = sqlite3_column_int(statement, 10);
                     
                     Song *song = (Song*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];
                     song.songName = nameSong;
@@ -198,8 +198,10 @@ static LocalDataBase *sharedInstance;
                 while (sqlite3_step(statement) == SQLITE_ROW) {
                     int idSong = sqlite3_column_int(statement, 0);
                     NSString *nameSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
-                    NSString *nameJPSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
-                    NSString *nameSinger = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 7)];
+                    NSString *nameSongUnicode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
+
+                    NSString *nameJPSong = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement,3)];
+                    NSString *nameSinger = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 8)];
                     int hotRate = sqlite3_column_int(statement, 8);
                     
                     Song *song = (Song*)[[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:manageContext];
@@ -208,6 +210,7 @@ static LocalDataBase *sharedInstance;
                     song.hotRate = [NSNumber numberWithInt:hotRate];
                     song.idSong = [NSString stringWithFormat:@"%i",idSong];
                     song.singerName = nameSinger;
+                    song.songNameUnicode =  nameSongUnicode;
                     [manageContext insertObject:song];
                     if (error) {
                         NSLog(@"Error : %@",error.localizedDescription);

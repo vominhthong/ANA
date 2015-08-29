@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSString * singerName;
 @property (nonatomic, retain) NSString * songName;
 @property (nonatomic, retain) NSString * songNameJP;
+@property (nonatomic, retain) NSString * songNameUnicode;
 
 @end

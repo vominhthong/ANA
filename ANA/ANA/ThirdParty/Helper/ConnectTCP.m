@@ -29,6 +29,7 @@
 -(instancetype)init{
     if (self = [super init]) {
         _socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+        self.isConnected = YES;
     }
     return self;
 }
@@ -44,7 +45,9 @@
     }
 }
 -(void)writeData:(NSString *)xmlString{
-    if (!self.roomBindingCode) {
+    
+    
+    if (!self.roomBindingCode || !self.isConnected) {
         [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to BOX" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
         return;
     }

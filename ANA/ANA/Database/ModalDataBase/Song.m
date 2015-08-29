@@ -17,5 +17,5 @@
 @dynamic singerName;
 @dynamic songName;
 @dynamic songNameJP;
-
+@dynamic songNameUnicode;
 @end
