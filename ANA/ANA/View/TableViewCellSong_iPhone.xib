@@ -21,24 +21,65 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="traitim.png" translatesAutoresizingMaskIntoConstraints="NO" id="YHK-ik-x5e">
                         <rect key="frame" x="8" y="17" width="25" height="25"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2v-1H-UiR">
-                        <rect key="frame" x="54" y="8" width="258" height="19"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lbName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2v-1H-UiR">
+                        <rect key="frame" x="54" y="7" width="258" height="22"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" red="0.1801343326" green="0.78630605090000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lbCode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOh-u8-0M9">
+                        <rect key="frame" x="54" y="36" width="98" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lbSinger" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piJ-jY-iTB">
+                        <rect key="frame" x="154" y="27" width="151" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-lC-Btd">
+                        <rect key="frame" x="126" y="24" width="134" height="31"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1v-Mm-sYE">
+                                <rect key="frame" x="12" y="8" width="55" height="23"/>
+                                <state key="normal" image="btnChoonse.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchedChooseSong:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uoW-qv-OO8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02y-Xc-wzt">
+                                <rect key="frame" x="74" y="8" width="55" height="23"/>
+                                <state key="normal" image="btnTop.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchedPushSong:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Toe-36-fyU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="backgroundCell" destination="kJm-8L-7HG" id="sVb-t6-fu5"/>
+                <outlet property="lbCode" destination="OOh-u8-0M9" id="gjq-Y9-JwE"/>
                 <outlet property="lbName" destination="Z2v-1H-UiR" id="clj-KX-X9T"/>
+                <outlet property="lbSingerName" destination="piJ-jY-iTB" id="9nP-We-RMq"/>
+                <outlet property="viewContentButton" destination="VRt-lC-Btd" id="p3g-ho-FWW"/>
             </connections>
             <point key="canvasLocation" x="338" y="346"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="background_cell.png" width="656" height="92"/>
+        <image name="btnChoonse.png" width="99" height="45"/>
+        <image name="btnTop.png" width="99" height="45"/>
         <image name="traitim.png" width="51" height="51"/>
     </resources>
 </document>

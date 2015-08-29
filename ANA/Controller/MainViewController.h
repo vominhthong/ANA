@@ -19,5 +19,11 @@
 
 @property (nonatomic,weak) IBOutlet UIActivityIndicatorView *activityIp;
 @property (nonatomic,weak) IBOutlet UIView *viewScanIP;
+@property (nonatomic,weak) IBOutlet UITextField *txtSearch_iPhone;
+
+@property (nonatomic,weak) IBOutlet UIButton *btnBaiHat_iPhone;
+@property (nonatomic,weak) IBOutlet UIButton *btnCasi_iPhone;
+@property (nonatomic,weak) IBOutlet UIButton *btnTheLoai_iPhone;
+@property (nonatomic,weak) IBOutlet UIButton *btnDaChon_iPhone;
 @end
 

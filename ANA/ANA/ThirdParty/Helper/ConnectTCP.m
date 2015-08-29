@@ -93,7 +93,11 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
 
     if ([[[[element elementForName:@"body"] attributeForName:@"errorcode"] stringValue] intValue] == 0) {
-        [window makeToast:@"Thao tác thành công!"];
+        if ([[[element elementForName:@"body"] attributeForName:@"roombindingcode"] stringValue]) {
+            [window makeToast:@"Kết nối thành công!"];
+        }else{
+            [window makeToast:@"Thao tác thành công!"];
+        }
     }else{
         [window makeToast:@"Thao tác thất bại!"];
     }

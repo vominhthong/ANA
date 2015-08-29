@@ -55,13 +55,16 @@
     }
 }
 -(void)connectTCPDidDisconnectHostWithError:(NSError *)error{
-    NSLog(@"Connect failed");
+   // self._connectTCP.isConnected = NO;
+    if (self._connectTCP.roomBindingCode.length > 0) {
+        [self._connectTCP connectSocketWithHost:self._connectTCP.hostIP port:HOST_TCP_ANA];
+    }
+    NSLog(@"connectTCPDidDisconnectHostWithError");
 }
 -(void)connectTCPDidConnectHost:(NSString *)host{
     if (_scanLan) {
         [_scanLan stopScan];
     }
-    
     if ([self.delegate respondsToSelector:@selector(scanLANIPDidConnectToANA:)]) {
         [self.delegate scanLANIPDidConnectToANA:self._connectTCP];
     }

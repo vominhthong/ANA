@@ -25,7 +25,7 @@
 #import "NSXMLElement+XMPP.h"
 #import "AFNetworkReachabilityManager.h"
 #import "ConnectionNetwork.h"
-
+#import "UIView+Toast.h"
 typedef enum {
     CollectionViewCellSinger_iPadTypeUnknow = 0,
     CollectionViewCellSinger_iPadTypeSinger = 1,
@@ -109,17 +109,29 @@ typedef enum {
     [self._connectTCP writeData:xmlString];
 }
 -(IBAction)didTouchedSong:(id)sender{
+    self.btnCasi_iPhone.selected = NO;
+    self.btnDaChon_iPhone.selected = NO;
+    self.btnTheLoai_iPhone.selected = NO;
+    self.btnBaiHat_iPhone.selected = YES;
+    self.txtSearch_iPhone.text = @"";
+
     __weak typeof(self)wSelf = self;
     self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
-    
+    wSelf.fetchResultSongs = nil;
+    [wSelf.tableView_iPhone reloadData];
     [sqliteExport excuteBlockInBackground:^{
-        wSelf.fetchResultSongs = nil;
-        [wSelf.tableView_iPhone reloadData];
+
         [wSelf fetchResultsSongs];
     }];
 }
 
--(IBAction)didTouchedSongType:(id)sender{
+-(IBAction)didTouchedSongType:(UIButton*)sender{
+    self.txtSearch_iPhone.text = @"";
+    self.btnCasi_iPhone.selected = NO;
+    self.btnDaChon_iPhone.selected = NO;
+    self.btnTheLoai_iPhone.selected = YES;
+    self.btnBaiHat_iPhone.selected = NO;
+    
     __weak typeof(self)wSelf = self;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -132,11 +144,12 @@ typedef enum {
             [wSelf fetchResultsSongType];
         }];
     }else{
+        sender.selected = YES;
         self.tableViewSong_iPhone = TableViewSong_iPhoneType;
-        
+        wSelf.fetchResultSongs = nil;
+        [wSelf.tableView_iPhone reloadData];
         [sqliteExport excuteBlockInBackground:^{
-            wSelf.fetchResultSongs = nil;
-            [wSelf.tableView_iPhone reloadData];
+
             wSelf.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:[wSelf fetchRequestSongType] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"SongType"];
             wSelf.fetchResultSongs.delegate = wSelf;
             NSError *error = nil;
@@ -151,6 +164,13 @@ typedef enum {
     
 }
 -(IBAction)didTouchedSinger:(id)sender{
+    self.txtSearch_iPhone.text = @"";
+
+    self.btnCasi_iPhone.selected = YES;
+    self.btnDaChon_iPhone.selected = NO;
+    self.btnTheLoai_iPhone.selected = NO;
+    self.btnBaiHat_iPhone.selected = NO;
+    
      __weak typeof(self)wSelf = self;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         self.fetchResultSingers = nil;
@@ -161,10 +181,10 @@ typedef enum {
         }];
     }else{
         self.tableViewSong_iPhone = TableViewSong_iPhoneSinger;
-        
+        wSelf.fetchResultSongs = nil;
+        [wSelf.tableView_iPhone reloadData];
         [sqliteExport excuteBlockInBackground:^{
-            wSelf.fetchResultSongs = nil;
-            [wSelf.tableView_iPhone reloadData];
+
             wSelf.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:[wSelf fetchRequestSinger] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:@"Single"];
             wSelf.fetchResultSongs.delegate = wSelf;
             NSError *error = nil;
@@ -207,6 +227,14 @@ typedef enum {
     if (![self.fetchResultSingers performFetch:&error]) {
         NSLog(@"Error :%@",error.localizedDescription);
     }
+    if (self.fetchResultSingers.sections.count == 0) {
+        [self.view makeToast:@"Không tìm thấy kết quả"];
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view hideToastActivity];
+        });
+    }
+    
     __weak typeof(self) wSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [wSelf.collectionView_iPad reloadData];
@@ -252,6 +280,16 @@ typedef enum {
     if (![self.fetchResultSongs performFetch:&error]) {
         NSLog(@"Error :%@",error.localizedDescription);
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.fetchResultSongs fetchedObjects].count == 0) {
+            [self.view makeToast:@"Không tìm thấy kết quả"];
+        }else{
+            [self.view hideToastActivity];
+
+        }
+    });
+    
+
     __weak typeof(self) wSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [wSelf.tableView_iPad reloadData];
@@ -259,11 +297,12 @@ typedef enum {
         [wSelf.indicatorViewTableView_iPad stopAnimating];
     });
 }
+
 -(NSFetchRequest*)fetchRequestSongWithKey:(NSString*)key{
     LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
     NSEntityDescription *entity = [localDatabase dataBaseEntitySongs:[localDatabase managedObjectContext]];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-    fetchRequest.fetchBatchSize = 100;
+    fetchRequest.fetchBatchSize = 10;
     fetchRequest.entity = entity;
     NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"songName" ascending:true];
     [fetchRequest setSortDescriptors:@[sortDscr]];
@@ -334,6 +373,53 @@ typedef enum {
     return fetchRequest;
 }
 
+-(NSFetchRequest*)fetchRequestSongTypeWithKey:(NSString*)key{
+    LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
+    NSEntityDescription *entity = [localDatabase dataBaseEntitySongType:[localDatabase managedObjectContext]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    fetchRequest.fetchBatchSize = 100;
+    fetchRequest.entity = entity;
+    NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"typeName" ascending:true];
+    [fetchRequest setSortDescriptors:@[sortDscr]];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"typeName contains[cd] %@",[[key uppercaseString] stringToASCII]];
+    return fetchRequest;
+}
+-(NSFetchRequest*)fetchRequestSongTypeWithKey_iPad:(NSString*)key{
+    LocalDataBase *localDatabase = [LocalDataBase sharedInstance];
+    NSEntityDescription *entity = [localDatabase dataBaseEntitySongType:[localDatabase managedObjectContext]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    fetchRequest.fetchBatchSize = 100;
+    fetchRequest.entity = entity;
+    NSSortDescriptor *sortDscr = [[NSSortDescriptor alloc]initWithKey:@"typeName" ascending:true];
+    [fetchRequest setSortDescriptors:@[sortDscr]];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"typeName BEGINSWITH[cd] %@",[[key uppercaseString] stringToASCII]];
+    return fetchRequest;
+}
+-(void)fetchResultsSongTypeWithFetchRequest_iPad:(NSFetchRequest*)request{
+    self.fetchResultSingers = [[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    self.fetchResultSingers.delegate = self;
+    NSError *error = nil;
+    if (![self.fetchResultSingers performFetch:&error]) {
+        NSLog(@"Error :%@",error.localizedDescription);
+    }
+    __weak typeof(self) wSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [wSelf.collectionView_iPad reloadData];
+    });
+}
+-(void)fetchResultsSongTypeWithFetchRequest:(NSFetchRequest*)request{
+    self.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    self.fetchResultSongs.delegate = self;
+    NSError *error = nil;
+    if (![self.fetchResultSongs performFetch:&error]) {
+        NSLog(@"Error :%@",error.localizedDescription);
+    }
+    __weak typeof(self) wSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [wSelf.tableView_iPhone reloadData];
+    });
+}
+
 -(void)fetchResultSongWithSingerName:(NSString*)singerName{
     self.fetchResultSongs = nil;
     [self.tableView_iPad reloadData];
@@ -387,16 +473,22 @@ typedef enum {
     __weak typeof(self)wSelf = self;
     if (textField == self.txtSearchSingerName) {
         [sqliteExport excuteBlockInBackground:^{
+            
             wSelf.fetchResultSingers = nil;
             [wSelf.collectionView_iPad reloadData];
-            NSString *searchKey = textField.text;
-            if (searchKey.length == 0) {
-                [wSelf fetchResultsSinger];
+            if (self.collectionViewCellType == CollectionViewCellSinger_iPadTypeSinger) {
+                NSString *searchKey = textField.text;
+                if (searchKey.length == 0) {
+                    [wSelf fetchResultsSinger];
+                }else{
+                    [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
+                }
             }else{
-                [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
+                
             }
+
         }];
-    }else{
+    }else if (textField == self.txtSearchSongName){
         self.fetchResultSongs = nil;
         [self.tableView_iPad reloadData];
         [self.tableView_iPhone reloadData];
@@ -409,46 +501,114 @@ typedef enum {
                 [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:searchKey]];
             }
         }];
+    }else if (textField == self.txtSearch_iPhone){
+
+        
+        if (self.tableViewSong_iPhone == TableViewSong_iPhoneSinger) {
+            self.fetchResultSongs = nil;
+            [self.tableView_iPhone reloadData];
+            [sqliteExport excuteBlockInBackground:^{
+                NSString *searchKey = textField.text;
+                if (searchKey.length == 0) {
+                    [wSelf didTouchedSinger:nil];
+                }else{
+                    wSelf.fetchResultSongs = [[NSFetchedResultsController alloc]initWithFetchRequest:[wSelf fetchRequestSingerWithKey:searchKey] managedObjectContext:[[LocalDataBase sharedInstance] managedObjectContext] sectionNameKeyPath:nil   cacheName:nil];
+                    wSelf.fetchResultSongs.delegate = wSelf;
+                    NSError *error = nil;
+                    if (![wSelf.fetchResultSongs performFetch:&error]) {
+                        NSLog(@"Error :%@",error.localizedDescription);
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [wSelf.tableView_iPhone reloadData];
+                    });
+                }
+            }];
+        }else if (self.tableViewSong_iPhone == TableViewSong_iPhoneSong){
+            self.fetchResultSongs = nil;
+            [self.tableView_iPhone reloadData];
+            [sqliteExport excuteBlockInBackground:^{
+                
+                NSString *searchKey = textField.text;
+                if (searchKey.length == 0) {
+                    [wSelf fetchResultsSongs];
+                }else{
+                    [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:searchKey]];
+                }
+            }];
+        }else if(self.tableViewSong_iPhone == TableViewSong_iPhoneType) {
+            self.fetchResultSongs = nil;
+            [self.tableView_iPhone reloadData];
+            [sqliteExport excuteBlockInBackground:^{
+                NSString *searchKey = textField.text;
+                if (searchKey.length == 0) {
+                    [wSelf didTouchedSongType:nil];
+                }else{
+                    [wSelf fetchResultsSongTypeWithFetchRequest_iPad:[self fetchRequestSongTypeWithKey_iPad:searchKey]];
+                }
+            }];
+        }
+        NSLog(@"OK");
     }
+    if (textField.text.length == 0) {
+        return YES;
+    }
+    [self.view makeToast:@"Đang tìm kiếm"];
     return YES;
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     __weak typeof(self)wSelf = self;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.view makeToast:@"Đang tìm kiếm"];
 
-    if (textField == self.txtSearchSingerName) {
-        self.fetchResultSingers = nil;
-        [self.collectionView_iPad reloadData];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [sqliteExport excuteBlockInBackground:^{
-                
-                NSString *searchKey = textField.text;
-                if (searchKey.length == 0) {
-                    [wSelf fetchResultsSinger];
-                }else{
-                    [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
-                }
-            }];
-        });
-        
-    }else{
-        self.fetchResultSongs = nil;
-        [self.tableView_iPad reloadData];
-        [self.tableView_iPhone reloadData];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [sqliteExport excuteBlockInBackground:^{
-                NSString *searchKey = textField.text;
-                if (searchKey.length == 0) {
-                    [wSelf fetchResultsSongs];
-                }else{
-                    [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:wSelf.txtSearchSongName.text]];
-                }
-                
-                
-            }];
-        });
-        
+        if (textField == self.txtSearchSingerName) {
+            self.fetchResultSingers = nil;
+            [self.collectionView_iPad reloadData];
+            if (self.collectionViewCellType == CollectionViewCellSinger_iPadTypeSinger) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [sqliteExport excuteBlockInBackground:^{
+                        
+                        NSString *searchKey = textField.text;
+                        if (searchKey.length == 0) {
+                            [wSelf fetchResultsSinger];
+                        }else{
+                            [wSelf fecthResultsSingerWithPredicate:[wSelf fetchRequestSingerWithKey:searchKey]];
+                        }
+                    }];
+                });
+            }else if (self.collectionViewCellType == CollectionViewCellSinger_iPadTypeSongType){
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [sqliteExport excuteBlockInBackground:^{
+                        
+                        NSString *searchKey = textField.text;
+                        if (searchKey.length == 0) {
+                            [wSelf fetchResultsSongType];
+                        }else{
+                            [wSelf fetchResultsSongTypeWithFetchRequest_iPad:[wSelf fetchRequestSongTypeWithKey_iPad:searchKey]];
+                        }
+                    }];
+                });
+            }
+
+            
+        }else{
+            self.fetchResultSongs = nil;
+            [self.tableView_iPad reloadData];
+            [self.tableView_iPhone reloadData];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [sqliteExport excuteBlockInBackground:^{
+                    NSString *searchKey = textField.text;
+                    if (searchKey.length == 0) {
+                        [wSelf fetchResultsSongs];
+                    }else{
+                        [wSelf fetchResultsSongsWithRequest:[wSelf fetchRequestSongWithKey:wSelf.txtSearchSongName.text]];
+                    }
+                }];
+            });
+            
+        }
     }
+
     return YES;
 }
 
@@ -484,11 +644,18 @@ typedef enum {
 }
 #pragma mark - TapGesture
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+
     for (TableViewCellSong_iPad *cell in self.tableView_iPad.visibleCells) {
+        if (cell.viewContentButton.hidden == NO) {
+            cell.viewContentButton.hidden = YES;
+        }
+    }
+    
+    for (TableViewCellSong_iPhone *cell in self.tableView_iPhone.visibleCells) {
         if (cell.viewContentButton.hidden == NO) {
             cell.viewContentButton.hidden = YES;
         }
@@ -496,33 +663,89 @@ typedef enum {
 }
 
 -(void)handleTapGestureTableViewIpad:(UITapGestureRecognizer*)gestureRecognizer{
-    for (TableViewCellSong_iPad *cell in self.tableView_iPad.visibleCells) {
-        if (cell.viewContentButton.hidden == NO) {
-            cell.viewContentButton.hidden = YES;
+    UIView *view = gestureRecognizer.view;
+    if (view == self.tableView_iPhone) {
+        for (TableViewCellSong_iPhone *cell in self.tableView_iPhone.visibleCells) {
+            if (cell.viewContentButton.hidden == NO) {
+                cell.viewContentButton.hidden = YES;
+            }
+        }
+        if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+            CGPoint swipeLocation = [gestureRecognizer locationInView:self.tableView_iPhone];
+            NSIndexPath *indexPath = [self.tableView_iPhone indexPathForRowAtPoint:swipeLocation];
+            switch (self.tableViewSong_iPhone) {
+                case TableViewSong_iPhoneSinger:
+                {
+                    self.btnBaiHat_iPhone.selected = YES;
+                    self.btnCasi_iPhone.selected = NO;
+                    self.btnDaChon_iPhone.selected = NO;
+                    self.btnTheLoai_iPhone.selected = NO;
+                    
+                    self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
+                    Singer *singer = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                    [self fetchResultSongWithSingerName:singer.name];
+                    
+                }
+                    break;
+                case TableViewSong_iPhoneType:{
+                    self.btnBaiHat_iPhone.selected = YES;
+                    self.btnCasi_iPhone.selected = NO;
+                    self.btnDaChon_iPhone.selected = NO;
+                    self.btnTheLoai_iPhone.selected = NO;
+                    self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
+                    SongType *songType = [self.fetchResultSongs objectAtIndexPath:indexPath];
+                    [self fetchResultSongWithTypeName:songType.tableName];
+                }
+                    break;
+                case TableViewSong_iPhoneSong:{
+                    self.btnBaiHat_iPhone.selected = YES;
+                    self.btnCasi_iPhone.selected = NO;
+                    self.btnDaChon_iPhone.selected = NO;
+                    self.btnTheLoai_iPhone.selected = NO;
+                    TableViewCellSong_iPhone* cell = (TableViewCellSong_iPhone*)[self.tableView_iPhone cellForRowAtIndexPath:indexPath];
+                    cell.viewContentButton.hidden = NO;
+                }
+                    break;
+                default:
+                    break;
+            }
+           
+        }
+    }else{
+        for (TableViewCellSong_iPad *cell in self.tableView_iPad.visibleCells) {
+            if (cell.viewContentButton.hidden == NO) {
+                cell.viewContentButton.hidden = YES;
+            }
+        }
+        if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+            CGPoint swipeLocation = [gestureRecognizer locationInView:self.tableView_iPad];
+            NSIndexPath *swipedIndexPath = [self.tableView_iPad indexPathForRowAtPoint:swipeLocation];
+            TableViewCellSong_iPad* cell = (TableViewCellSong_iPad*)[self.tableView_iPad cellForRowAtIndexPath:swipedIndexPath];
+            cell.viewContentButton.hidden = NO;
         }
     }
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        CGPoint swipeLocation = [gestureRecognizer locationInView:self.tableView_iPad];
-        NSIndexPath *swipedIndexPath = [self.tableView_iPad indexPathForRowAtPoint:swipeLocation];
-        TableViewCellSong_iPad* cell = (TableViewCellSong_iPad*)[self.tableView_iPad cellForRowAtIndexPath:swipedIndexPath];
-        cell.viewContentButton.hidden = NO;
-    }
+
 }
 #pragma mark - Init life vehicle
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.btnBaiHat_iPhone.selected = YES;
 
     
     [self.tableView_iPad addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureTableViewIpad:)]];
+    
+    [self.tableView_iPhone addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGestureTableViewIpad:)]];
     self.activityIp.hidesWhenStopped = YES;
     [self.activityIp startAnimating];
     [self startScanToolIP];
     
     self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;
     sqliteExport = [[SQLiteExport alloc]init];
+    
     self.txtSearchSingerName.delegate = self;
     self.txtSearchSongName.delegate = self;
+    self.txtSearch_iPhone.delegate = self;
     
     self.txtSearchSongName.returnKeyType = UIReturnKeyDone;
     self.txtSearchSingerName.returnKeyType = UIReturnKeyDone;
@@ -582,6 +805,7 @@ typedef enum {
             cell.hidden = YES;
             return cell;
         }
+        
         Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
         cell.song = song;
         cell.lbName.text = [song.songName uppercaseString];
@@ -596,17 +820,27 @@ typedef enum {
         return cell;
     }else{
         TableViewCellSong_iPhone *cell = [self.tableView_iPhone dequeueReusableCellWithIdentifier:@"TableViewCellSong_iPhone" forIndexPath:indexPath];
+        cell.lbCode.text = @"";
+        cell.lbSingerName.text = @"";
+        if (self.fetchResultSongs.sections.count == 0) {
+            cell.hidden = YES;
+            return cell;
+        }
         switch (self.tableViewSong_iPhone) {
             case TableViewSong_iPhoneSinger:
             {
                 Singer *singer = [self.fetchResultSongs objectAtIndexPath:indexPath];
                 cell.lbName.text = singer.name;
+                
             }
                 break;
             case TableViewSong_iPhoneSong:{
                 Song *song = [self.fetchResultSongs objectAtIndexPath:indexPath];
                 cell.lbName.text = [song.songName uppercaseString];
                 cell.lbSingerName.text = song.singerName;
+                cell.lbCode.text = song.idSong;
+                cell.song = song;
+                
             }
                 break;
             case TableViewSong_iPhoneType:{
@@ -623,6 +857,7 @@ typedef enum {
         }else{
             cell.backgroundCell.alpha = 0.9;
         }
+        cell.viewContentButton.hidden = YES;
         return cell;
     }
     return nil;
@@ -636,7 +871,6 @@ typedef enum {
                 self.tableViewSong_iPhone = TableViewSong_iPhoneSong;
                 Singer *singer = [self.fetchResultSongs objectAtIndexPath:indexPath];
                 [wSelf fetchResultSongWithSingerName:singer.name];
-                
             }
                 break;
             case TableViewSong_iPhoneType:{
@@ -770,6 +1004,9 @@ typedef enum {
 
 -(BOOL)isHasNetwork{
     return [[ConnectionNetwork shareInstance] networkStatus] != ConnectionNetworkStatusNotReachable;
+}
+-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    [self didTouchedDrumButton:nil];
 }
 /*
 #pragma mark - Navigation
