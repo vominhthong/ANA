@@ -63,6 +63,11 @@ typedef enum {
     return _arrSingers;
 }
 #pragma mark - IBAction
+-(IBAction)didTouchedChoosedSong:(id)sender{
+    XMLPackets *xmlPacketChoosedSong = [[XMLPackets alloc]init];
+    NSString *xmlString = [[xmlPacketChoosedSong chooseSongWithIP:self._connectTCP.hostIP roomBindingCode:self._connectTCP.roomBindingCode withId:nil] compactXMLString];
+    [self._connectTCP writeData:xmlString];
+}
 -(IBAction)didTouchedThumbDownButton:(id)sender{
     XMLPackets *xmlPacketClap = [[XMLPackets alloc]init];
     NSString *xmlString = [[xmlPacketClap thumbDownWithIP:self._connectTCP.hostIP  roomBindingCode:self._connectTCP.roomBindingCode] compactXMLString];

@@ -73,7 +73,7 @@
     NSLog(@"found  %@", address);
     __weak typeof(self)wSelf = self;
     dispatch_block_t block = ^{
-        [wSelf connectToHost:address andPort:HOST_TCP_ANA];
+        [wSelf connectToHost:@"192.168.1.49" andPort:HOST_TCP_ANA];
     };
     if (dispatch_get_specific(connectQueueTag)) {
         block();

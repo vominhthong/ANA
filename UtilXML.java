@@ -318,6 +318,7 @@ public class UtilXML {
 
         packetInfo.setBodyAttribute("cmdid", "E402");
         packetInfo.setBodyAttribute("roombindingcode", ConnectSharedReference.roomBindingCode);
+        
         packetInfo.setRecordsAttribute("startpos", "0");
         packetInfo.setRecordsAttribute("timestamp", "0");
         packetInfo.setRecordsAttribute("num", "20");

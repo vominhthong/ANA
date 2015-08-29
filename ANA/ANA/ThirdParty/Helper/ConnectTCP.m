@@ -1,4 +1,4 @@
-//
+
 //  ConnectTCP.m
 //  ANA
 //
@@ -47,8 +47,6 @@
     }
 }
 -(void)writeData:(NSString *)xmlString{
-    
-    
     if (!self.roomBindingCode || !self.isConnected) {
         [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to BOX" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
         return;
@@ -109,5 +107,7 @@
     if (!self.roomBindingCode) {
         self.roomBindingCode = [[[element elementForName:@"body"] attributeForName:@"roombindingcode"] stringValue];
     }
+    /* check record */
+    
 }
 @end

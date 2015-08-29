@@ -172,20 +172,17 @@
     [headTag addAttributeWithName:@"toip" stringValue:ip];
     
     NSXMLElement *bodyTag = [NSXMLElement elementWithName:@"body"];
-    [bodyTag addAttributeWithName:@"cmdid" stringValue:@"E400"];
+    [bodyTag addAttributeWithName:@"cmdid" stringValue:@"E402"];
     [bodyTag addAttributeWithName:@"roombindingcode" stringValue:bindingCode];
-    [bodyTag addAttributeWithName:@"controltype" stringValue:@"41"];
-    [bodyTag addAttributeWithName:@"controlvalue" stringValue:idSong];
-    [bodyTag addAttributeWithName:@"kp" stringValue:@"0"];
     
-    NSXMLElement *recordTag = [NSXMLElement elementWithName:@"record"];
+    NSXMLElement *recordTag = [NSXMLElement elementWithName:@"records"];
     [recordTag addAttributeWithName:@"startpos" stringValue:@"0"];
     [recordTag addAttributeWithName:@"timestamp" stringValue:@"0"];
     [recordTag addAttributeWithName:@"num" stringValue:@"20"];
-
+    
+    [bodyTag addChild:recordTag];
     [messageTag addChild:headTag];
     [messageTag addChild:bodyTag];
-    [messageTag addChild:recordTag];
 
     
     return messageTag;
