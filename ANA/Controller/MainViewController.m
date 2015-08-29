@@ -455,9 +455,13 @@ typedef enum {
         [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't find BOX" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
     }
 }
+-(void)scanLANIPFailed{
+    [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to network" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
+}
 -(void)clearScanToolIP{
     self._scanLanIPTool = nil;
 }
+
 -(void)startScanToolIP{
     self._scanLanIPTool = [[ScanLANIP alloc]init];
     self._scanLanIPTool.delegate = self;
@@ -494,17 +498,20 @@ typedef enum {
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    ConnectionNetwork *connect = [ConnectionNetwork shareInstance];
+    
     NotifReg(self, @selector(handleConnectionNetwork:), kHandleConnectionNetwork);
+    
     [self.tableView_iPad addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureTableViewIpad:)]];
     self.activityIp.hidesWhenStopped = YES;
     [self.activityIp startAnimating];
     [self startScanToolIP];
     
-    if (!self.isHasNetwork) {
-        [self._scanLanIPTool stopScanIPInLan];
-        self.viewScanIP.hidden = YES;
-        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to wifi" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
-    }
+//    if (!self.isHasNetwork) {
+//        [self._scanLanIPTool stopScanIPInLan];
+//        self.viewScanIP.hidden = YES;
+//        [[[UIAlertView alloc]initWithTitle:@"ERROR" message:@"Can't connect to wifi" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Close", nil] show];
+//    }
 
     
     self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSinger;

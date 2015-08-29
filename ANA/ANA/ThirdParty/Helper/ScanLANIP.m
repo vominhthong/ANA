@@ -36,6 +36,7 @@
 -(void)stopScanIPInLan{
     [_scanLan stopScan];
 }
+
 -(void)startScanIPInLan{
     [_scanLan startScan];
 }
@@ -56,6 +57,12 @@
     
     if ([self.delegate respondsToSelector:@selector(scanLANIPDidConnectToANA:)]) {
         [self.delegate scanLANIPDidConnectToANA:self._connectTCP];
+    }
+}
+
+-(void)scanFailed{
+    if ([self.delegate respondsToSelector:@selector(scanLANIPFailed)]) {
+        [self.delegate scanLANIPFailed];
     }
 }
 - (void)scanLANDidFindNewAdrress:(NSString *)address havingHostName:(NSString *)hostName {

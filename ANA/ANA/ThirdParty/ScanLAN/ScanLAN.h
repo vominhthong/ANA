@@ -13,6 +13,7 @@
 @optional
 - (void)scanLANDidFindNewAdrress:(NSString *)address havingHostName:(NSString *)hostName;
 - (void)scanLANDidFinishScanning;
+- (void)scanFailed;
 @end
 
 @interface ScanLAN : NSObject
@@ -22,5 +23,6 @@
 - (id)initWithDelegate:(id<ScanLANDelegate>)delegate;
 - (void)startScan;
 - (void)stopScan;
+
 
 @end

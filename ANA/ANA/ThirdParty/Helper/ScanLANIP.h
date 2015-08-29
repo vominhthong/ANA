@@ -12,6 +12,7 @@
 
 -(void)scanLANIPDidConnectToANA:(ConnectTCP*)socket;
 -(void)scanLANIPDidFinishedScan:(ConnectTCP*)socket;
+-(void)scanLANIPFailed;
 @end
 
 @interface ScanLANIP : NSObject

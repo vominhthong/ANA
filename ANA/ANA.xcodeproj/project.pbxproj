@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6885FC381B91541800730E06 /* Song_Sqlite.db in Resources */ = {isa = PBXBuildFile; fileRef = 6885FC371B91541800730E06 /* Song_Sqlite.db */; };
 		68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */; };
 		68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */; };
 		68982EE41B8A22E30003C57F /* avatar_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68982EC61B8A22E30003C57F /* avatar_placeholder.png */; };
@@ -100,7 +101,6 @@
 		68B1366E1B858DDC001F4C64 /* ANATests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B1366D1B858DDC001F4C64 /* ANATests.m */; };
 		68C5E71F1B86DBBA00C2A58F /* ANACoreDataStoreage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E71D1B86DBBA00C2A58F /* ANACoreDataStoreage.m */; };
 		68C5E7221B86DFA600C2A58F /* ImportSQLToCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7211B86DFA600C2A58F /* ImportSQLToCoreData.m */; };
-		68C5E7271B86E0C900C2A58F /* Song_Sqlite.db in Resources */ = {isa = PBXBuildFile; fileRef = 68C5E7261B86E0C900C2A58F /* Song_Sqlite.db */; };
 		68C5E72A1B86E36D00C2A58F /* Song_CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E7281B86E36D00C2A58F /* Song_CoreData.xcdatamodeld */; };
 		68C5E72D1B86E47500C2A58F /* SQLiteExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5E72C1B86E47500C2A58F /* SQLiteExport.m */; };
 		68C5E72F1B86E6DA00C2A58F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C5E72E1B86E6DA00C2A58F /* libsqlite3.dylib */; };
@@ -132,6 +132,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6885FC371B91541800730E06 /* Song_Sqlite.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Song_Sqlite.db; sourceTree = "<group>"; };
 		68870F031B8D7DA00027DCE4 /* MorinitoringMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorinitoringMemory.h; sourceTree = "<group>"; };
 		68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorinitoringMemory.m; sourceTree = "<group>"; };
 		68870F091B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+HashPacketANA.h"; sourceTree = "<group>"; };
@@ -258,7 +259,6 @@
 		68C5E71D1B86DBBA00C2A58F /* ANACoreDataStoreage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANACoreDataStoreage.m; sourceTree = "<group>"; };
 		68C5E7201B86DFA600C2A58F /* ImportSQLToCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportSQLToCoreData.h; sourceTree = "<group>"; };
 		68C5E7211B86DFA600C2A58F /* ImportSQLToCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSQLToCoreData.m; sourceTree = "<group>"; };
-		68C5E7261B86E0C900C2A58F /* Song_Sqlite.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Song_Sqlite.db; sourceTree = "<group>"; };
 		68C5E7291B86E36D00C2A58F /* Song_CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Song_CoreData.xcdatamodel; sourceTree = "<group>"; };
 		68C5E72B1B86E47500C2A58F /* SQLiteExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteExport.h; sourceTree = "<group>"; };
 		68C5E72C1B86E47500C2A58F /* SQLiteExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteExport.m; sourceTree = "<group>"; };
@@ -624,7 +624,7 @@
 		68C5E7231B86DFC200C2A58F /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				68C5E7261B86E0C900C2A58F /* Song_Sqlite.db */,
+				6885FC371B91541800730E06 /* Song_Sqlite.db */,
 				68C5E7281B86E36D00C2A58F /* Song_CoreData.xcdatamodeld */,
 			);
 			path = Database;
@@ -786,11 +786,11 @@
 				68A703411B8AD0E60091E84A /* rfresh.png in Resources */,
 				68982EE51B8A22E30003C57F /* background.png in Resources */,
 				68982F181B8A33520003C57F /* button_amthanh.png in Resources */,
+				6885FC381B91541800730E06 /* Song_Sqlite.db in Resources */,
 				68A703461B8AD3170091E84A /* background_choi.png in Resources */,
 				68982EED1B8A22E30003C57F /* button_danceremix.png in Resources */,
 				68982EF41B8A22E30003C57F /* button_play.png in Resources */,
 				689D09631B8616AC00D5C97B /* Main_iPad.storyboard in Resources */,
-				68C5E7271B86E0C900C2A58F /* Song_Sqlite.db in Resources */,
 				68982EEE1B8A22E30003C57F /* button_dislike.png in Resources */,
 				68982EE61B8A22E30003C57F /* background_cell.png in Resources */,
 				68982EF01B8A22E30003C57F /* button_lips.png in Resources */,

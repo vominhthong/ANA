@@ -57,6 +57,10 @@
             }
         }
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(pingAddress) userInfo:nil repeats:YES];
+    }else{
+        if ([self.delegate respondsToSelector:@selector(scanFailed)]) {
+            [self.delegate scanFailed];
+        }
     }
 }
 
