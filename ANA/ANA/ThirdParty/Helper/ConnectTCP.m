@@ -11,6 +11,8 @@
 #import "NSXMLElement+XMPP.h"
 #import "NSMutableData+HashPacketANA.h"
 #import <UIKit/UIKit.h>
+#import "UIView+Toast.h"
+#import "Constants.h"
 @interface ConnectTCP ()<GCDAsyncSocketDelegate>{
     GCDAsyncSocket *_socket;
 
@@ -88,6 +90,14 @@
     NSError *errorWhenReadXML = nil;
     DDXMLDocument *dataFromServer = [[DDXMLDocument alloc]initWithData:data options:0 error:&errorWhenReadXML];
     NSXMLElement *element = [dataFromServer.children lastObject];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+
+    if ([[[[element elementForName:@"body"] attributeForName:@"errorcode"] stringValue] intValue] == 0) {
+        [window makeToast:@"Thao tác thành công!"];
+    }else{
+        [window makeToast:@"Thao tác thất bại!"];
+    }
+
     if (!element) {
         return;
     }

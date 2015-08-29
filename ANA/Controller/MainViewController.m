@@ -527,7 +527,7 @@ typedef enum {
     self.txtSearchSongName.returnKeyType = UIReturnKeyDone;
     self.txtSearchSingerName.returnKeyType = UIReturnKeyDone;
     if (!semaphore) {
-        semaphore = dispatch_semaphore_create(0);
+ //       semaphore = dispatch_semaphore_create(0);
     }
     __weak typeof(self) wSelf = self;
     [self configTableView];
@@ -536,7 +536,7 @@ typedef enum {
 
     [sqliteExport exportSQLiteToLog:^{
         [wSelf fetchResultsSinger];
-        dispatch_semaphore_signal(semaphore);
+//        dispatch_semaphore_signal(semaphore);
     }];
 
     [sqliteExport exportSongTypeSQLiteToLog:^{
@@ -550,8 +550,8 @@ typedef enum {
     [sqliteExport exportSongSQLiteToLog:^{
         [wSelf fetchResultsSongs];
     }];
-    [self getPhysicalMemoryValue];
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+  //  [self getPhysicalMemoryValue];
+ //   dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
   //  MorinitoringMemory *morinitor = [[MorinitoringMemory alloc]init];
   //  [morinitor startMornitoringRAMWithTimer:10];

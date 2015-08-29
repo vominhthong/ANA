@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6885FC381B91541800730E06 /* Song_Sqlite.db in Resources */ = {isa = PBXBuildFile; fileRef = 6885FC371B91541800730E06 /* Song_Sqlite.db */; };
 		6885FC3B1B916C7A00730E06 /* NSString+ASII.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885FC3A1B916C7A00730E06 /* NSString+ASII.m */; };
+		6885FC3E1B917B4B00730E06 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885FC3D1B917B4B00730E06 /* UIView+Toast.m */; };
 		68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */; };
 		68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */ = {isa = PBXBuildFile; fileRef = 68870F0A1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m */; };
 		68982EE41B8A22E30003C57F /* avatar_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68982EC61B8A22E30003C57F /* avatar_placeholder.png */; };
@@ -136,6 +137,8 @@
 		6885FC371B91541800730E06 /* Song_Sqlite.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Song_Sqlite.db; sourceTree = "<group>"; };
 		6885FC391B916C7A00730E06 /* NSString+ASII.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ASII.h"; sourceTree = "<group>"; };
 		6885FC3A1B916C7A00730E06 /* NSString+ASII.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ASII.m"; sourceTree = "<group>"; };
+		6885FC3C1B917B4B00730E06 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		6885FC3D1B917B4B00730E06 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		68870F031B8D7DA00027DCE4 /* MorinitoringMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorinitoringMemory.h; sourceTree = "<group>"; };
 		68870F041B8D7DA00027DCE4 /* MorinitoringMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorinitoringMemory.m; sourceTree = "<group>"; };
 		68870F091B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+HashPacketANA.h"; sourceTree = "<group>"; };
@@ -409,6 +412,8 @@
 		68AB72091B90BBF8003BE428 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
+				6885FC3C1B917B4B00730E06 /* UIView+Toast.h */,
+				6885FC3D1B917B4B00730E06 /* UIView+Toast.m */,
 				68AB72101B90BD85003BE428 /* Reachability.h */,
 				68AB72111B90BD85003BE428 /* Reachability.m */,
 				68AB720A1B90BBFD003BE428 /* AFNetworkReachabilityManager.h */,
@@ -877,6 +882,7 @@
 				68AC02CD1B8C4ABF003F2316 /* DDXMLElement.m in Sources */,
 				68CF2E901B8EAE1100A230AE /* Zong.m in Sources */,
 				689F0E1D1B8810B400B5BF88 /* TableViewCellSong_iPad.m in Sources */,
+				6885FC3E1B917B4B00730E06 /* UIView+Toast.m in Sources */,
 				68870F0B1B8DE0B20027DCE4 /* NSMutableData+HashPacketANA.m in Sources */,
 				68C5E73F1B87664600C2A58F /* CollectionViewName_iPad.m in Sources */,
 				68AC02E51B8C5076003F2316 /* Device.m in Sources */,
