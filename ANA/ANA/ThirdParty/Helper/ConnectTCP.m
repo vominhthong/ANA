@@ -107,7 +107,18 @@
     if (!self.roomBindingCode) {
         self.roomBindingCode = [[[element elementForName:@"body"] attributeForName:@"roombindingcode"] stringValue];
     }
+    
     /* check record */
+    if ([[[element elementForName:@"body"] elementForName:@"records"] elementsForName:@"record"].count == 0) {
+        return;
+    }
+    NSMutableArray *arrObjects = [NSMutableArray array];
+    for (NSXMLElement *object in [[[element elementForName:@"body"] elementForName:@"records"] elementsForName:@"record"]) {
+        [arrObjects addObject:object];
+    }
+    NotifPost2Obj(@"kDaChon", arrObjects);
+    NSLog(@"Post notification object");
+  
     
 }
 @end

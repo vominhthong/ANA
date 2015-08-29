@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NSString+ASII.h"
+#import "TableViewChoosedSong.h"
 @interface MainViewController : UIViewController
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView_iPad;
 @property (nonatomic,weak) IBOutlet UITableView *tableView_iPad;
@@ -25,5 +26,8 @@
 @property (nonatomic,weak) IBOutlet UIButton *btnCasi_iPhone;
 @property (nonatomic,weak) IBOutlet UIButton *btnTheLoai_iPhone;
 @property (nonatomic,weak) IBOutlet UIButton *btnDaChon_iPhone;
+
+@property (nonatomic,weak) IBOutlet TableViewChoosedSong *tableView_ChoosedSong;
+
 @end
 

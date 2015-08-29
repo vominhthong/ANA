@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		683B35EF1B91C5C9003A55FA /* TableViewChoosedSong_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 683B35ED1B91C5C9003A55FA /* TableViewChoosedSong_Cell.m */; };
+		683B35F01B91C5C9003A55FA /* TableViewChoosedSong_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683B35EE1B91C5C9003A55FA /* TableViewChoosedSong_Cell.xib */; };
 		6885FC381B91541800730E06 /* Song_Sqlite.db in Resources */ = {isa = PBXBuildFile; fileRef = 6885FC371B91541800730E06 /* Song_Sqlite.db */; };
 		6885FC3B1B916C7A00730E06 /* NSString+ASII.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885FC3A1B916C7A00730E06 /* NSString+ASII.m */; };
 		6885FC3E1B917B4B00730E06 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885FC3D1B917B4B00730E06 /* UIView+Toast.m */; };
@@ -68,6 +70,7 @@
 		68A6E7F81B91A3F9000FF498 /* text_dachon_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A6E7F01B91A3F9000FF498 /* text_dachon_normal.png */; };
 		68A6E7F91B91A3F9000FF498 /* text_theloai_actived.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A6E7F11B91A3F9000FF498 /* text_theloai_actived.png */; };
 		68A6E7FA1B91A3F9000FF498 /* text_theloai_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A6E7F21B91A3F9000FF498 /* text_theloai_normal.png */; };
+		68A6E7FD1B91C49A000FF498 /* TableViewChoosedSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A6E7FC1B91C49A000FF498 /* TableViewChoosedSong.m */; };
 		68A703351B8AC6580091E84A /* drum.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A703331B8AC6580091E84A /* drum.png */; };
 		68A703361B8AC6580091E84A /* lips.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A703341B8AC6580091E84A /* lips.png */; };
 		68A703381B8ACC050091E84A /* layermusic.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A703371B8ACC050091E84A /* layermusic.png */; };
@@ -142,6 +145,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		683B35EC1B91C5C9003A55FA /* TableViewChoosedSong_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewChoosedSong_Cell.h; sourceTree = "<group>"; };
+		683B35ED1B91C5C9003A55FA /* TableViewChoosedSong_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewChoosedSong_Cell.m; sourceTree = "<group>"; };
+		683B35EE1B91C5C9003A55FA /* TableViewChoosedSong_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewChoosedSong_Cell.xib; sourceTree = "<group>"; };
 		6885FC371B91541800730E06 /* Song_Sqlite.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Song_Sqlite.db; sourceTree = "<group>"; };
 		6885FC391B916C7A00730E06 /* NSString+ASII.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ASII.h"; sourceTree = "<group>"; };
 		6885FC3A1B916C7A00730E06 /* NSString+ASII.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ASII.m"; sourceTree = "<group>"; };
@@ -209,6 +215,8 @@
 		68A6E7F01B91A3F9000FF498 /* text_dachon_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_dachon_normal.png; sourceTree = "<group>"; };
 		68A6E7F11B91A3F9000FF498 /* text_theloai_actived.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_theloai_actived.png; sourceTree = "<group>"; };
 		68A6E7F21B91A3F9000FF498 /* text_theloai_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_theloai_normal.png; sourceTree = "<group>"; };
+		68A6E7FB1B91C49A000FF498 /* TableViewChoosedSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewChoosedSong.h; sourceTree = "<group>"; };
+		68A6E7FC1B91C49A000FF498 /* TableViewChoosedSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewChoosedSong.m; sourceTree = "<group>"; };
 		68A703331B8AC6580091E84A /* drum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drum.png; sourceTree = "<group>"; };
 		68A703341B8AC6580091E84A /* lips.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips.png; sourceTree = "<group>"; };
 		68A703371B8ACC050091E84A /* layermusic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = layermusic.png; sourceTree = "<group>"; };
@@ -686,6 +694,11 @@
 				68AC02EF1B8C6C17003F2316 /* TableViewCellSong_iPhone.h */,
 				68AC02F01B8C6C17003F2316 /* TableViewCellSong_iPhone.m */,
 				68AC02F11B8C6C17003F2316 /* TableViewCellSong_iPhone.xib */,
+				68A6E7FB1B91C49A000FF498 /* TableViewChoosedSong.h */,
+				68A6E7FC1B91C49A000FF498 /* TableViewChoosedSong.m */,
+				683B35EC1B91C5C9003A55FA /* TableViewChoosedSong_Cell.h */,
+				683B35ED1B91C5C9003A55FA /* TableViewChoosedSong_Cell.m */,
+				683B35EE1B91C5C9003A55FA /* TableViewChoosedSong_Cell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -872,6 +885,7 @@
 				68982EEB1B8A22E30003C57F /* button_bravo.png in Resources */,
 				68A6E7F51B91A3F9000FF498 /* text_casi_actived.png in Resources */,
 				68982F0F1B8A28490003C57F /* button_casi.png in Resources */,
+				683B35F01B91C5C9003A55FA /* TableViewChoosedSong_Cell.xib in Resources */,
 				68982EEC1B8A22E30003C57F /* button_cakhucbathuu.png in Resources */,
 				68982F161B8A2DD50003C57F /* button_caidat.png in Resources */,
 				68982F121B8A2A7F0003C57F /* textfield_iphone.png in Resources */,
@@ -912,6 +926,7 @@
 				68AB720F1B90BC42003BE428 /* ConnectionNetwork.m in Sources */,
 				68870F051B8D7DA00027DCE4 /* MorinitoringMemory.m in Sources */,
 				68AC02CD1B8C4ABF003F2316 /* DDXMLElement.m in Sources */,
+				683B35EF1B91C5C9003A55FA /* TableViewChoosedSong_Cell.m in Sources */,
 				68CF2E901B8EAE1100A230AE /* Zong.m in Sources */,
 				689F0E1D1B8810B400B5BF88 /* TableViewCellSong_iPad.m in Sources */,
 				6885FC3E1B917B4B00730E06 /* UIView+Toast.m in Sources */,
@@ -938,6 +953,7 @@
 				68AC02CE1B8C4ABF003F2316 /* DDXMLNode.m in Sources */,
 				68B136541B858DDC001F4C64 /* main.m in Sources */,
 				68C5E72D1B86E47500C2A58F /* SQLiteExport.m in Sources */,
+				68A6E7FD1B91C49A000FF498 /* TableViewChoosedSong.m in Sources */,
 				68CF2E8E1B8EAE1100A230AE /* YueNan.m in Sources */,
 				68C5E7431B876A1900C2A58F /* CollectionViewCellSinger_iPad.m in Sources */,
 				68AC02D11B8C4ABF003F2316 /* NSXMLElement+XMPP.m in Sources */,

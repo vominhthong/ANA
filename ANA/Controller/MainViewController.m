@@ -26,10 +26,12 @@
 #import "AFNetworkReachabilityManager.h"
 #import "ConnectionNetwork.h"
 #import "UIView+Toast.h"
+#import "TableViewChoosedSong_Cell.h"
 typedef enum {
     CollectionViewCellSinger_iPadTypeUnknow = 0,
     CollectionViewCellSinger_iPadTypeSinger = 1,
-    CollectionViewCellSinger_iPadTypeSongType
+    CollectionViewCellSinger_iPadTypeSongType = 2,
+    CollectionViewCellSinger_iPadTypeSongChoosed
 }CollectionViewCellSinger_iPadType;
 
 typedef enum {
@@ -51,11 +53,20 @@ typedef enum {
 @property (nonatomic) BOOL  isHasNetwork;
 @property (nonatomic,strong) ScanLANIP *_scanLanIPTool;
 @property (nonatomic,strong) ConnectTCP *_connectTCP;
+
+/* array for tab da chon*/
+@property (nonatomic,strong) NSMutableArray *arrChoosedSongFromServer;
 @end
 
 @implementation MainViewController
 
 #pragma mark - Initialize
+-(NSMutableArray *)arrChoosedSongFromServer{
+    if (!_arrChoosedSongFromServer) {
+        _arrChoosedSongFromServer = [NSMutableArray array];
+    }
+    return _arrChoosedSongFromServer;
+}
 -(NSMutableArray *)arrSingers{
     if (!_arrSingers) {
         _arrSingers = [[NSMutableArray alloc]init];
@@ -64,6 +75,8 @@ typedef enum {
 }
 #pragma mark - IBAction
 -(IBAction)didTouchedChoosedSong:(id)sender{
+    self.collectionView_iPad.hidden = YES;
+    self.tableView_ChoosedSong.hidden = NO;
     XMLPackets *xmlPacketChoosedSong = [[XMLPackets alloc]init];
     NSString *xmlString = [[xmlPacketChoosedSong chooseSongWithIP:self._connectTCP.hostIP roomBindingCode:self._connectTCP.roomBindingCode withId:nil] compactXMLString];
     [self._connectTCP writeData:xmlString];
@@ -114,6 +127,8 @@ typedef enum {
     [self._connectTCP writeData:xmlString];
 }
 -(IBAction)didTouchedSong:(id)sender{
+    self.collectionView_iPad.hidden = NO;
+    self.tableView_ChoosedSong.hidden = YES;
     self.btnCasi_iPhone.selected = NO;
     self.btnDaChon_iPhone.selected = NO;
     self.btnTheLoai_iPhone.selected = NO;
@@ -131,6 +146,8 @@ typedef enum {
 }
 
 -(IBAction)didTouchedSongType:(UIButton*)sender{
+    self.collectionView_iPad.hidden = NO;
+    self.tableView_ChoosedSong.hidden = YES;
     self.txtSearch_iPhone.text = @"";
     self.btnCasi_iPhone.selected = NO;
     self.btnDaChon_iPhone.selected = NO;
@@ -218,6 +235,10 @@ typedef enum {
     self.tableView_iPhone.rowHeight = 60;
     self.tableView_iPhone.backgroundColor = [UIColor clearColor];
     
+    [self.tableView_ChoosedSong registerClass:[TableViewChoosedSong_Cell class] forCellReuseIdentifier:@"TableViewChoosedSong_Cell"];
+    [self.tableView_ChoosedSong registerNib:[UINib nibWithNibName:@"TableViewChoosedSong_Cell" bundle:nil] forCellReuseIdentifier:@"TableViewChoosedSong_Cell"];
+    self.tableView_ChoosedSong.rowHeight = 60;
+    self.tableView_ChoosedSong.backgroundColor = [UIColor clearColor];
 }
 -(void)configIndicatorView{
     self.indicatorViewTableView_iPad.hidesWhenStopped = YES;
@@ -735,6 +756,7 @@ typedef enum {
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.tableView_ChoosedSong.hidden = YES;
     self.btnBaiHat_iPhone.selected = YES;
 
     
@@ -786,6 +808,8 @@ typedef enum {
     
     [ConnectionNetwork shareInstance];
     NotifReg(self, @selector(handleConnectionNetwork:), kHandleConnectionNetwork);
+    
+    NotifReg(self, @selector(handlekDaChon:), @"kDaChon");
     
     // Do any additional setup after loading the view.
 }
@@ -924,13 +948,11 @@ typedef enum {
             SongType *songType = [self.fetchResultSingers objectAtIndexPath:indexPath];
             singerCell.lbSingerName.text = songType.typeName;
         }
-            
+            break;
         default:
             break;
     }
-
     return singerCell;
-    
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     switch (self.collectionViewCellType) {
@@ -970,6 +992,13 @@ typedef enum {
 }
 
 #pragma mark - NOtification
+-(void)handlekDaChon:(NSNotification*)notifi{
+    self.collectionViewCellType = CollectionViewCellSinger_iPadTypeSongChoosed;
+    [self.arrChoosedSongFromServer removeAllObjects];
+    [self.arrChoosedSongFromServer addObjectsFromArray:notifi.object];
+    self.tableView_ChoosedSong.arrChoosedSong = self.arrChoosedSongFromServer;
+    [self.tableView_ChoosedSong reloadData];
+}
 -(void)handleConnectionNetwork:(NSNotification*)notifi{
     ConnectionNetworkStatus status = [notifi.object intValue];
     switch (status) {

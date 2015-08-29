@@ -91,7 +91,7 @@ static LocalDataBase *sharedInstance;
                     songType.pftype = [NSNumber numberWithInt:pftype];
                     
                     NSError*error = nil;
-                    [manageContext save:&error];
+                    [manageContext insertObject:songType];
                     if (error) {
                         NSLog(@"Error : %@",error.localizedDescription);
                     }
@@ -156,7 +156,7 @@ static LocalDataBase *sharedInstance;
                     song.singerName = nameSinger;
                     
                     NSError*error = nil;
-                    [manageContext save:&error];
+                    [manageContext insertObject:song];
                     if (error) {
                         NSLog(@"Error : %@",error.localizedDescription);
                     }
@@ -264,7 +264,7 @@ static LocalDataBase *sharedInstance;
                     singer.hoterate = [NSNumber numberWithInt:hotRate];
                     
                     NSError*error = nil;
-                    [manageContext save:&error];
+                    [manageContext insertObject:singer];
                     if (error) {
                         NSLog(@"Error : %@",error.localizedDescription);
                     }
